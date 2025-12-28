@@ -1,0 +1,53 @@
+{
+  "timestamp": "2025-12-26T11:33:51.297000",
+  "market_type": "forex",
+  "symbols": [
+    "EURUSD=X",
+    "GBPUSD=X",
+    "USDJPY=X",
+    "AUDUSD=X",
+    "USDCAD=X",
+    "USDCHF=X"
+  ],
+  "account": {
+    "cash": 500,
+    "equity": 500,
+    "return_pct": 0,
+    "buying_power": 0
+  },
+  "positions": [],
+  "trade_history": [],
+  "predictions": {
+    "EURUSD=X": {
+      "prob": 0.5048309564590454,
+      "signal": "UP",
+      "timestamp": "2025-12-26T11:33:51.066242"
+    },
+    "GBPUSD=X": {
+      "prob": 0.5049967765808105,
+      "signal": "UP",
+      "timestamp": "2025-12-26T11:33:51.114070"
+    },
+    "USDJPY=X": {
+      "prob": 0.50946444272995,
+      "signal": "UP",
+      "timestamp": "2025-12-26T11:33:51.157947"
+    },
+    "AUDUSD=X": {
+      "prob": 0.5082381367683411,
+      "signal": "UP",
+      "timestamp": "2025-12-26T11:33:51.197651"
+    },
+    "USDCAD=X": {
+      "prob": 0.5110264420509338,
+      "signal": "UP",
+      "timestamp": "2025-12-26T11:33:51.232565"
+    },
+    "USDCHF=X": {
+      "prob": 0.5114447474479675,
+      "signal": "UP",
+      "timestamp": "2025-12-26T11:33:51.271668"
+    }
+  },
+  "latest_logs": []
+}

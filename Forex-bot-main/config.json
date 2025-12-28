@@ -1,0 +1,81 @@
+{
+    "bot": {
+        "market_type": "forex",
+        "paper_trading": true,
+        "initial_capital": 500,
+        "trading_interval_seconds": 60,
+        "seq_length": 30
+    },
+    "markets": {
+        "stock": {
+            "symbols": [
+                "AAPL"
+            ]
+        },
+        "forex": {
+            "symbols": [
+                "EURUSD=X",
+                "GBPUSD=X",
+                "USDJPY=X",
+                "AUDUSD=X",
+                "USDCAD=X",
+                "USDCHF=X"
+            ]
+        }
+    },
+    "risk": {
+        "max_position_size_pct": 0.1,
+        "max_daily_loss_pct": 0.02,
+        "stop_loss_pct": 0.02,
+        "take_profit_pct": 0.04,
+        "max_open_positions": 3,
+        "min_confidence": 0.6,
+        "forex_risk": {
+            "risk_per_trade_pct": 0.01,
+            "stop_loss_pips": 20,
+            "risk_reward_ratio": 2.0
+        }
+    },
+    "model": {
+        "type": "lstm",
+        "path": "models/trained_lstm.pth",
+        "lstm": {
+            "hidden_size": 64,
+            "num_layers": 2
+        },
+        "xgboost": {
+            "model_path": "models/xgboost_forex.json",
+            "max_depth": 5,
+            "learning_rate": 0.05,
+            "n_estimators": 300
+        }
+    },
+    "alerts": {
+        "email_enabled": true,
+        "smtp_server": "smtp.gmail.com",
+        "smtp_port": 587,
+        "smtp_user": "kaluvictor130@gmail.com",
+        "smtp_password": "mfwt phwp qste ssig",
+        "alert_email": "kaluvictor130@gmail.com"
+    },
+    "brokers": {
+        "alpaca": {
+            "enabled": false,
+            "api_key": "",
+            "api_secret": "",
+            "paper": true
+        },
+        "oanda": {
+            "enabled": false,
+            "account_id": "",
+            "access_token": "",
+            "practice": true
+        },
+        "mt5": {
+            "enabled": true,
+            "login": "61450727",
+            "password": "eb1jx!kilE",
+            "server": "Pepperstone Demo"
+        }
+    }
+}

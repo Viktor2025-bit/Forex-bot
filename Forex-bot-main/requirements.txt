@@ -1,0 +1,13 @@
+yfinance
+pandas
+numpy
+scikit-learn
+alpaca-trade-api
+matplotlib
+backtrader
+streamlit
+plotly
+torch
+xgboost
+ta
+MetaTrader5

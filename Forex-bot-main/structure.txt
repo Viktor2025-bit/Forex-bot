@@ -1,0 +1,10 @@
+AI_Trading_Bot/
+├── data/
+│   ├── raw/
+│   └── processed/
+├── models/
+├── strategies/
+├── utils/
+├── main.py
+├── requirements.txt
+└── README.md
