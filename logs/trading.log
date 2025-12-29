@@ -1094,3 +1094,486 @@
 2025-12-26 11:33:51 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
 2025-12-26 11:33:51 | INFO     | trading_bot | ==============================
 2025-12-26 11:33:51 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 00:58:08 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-28 00:58:08 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-28 00:58:08 | WARNING  | trading_bot | LSTM Model not found at models/trained_lstm.pth. Using untrained model.
+2025-12-28 00:58:08 | INFO     | trading_bot | Bot initialized for ['EURUSD=X', 'GBPUSD=X', 'USDJPY=X', 'AUDUSD=X', 'USDCAD=X', 'USDCHF=X'] (Paper trading)
+2025-12-28 00:58:08 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-28 00:58:08 | INFO     | trading_bot | Trading Cycle - 2025-12-28 00:58:08
+2025-12-28 00:58:17 | INFO     | trading_bot | Bot stopped by user
+2025-12-28 00:59:47 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-28 00:59:47 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-28 00:59:47 | WARNING  | trading_bot | LSTM Model not found at models/trained_lstm.pth. Using untrained model.
+2025-12-28 00:59:47 | INFO     | trading_bot | Bot initialized for ['EURUSD=X', 'GBPUSD=X', 'USDJPY=X', 'AUDUSD=X', 'USDCAD=X', 'USDCHF=X'] (Paper trading)
+2025-12-28 00:59:47 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-28 00:59:47 | INFO     | trading_bot | Trading Cycle - 2025-12-28 00:59:47
+2025-12-28 00:59:48 | INFO     | trading_bot | Model Prediction for EURUSD=X: 48.97% (DOWN)
+2025-12-28 00:59:48 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 48.47% (DOWN)
+2025-12-28 00:59:48 | INFO     | trading_bot | Model Prediction for USDJPY=X: 49.17% (DOWN)
+2025-12-28 00:59:48 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.43% (DOWN)
+2025-12-28 00:59:49 | INFO     | trading_bot | Model Prediction for USDCAD=X: 48.47% (DOWN)
+2025-12-28 00:59:49 | INFO     | trading_bot | Model Prediction for USDCHF=X: 47.76% (DOWN)
+2025-12-28 00:59:49 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 00:59:49 | INFO     | trading_bot | ==============================
+2025-12-28 00:59:49 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:00:49 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:00:49
+2025-12-28 01:00:49 | INFO     | trading_bot | Model Prediction for EURUSD=X: 49.19% (DOWN)
+2025-12-28 01:00:49 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 49.24% (DOWN)
+2025-12-28 01:00:49 | INFO     | trading_bot | Model Prediction for USDJPY=X: 48.15% (DOWN)
+2025-12-28 01:00:49 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.35% (DOWN)
+2025-12-28 01:00:49 | INFO     | trading_bot | Model Prediction for USDCAD=X: 48.20% (DOWN)
+2025-12-28 01:00:49 | INFO     | trading_bot | Model Prediction for USDCHF=X: 49.23% (DOWN)
+2025-12-28 01:00:49 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:00:49 | INFO     | trading_bot | ==============================
+2025-12-28 01:00:49 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:01:49 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:01:49
+2025-12-28 01:01:49 | INFO     | trading_bot | Model Prediction for EURUSD=X: 48.75% (DOWN)
+2025-12-28 01:01:49 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 49.00% (DOWN)
+2025-12-28 01:01:49 | INFO     | trading_bot | Model Prediction for USDJPY=X: 48.15% (DOWN)
+2025-12-28 01:01:49 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.59% (DOWN)
+2025-12-28 01:01:49 | INFO     | trading_bot | Model Prediction for USDCAD=X: 48.35% (DOWN)
+2025-12-28 01:01:49 | INFO     | trading_bot | Model Prediction for USDCHF=X: 49.06% (DOWN)
+2025-12-28 01:01:49 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:01:49 | INFO     | trading_bot | ==============================
+2025-12-28 01:01:49 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:02:49 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:02:49
+2025-12-28 01:02:49 | INFO     | trading_bot | Model Prediction for EURUSD=X: 49.18% (DOWN)
+2025-12-28 01:02:49 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 49.40% (DOWN)
+2025-12-28 01:02:49 | INFO     | trading_bot | Model Prediction for USDJPY=X: 49.07% (DOWN)
+2025-12-28 01:02:49 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.67% (DOWN)
+2025-12-28 01:02:49 | INFO     | trading_bot | Model Prediction for USDCAD=X: 48.78% (DOWN)
+2025-12-28 01:02:49 | INFO     | trading_bot | Model Prediction for USDCHF=X: 48.34% (DOWN)
+2025-12-28 01:02:49 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:02:49 | INFO     | trading_bot | ==============================
+2025-12-28 01:02:49 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:03:49 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:03:49
+2025-12-28 01:03:49 | INFO     | trading_bot | Model Prediction for EURUSD=X: 48.16% (DOWN)
+2025-12-28 01:03:49 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 49.31% (DOWN)
+2025-12-28 01:03:50 | INFO     | trading_bot | Model Prediction for USDJPY=X: 47.63% (DOWN)
+2025-12-28 01:03:50 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.49% (DOWN)
+2025-12-28 01:03:50 | INFO     | trading_bot | Model Prediction for USDCAD=X: 49.05% (DOWN)
+2025-12-28 01:03:50 | INFO     | trading_bot | Model Prediction for USDCHF=X: 48.46% (DOWN)
+2025-12-28 01:03:50 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:03:50 | INFO     | trading_bot | ==============================
+2025-12-28 01:03:50 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:04:50 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:04:50
+2025-12-28 01:04:50 | INFO     | trading_bot | Model Prediction for EURUSD=X: 49.42% (DOWN)
+2025-12-28 01:04:50 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 48.72% (DOWN)
+2025-12-28 01:04:50 | INFO     | trading_bot | Model Prediction for USDJPY=X: 49.57% (DOWN)
+2025-12-28 01:04:50 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.95% (DOWN)
+2025-12-28 01:04:50 | INFO     | trading_bot | Model Prediction for USDCAD=X: 48.98% (DOWN)
+2025-12-28 01:04:50 | INFO     | trading_bot | Model Prediction for USDCHF=X: 48.74% (DOWN)
+2025-12-28 01:04:50 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:04:50 | INFO     | trading_bot | ==============================
+2025-12-28 01:04:50 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:05:50 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:05:50
+2025-12-28 01:05:50 | INFO     | trading_bot | Model Prediction for EURUSD=X: 49.18% (DOWN)
+2025-12-28 01:05:50 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 47.99% (DOWN)
+2025-12-28 01:05:50 | INFO     | trading_bot | Model Prediction for USDJPY=X: 48.99% (DOWN)
+2025-12-28 01:05:50 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.00% (DOWN)
+2025-12-28 01:05:50 | INFO     | trading_bot | Model Prediction for USDCAD=X: 48.65% (DOWN)
+2025-12-28 01:05:50 | INFO     | trading_bot | Model Prediction for USDCHF=X: 48.04% (DOWN)
+2025-12-28 01:05:50 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:05:50 | INFO     | trading_bot | ==============================
+2025-12-28 01:05:50 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:06:50 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:06:50
+2025-12-28 01:06:53 | INFO     | trading_bot | Model Prediction for EURUSD=X: 47.50% (DOWN)
+2025-12-28 01:06:54 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 47.18% (DOWN)
+2025-12-28 01:06:55 | INFO     | trading_bot | Model Prediction for USDJPY=X: 49.03% (DOWN)
+2025-12-28 01:06:56 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.31% (DOWN)
+2025-12-28 01:06:58 | INFO     | trading_bot | Model Prediction for USDCAD=X: 49.53% (DOWN)
+2025-12-28 01:06:59 | INFO     | trading_bot | Model Prediction for USDCHF=X: 47.92% (DOWN)
+2025-12-28 01:06:59 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:06:59 | INFO     | trading_bot | ==============================
+2025-12-28 01:06:59 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:07:59 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:07:59
+2025-12-28 01:07:59 | INFO     | trading_bot | Model Prediction for EURUSD=X: 48.63% (DOWN)
+2025-12-28 01:07:59 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 48.65% (DOWN)
+2025-12-28 01:07:59 | INFO     | trading_bot | Model Prediction for USDJPY=X: 48.31% (DOWN)
+2025-12-28 01:07:59 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.73% (DOWN)
+2025-12-28 01:07:59 | INFO     | trading_bot | Model Prediction for USDCAD=X: 48.49% (DOWN)
+2025-12-28 01:07:59 | INFO     | trading_bot | Model Prediction for USDCHF=X: 48.78% (DOWN)
+2025-12-28 01:07:59 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:07:59 | INFO     | trading_bot | ==============================
+2025-12-28 01:07:59 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:08:59 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:08:59
+2025-12-28 01:09:00 | INFO     | trading_bot | Model Prediction for EURUSD=X: 48.66% (DOWN)
+2025-12-28 01:09:00 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 49.18% (DOWN)
+2025-12-28 01:09:00 | INFO     | trading_bot | Model Prediction for USDJPY=X: 48.43% (DOWN)
+2025-12-28 01:09:00 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 49.08% (DOWN)
+2025-12-28 01:09:00 | INFO     | trading_bot | Model Prediction for USDCAD=X: 49.14% (DOWN)
+2025-12-28 01:09:01 | INFO     | trading_bot | Model Prediction for USDCHF=X: 49.05% (DOWN)
+2025-12-28 01:09:01 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:09:01 | INFO     | trading_bot | ==============================
+2025-12-28 01:09:01 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:10:01 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:10:01
+2025-12-28 01:10:01 | INFO     | trading_bot | Model Prediction for EURUSD=X: 48.50% (DOWN)
+2025-12-28 01:10:01 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 48.95% (DOWN)
+2025-12-28 01:10:01 | INFO     | trading_bot | Model Prediction for USDJPY=X: 49.14% (DOWN)
+2025-12-28 01:10:01 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.89% (DOWN)
+2025-12-28 01:10:01 | INFO     | trading_bot | Model Prediction for USDCAD=X: 48.34% (DOWN)
+2025-12-28 01:10:01 | INFO     | trading_bot | Model Prediction for USDCHF=X: 48.35% (DOWN)
+2025-12-28 01:10:01 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:10:01 | INFO     | trading_bot | ==============================
+2025-12-28 01:10:01 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:11:01 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:11:01
+2025-12-28 01:11:01 | INFO     | trading_bot | Model Prediction for EURUSD=X: 48.42% (DOWN)
+2025-12-28 01:11:01 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 48.08% (DOWN)
+2025-12-28 01:11:01 | INFO     | trading_bot | Model Prediction for USDJPY=X: 48.71% (DOWN)
+2025-12-28 01:11:01 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.51% (DOWN)
+2025-12-28 01:11:01 | INFO     | trading_bot | Model Prediction for USDCAD=X: 49.12% (DOWN)
+2025-12-28 01:11:01 | INFO     | trading_bot | Model Prediction for USDCHF=X: 49.57% (DOWN)
+2025-12-28 01:11:01 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:11:01 | INFO     | trading_bot | ==============================
+2025-12-28 01:11:01 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:12:01 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:12:01
+2025-12-28 01:12:01 | INFO     | trading_bot | Model Prediction for EURUSD=X: 49.41% (DOWN)
+2025-12-28 01:12:01 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 48.41% (DOWN)
+2025-12-28 01:12:01 | INFO     | trading_bot | Model Prediction for USDJPY=X: 49.58% (DOWN)
+2025-12-28 01:12:01 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.00% (DOWN)
+2025-12-28 01:12:01 | INFO     | trading_bot | Model Prediction for USDCAD=X: 48.88% (DOWN)
+2025-12-28 01:12:01 | INFO     | trading_bot | Model Prediction for USDCHF=X: 48.71% (DOWN)
+2025-12-28 01:12:01 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:12:01 | INFO     | trading_bot | ==============================
+2025-12-28 01:12:01 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:13:01 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:13:01
+2025-12-28 01:13:01 | INFO     | trading_bot | Model Prediction for EURUSD=X: 48.80% (DOWN)
+2025-12-28 01:13:01 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 49.15% (DOWN)
+2025-12-28 01:13:01 | INFO     | trading_bot | Model Prediction for USDJPY=X: 49.16% (DOWN)
+2025-12-28 01:13:01 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 49.54% (DOWN)
+2025-12-28 01:13:01 | INFO     | trading_bot | Model Prediction for USDCAD=X: 49.04% (DOWN)
+2025-12-28 01:13:01 | INFO     | trading_bot | Model Prediction for USDCHF=X: 49.22% (DOWN)
+2025-12-28 01:13:01 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:13:01 | INFO     | trading_bot | ==============================
+2025-12-28 01:13:01 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:14:01 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:14:01
+2025-12-28 01:14:02 | INFO     | trading_bot | Model Prediction for EURUSD=X: 48.58% (DOWN)
+2025-12-28 01:14:02 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 49.18% (DOWN)
+2025-12-28 01:14:02 | INFO     | trading_bot | Model Prediction for USDJPY=X: 48.75% (DOWN)
+2025-12-28 01:14:02 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.64% (DOWN)
+2025-12-28 01:14:02 | INFO     | trading_bot | Model Prediction for USDCAD=X: 49.24% (DOWN)
+2025-12-28 01:14:02 | INFO     | trading_bot | Model Prediction for USDCHF=X: 49.30% (DOWN)
+2025-12-28 01:14:02 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:14:02 | INFO     | trading_bot | ==============================
+2025-12-28 01:14:02 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:15:02 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:15:02
+2025-12-28 01:15:02 | INFO     | trading_bot | Model Prediction for EURUSD=X: 49.15% (DOWN)
+2025-12-28 01:15:02 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 49.27% (DOWN)
+2025-12-28 01:15:02 | INFO     | trading_bot | Model Prediction for USDJPY=X: 49.14% (DOWN)
+2025-12-28 01:15:02 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.56% (DOWN)
+2025-12-28 01:15:02 | INFO     | trading_bot | Model Prediction for USDCAD=X: 48.44% (DOWN)
+2025-12-28 01:15:02 | INFO     | trading_bot | Model Prediction for USDCHF=X: 47.87% (DOWN)
+2025-12-28 01:15:02 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:15:02 | INFO     | trading_bot | ==============================
+2025-12-28 01:15:02 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:16:02 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:16:02
+2025-12-28 01:16:02 | INFO     | trading_bot | Model Prediction for EURUSD=X: 49.45% (DOWN)
+2025-12-28 01:16:02 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 48.26% (DOWN)
+2025-12-28 01:16:02 | INFO     | trading_bot | Model Prediction for USDJPY=X: 48.46% (DOWN)
+2025-12-28 01:16:02 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.71% (DOWN)
+2025-12-28 01:16:02 | INFO     | trading_bot | Model Prediction for USDCAD=X: 48.12% (DOWN)
+2025-12-28 01:16:02 | INFO     | trading_bot | Model Prediction for USDCHF=X: 49.28% (DOWN)
+2025-12-28 01:16:02 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:16:02 | INFO     | trading_bot | ==============================
+2025-12-28 01:16:02 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:17:02 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:17:02
+2025-12-28 01:17:02 | INFO     | trading_bot | Model Prediction for EURUSD=X: 49.06% (DOWN)
+2025-12-28 01:17:03 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 48.49% (DOWN)
+2025-12-28 01:17:03 | INFO     | trading_bot | Model Prediction for USDJPY=X: 48.58% (DOWN)
+2025-12-28 01:17:03 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 48.11% (DOWN)
+2025-12-28 01:17:03 | INFO     | trading_bot | Model Prediction for USDCAD=X: 48.36% (DOWN)
+2025-12-28 01:17:03 | INFO     | trading_bot | Model Prediction for USDCHF=X: 49.31% (DOWN)
+2025-12-28 01:17:03 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:17:03 | INFO     | trading_bot | ==============================
+2025-12-28 01:17:03 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:18:03 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:18:03
+2025-12-28 01:18:03 | INFO     | trading_bot | Model Prediction for EURUSD=X: 48.23% (DOWN)
+2025-12-28 01:18:03 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 48.28% (DOWN)
+2025-12-28 01:18:03 | INFO     | trading_bot | Model Prediction for USDJPY=X: 48.32% (DOWN)
+2025-12-28 01:18:03 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 49.06% (DOWN)
+2025-12-28 01:18:03 | INFO     | trading_bot | Model Prediction for USDCAD=X: 47.61% (DOWN)
+2025-12-28 01:18:03 | INFO     | trading_bot | Model Prediction for USDCHF=X: 47.35% (DOWN)
+2025-12-28 01:18:03 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:18:03 | INFO     | trading_bot | ==============================
+2025-12-28 01:18:03 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:19:03 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:19:03
+2025-12-28 01:19:03 | INFO     | trading_bot | Model Prediction for EURUSD=X: 49.33% (DOWN)
+2025-12-28 01:19:03 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 48.09% (DOWN)
+2025-12-28 01:19:03 | INFO     | trading_bot | Model Prediction for USDJPY=X: 48.90% (DOWN)
+2025-12-28 01:19:03 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 49.53% (DOWN)
+2025-12-28 01:19:03 | INFO     | trading_bot | Model Prediction for USDCAD=X: 49.59% (DOWN)
+2025-12-28 01:19:03 | INFO     | trading_bot | Model Prediction for USDCHF=X: 48.27% (DOWN)
+2025-12-28 01:19:03 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:19:03 | INFO     | trading_bot | ==============================
+2025-12-28 01:19:03 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:20:03 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:20:03
+2025-12-28 01:20:03 | INFO     | trading_bot | Model Prediction for EURUSD=X: 49.64% (DOWN)
+2025-12-28 01:20:03 | INFO     | trading_bot | Model Prediction for GBPUSD=X: 49.13% (DOWN)
+2025-12-28 01:20:03 | INFO     | trading_bot | Model Prediction for USDJPY=X: 49.53% (DOWN)
+2025-12-28 01:20:04 | INFO     | trading_bot | Model Prediction for AUDUSD=X: 49.22% (DOWN)
+2025-12-28 01:20:04 | INFO     | trading_bot | Model Prediction for USDCAD=X: 49.42% (DOWN)
+2025-12-28 01:20:04 | INFO     | trading_bot | Model Prediction for USDCHF=X: 49.18% (DOWN)
+2025-12-28 01:20:04 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:20:04 | INFO     | trading_bot | ==============================
+2025-12-28 01:20:04 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:21:56 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-28 01:21:56 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-28 01:21:56 | WARNING  | trading_bot | LSTM Model not found at models/trained_lstm.pth. Using untrained model.
+2025-12-28 01:21:56 | INFO     | trading_bot | Bot initialized for ['US500', 'US30', 'NAS100'] (Paper trading)
+2025-12-28 01:21:56 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-28 01:21:56 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:21:56
+2025-12-28 01:21:57 | INFO     | trading_bot | Model Prediction for US500: 53.56% (UP)
+2025-12-28 01:21:57 | INFO     | trading_bot | Model Prediction for US30: 54.33% (UP)
+2025-12-28 01:21:57 | INFO     | trading_bot | Model Prediction for NAS100: 54.18% (UP)
+2025-12-28 01:21:57 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:21:57 | INFO     | trading_bot | ==============================
+2025-12-28 01:21:57 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:22:57 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:22:57
+2025-12-28 01:22:57 | INFO     | trading_bot | Model Prediction for US500: 53.92% (UP)
+2025-12-28 01:22:57 | INFO     | trading_bot | Model Prediction for US30: 54.07% (UP)
+2025-12-28 01:22:57 | INFO     | trading_bot | Model Prediction for NAS100: 53.96% (UP)
+2025-12-28 01:22:57 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:22:57 | INFO     | trading_bot | ==============================
+2025-12-28 01:22:57 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-28 01:23:57 | INFO     | trading_bot | Trading Cycle - 2025-12-28 01:23:57
+2025-12-28 01:23:57 | INFO     | trading_bot | Model Prediction for US500: 54.88% (UP)
+2025-12-28 01:23:57 | INFO     | trading_bot | Model Prediction for US30: 54.41% (UP)
+2025-12-28 01:23:57 | INFO     | trading_bot | Model Prediction for NAS100: 53.77% (UP)
+2025-12-28 01:23:57 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-28 01:23:57 | INFO     | trading_bot | ==============================
+2025-12-28 01:23:57 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:24:50 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:24:50
+2025-12-29 01:24:50 | INFO     | trading_bot | Model Prediction for US500: 54.11% (UP)
+2025-12-29 01:24:50 | INFO     | trading_bot | Model Prediction for US30: 54.11% (UP)
+2025-12-29 01:24:51 | INFO     | trading_bot | Model Prediction for NAS100: 54.93% (UP)
+2025-12-29 01:24:51 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:24:51 | INFO     | trading_bot | ==============================
+2025-12-29 01:24:51 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:24:55 | INFO     | trading_bot | Bot stopped by user
+2025-12-29 01:26:32 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-29 01:26:32 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-29 01:26:32 | WARNING  | trading_bot | LSTM Model not found at models/trained_lstm.pth. Using untrained model.
+2025-12-29 01:26:32 | INFO     | trading_bot | Bot initialized for ['US500', 'US30', 'NAS100'] (Paper trading)
+2025-12-29 01:26:32 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-29 01:26:32 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:26:32
+2025-12-29 01:26:33 | INFO     | trading_bot | Model Prediction for US500: 53.88% (UP)
+2025-12-29 01:26:34 | INFO     | trading_bot | Model Prediction for US30: 54.80% (UP)
+2025-12-29 01:26:34 | INFO     | trading_bot | Model Prediction for NAS100: 54.94% (UP)
+2025-12-29 01:26:34 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:26:34 | INFO     | trading_bot | ==============================
+2025-12-29 01:26:34 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:27:34 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:27:34
+2025-12-29 01:27:34 | INFO     | trading_bot | Model Prediction for US500: 54.79% (UP)
+2025-12-29 01:27:34 | INFO     | trading_bot | Model Prediction for US30: 54.16% (UP)
+2025-12-29 01:27:34 | INFO     | trading_bot | Model Prediction for NAS100: 54.06% (UP)
+2025-12-29 01:27:34 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:27:34 | INFO     | trading_bot | ==============================
+2025-12-29 01:27:34 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:28:34 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:28:34
+2025-12-29 01:28:35 | INFO     | trading_bot | Model Prediction for US500: 54.59% (UP)
+2025-12-29 01:28:35 | INFO     | trading_bot | Model Prediction for US30: 54.49% (UP)
+2025-12-29 01:28:36 | INFO     | trading_bot | Model Prediction for NAS100: 55.09% (UP)
+2025-12-29 01:28:36 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:28:36 | INFO     | trading_bot | ==============================
+2025-12-29 01:28:36 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:29:36 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:29:36
+2025-12-29 01:29:36 | INFO     | trading_bot | Model Prediction for US500: 54.98% (UP)
+2025-12-29 01:29:36 | INFO     | trading_bot | Model Prediction for US30: 54.74% (UP)
+2025-12-29 01:29:36 | INFO     | trading_bot | Model Prediction for NAS100: 54.63% (UP)
+2025-12-29 01:29:36 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:29:36 | INFO     | trading_bot | ==============================
+2025-12-29 01:29:36 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:30:36 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:30:36
+2025-12-29 01:30:37 | INFO     | trading_bot | Model Prediction for US500: 55.03% (UP)
+2025-12-29 01:30:37 | INFO     | trading_bot | Model Prediction for US30: 55.22% (UP)
+2025-12-29 01:30:37 | INFO     | trading_bot | Model Prediction for NAS100: 53.73% (UP)
+2025-12-29 01:30:37 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:30:37 | INFO     | trading_bot | ==============================
+2025-12-29 01:30:37 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:31:37 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:31:37
+2025-12-29 01:31:37 | INFO     | trading_bot | Model Prediction for US500: 54.72% (UP)
+2025-12-29 01:31:37 | INFO     | trading_bot | Model Prediction for US30: 54.76% (UP)
+2025-12-29 01:31:37 | INFO     | trading_bot | Model Prediction for NAS100: 54.78% (UP)
+2025-12-29 01:31:37 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:31:37 | INFO     | trading_bot | ==============================
+2025-12-29 01:31:37 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:32:37 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:32:37
+2025-12-29 01:32:37 | INFO     | trading_bot | Model Prediction for US500: 53.75% (UP)
+2025-12-29 01:32:37 | INFO     | trading_bot | Model Prediction for US30: 54.45% (UP)
+2025-12-29 01:32:37 | INFO     | trading_bot | Model Prediction for NAS100: 54.13% (UP)
+2025-12-29 01:32:37 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:32:37 | INFO     | trading_bot | ==============================
+2025-12-29 01:32:37 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:33:37 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:33:37
+2025-12-29 01:33:37 | INFO     | trading_bot | Model Prediction for US500: 54.97% (UP)
+2025-12-29 01:33:37 | INFO     | trading_bot | Model Prediction for US30: 54.49% (UP)
+2025-12-29 01:33:37 | INFO     | trading_bot | Model Prediction for NAS100: 54.21% (UP)
+2025-12-29 01:33:37 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:33:37 | INFO     | trading_bot | ==============================
+2025-12-29 01:33:37 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:35:19 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-29 01:35:19 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-29 01:35:19 | WARNING  | trading_bot | LSTM Model not found at models/trained_lstm.pth. Using untrained model.
+2025-12-29 01:35:19 | INFO     | trading_bot | Bot initialized for ['US500', 'US30', 'NAS100'] (Paper trading)
+2025-12-29 01:35:19 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-29 01:35:19 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:35:19
+2025-12-29 01:35:19 | INFO     | trading_bot | Model Prediction for US500: 52.52% (UP)
+2025-12-29 01:35:19 | INFO     | trading_bot | Model Prediction for US30: 52.83% (UP)
+2025-12-29 01:35:19 | INFO     | trading_bot | Model Prediction for NAS100: 52.56% (UP)
+2025-12-29 01:35:19 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:35:19 | INFO     | trading_bot | ==============================
+2025-12-29 01:35:19 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:36:19 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:36:19
+2025-12-29 01:36:19 | INFO     | trading_bot | Model Prediction for US500: 52.86% (UP)
+2025-12-29 01:36:19 | INFO     | trading_bot | Model Prediction for US30: 52.65% (UP)
+2025-12-29 01:36:19 | INFO     | trading_bot | Model Prediction for NAS100: 52.19% (UP)
+2025-12-29 01:36:19 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:36:19 | INFO     | trading_bot | ==============================
+2025-12-29 01:36:19 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:37:19 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:37:19
+2025-12-29 01:37:19 | INFO     | trading_bot | Model Prediction for US500: 52.97% (UP)
+2025-12-29 01:37:19 | INFO     | trading_bot | Model Prediction for US30: 52.32% (UP)
+2025-12-29 01:37:19 | INFO     | trading_bot | Model Prediction for NAS100: 51.79% (UP)
+2025-12-29 01:37:19 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:37:19 | INFO     | trading_bot | ==============================
+2025-12-29 01:37:19 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:38:19 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:38:19
+2025-12-29 01:38:19 | INFO     | trading_bot | Model Prediction for US500: 52.52% (UP)
+2025-12-29 01:38:19 | INFO     | trading_bot | Model Prediction for US30: 52.30% (UP)
+2025-12-29 01:38:19 | INFO     | trading_bot | Model Prediction for NAS100: 52.50% (UP)
+2025-12-29 01:38:19 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:38:19 | INFO     | trading_bot | ==============================
+2025-12-29 01:38:19 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:39:19 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:39:19
+2025-12-29 01:39:19 | INFO     | trading_bot | Model Prediction for US500: 52.77% (UP)
+2025-12-29 01:39:19 | INFO     | trading_bot | Model Prediction for US30: 52.28% (UP)
+2025-12-29 01:39:19 | INFO     | trading_bot | Model Prediction for NAS100: 52.63% (UP)
+2025-12-29 01:39:19 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:39:19 | INFO     | trading_bot | ==============================
+2025-12-29 01:39:19 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:40:19 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:40:19
+2025-12-29 01:40:20 | INFO     | trading_bot | Model Prediction for US500: 52.79% (UP)
+2025-12-29 01:40:20 | INFO     | trading_bot | Model Prediction for US30: 52.75% (UP)
+2025-12-29 01:40:20 | INFO     | trading_bot | Model Prediction for NAS100: 53.09% (UP)
+2025-12-29 01:40:20 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:40:20 | INFO     | trading_bot | ==============================
+2025-12-29 01:40:20 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:41:20 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:41:20
+2025-12-29 01:41:20 | INFO     | trading_bot | Model Prediction for US500: 52.70% (UP)
+2025-12-29 01:41:20 | INFO     | trading_bot | Model Prediction for US30: 52.65% (UP)
+2025-12-29 01:41:20 | INFO     | trading_bot | Model Prediction for NAS100: 52.94% (UP)
+2025-12-29 01:41:20 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:41:20 | INFO     | trading_bot | ==============================
+2025-12-29 01:41:20 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:42:20 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:42:20
+2025-12-29 01:42:20 | INFO     | trading_bot | Model Prediction for US500: 52.51% (UP)
+2025-12-29 01:42:20 | INFO     | trading_bot | Model Prediction for US30: 52.89% (UP)
+2025-12-29 01:42:20 | INFO     | trading_bot | Model Prediction for NAS100: 52.69% (UP)
+2025-12-29 01:42:20 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:42:20 | INFO     | trading_bot | ==============================
+2025-12-29 01:42:20 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:43:20 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:43:20
+2025-12-29 01:43:20 | INFO     | trading_bot | Model Prediction for US500: 52.56% (UP)
+2025-12-29 01:43:20 | INFO     | trading_bot | Model Prediction for US30: 52.79% (UP)
+2025-12-29 01:43:20 | INFO     | trading_bot | Model Prediction for NAS100: 52.91% (UP)
+2025-12-29 01:43:20 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:43:20 | INFO     | trading_bot | ==============================
+2025-12-29 01:43:20 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:44:20 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:44:20
+2025-12-29 01:44:20 | INFO     | trading_bot | Model Prediction for US500: 52.21% (UP)
+2025-12-29 01:44:20 | INFO     | trading_bot | Model Prediction for US30: 52.80% (UP)
+2025-12-29 01:44:20 | INFO     | trading_bot | Model Prediction for NAS100: 52.84% (UP)
+2025-12-29 01:44:20 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:44:20 | INFO     | trading_bot | ==============================
+2025-12-29 01:44:20 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:45:20 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:45:20
+2025-12-29 01:45:20 | INFO     | trading_bot | Model Prediction for US500: 52.88% (UP)
+2025-12-29 01:45:20 | INFO     | trading_bot | Model Prediction for US30: 52.66% (UP)
+2025-12-29 01:45:20 | INFO     | trading_bot | Model Prediction for NAS100: 52.49% (UP)
+2025-12-29 01:45:20 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:45:20 | INFO     | trading_bot | ==============================
+2025-12-29 01:45:20 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:46:20 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:46:20
+2025-12-29 01:46:21 | INFO     | trading_bot | Model Prediction for US500: 52.40% (UP)
+2025-12-29 01:46:21 | INFO     | trading_bot | Model Prediction for US30: 52.78% (UP)
+2025-12-29 01:46:21 | INFO     | trading_bot | Model Prediction for NAS100: 53.05% (UP)
+2025-12-29 01:46:21 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:46:21 | INFO     | trading_bot | ==============================
+2025-12-29 01:46:21 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:47:21 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:47:21
+2025-12-29 01:47:21 | INFO     | trading_bot | Model Prediction for US500: 52.19% (UP)
+2025-12-29 01:47:21 | INFO     | trading_bot | Model Prediction for US30: 52.64% (UP)
+2025-12-29 01:47:21 | INFO     | trading_bot | Model Prediction for NAS100: 53.01% (UP)
+2025-12-29 01:47:21 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:47:21 | INFO     | trading_bot | ==============================
+2025-12-29 01:47:21 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:48:21 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:48:21
+2025-12-29 01:48:21 | INFO     | trading_bot | Model Prediction for US500: 52.26% (UP)
+2025-12-29 01:48:21 | INFO     | trading_bot | Model Prediction for US30: 53.24% (UP)
+2025-12-29 01:48:21 | INFO     | trading_bot | Model Prediction for NAS100: 52.76% (UP)
+2025-12-29 01:48:21 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:48:21 | INFO     | trading_bot | ==============================
+2025-12-29 01:48:21 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:49:21 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:49:21
+2025-12-29 01:49:21 | INFO     | trading_bot | Model Prediction for US500: 52.97% (UP)
+2025-12-29 01:49:21 | INFO     | trading_bot | Model Prediction for US30: 52.82% (UP)
+2025-12-29 01:49:21 | INFO     | trading_bot | Model Prediction for NAS100: 52.59% (UP)
+2025-12-29 01:49:21 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:49:21 | INFO     | trading_bot | ==============================
+2025-12-29 01:49:21 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:50:21 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:50:21
+2025-12-29 01:50:21 | INFO     | trading_bot | Model Prediction for US500: 52.41% (UP)
+2025-12-29 01:50:21 | INFO     | trading_bot | Model Prediction for US30: 52.36% (UP)
+2025-12-29 01:50:21 | INFO     | trading_bot | Model Prediction for NAS100: 52.72% (UP)
+2025-12-29 01:50:21 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:50:21 | INFO     | trading_bot | ==============================
+2025-12-29 01:50:21 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:51:21 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:51:21
+2025-12-29 01:51:21 | INFO     | trading_bot | Model Prediction for US500: 52.68% (UP)
+2025-12-29 01:51:21 | INFO     | trading_bot | Model Prediction for US30: 52.94% (UP)
+2025-12-29 01:51:21 | INFO     | trading_bot | Model Prediction for NAS100: 52.62% (UP)
+2025-12-29 01:51:21 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:51:21 | INFO     | trading_bot | ==============================
+2025-12-29 01:51:21 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:52:21 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:52:21
+2025-12-29 01:52:21 | INFO     | trading_bot | Model Prediction for US500: 52.63% (UP)
+2025-12-29 01:52:21 | INFO     | trading_bot | Model Prediction for US30: 52.69% (UP)
+2025-12-29 01:52:21 | INFO     | trading_bot | Model Prediction for NAS100: 53.03% (UP)
+2025-12-29 01:52:21 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:52:21 | INFO     | trading_bot | ==============================
+2025-12-29 01:52:21 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:53:21 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:53:21
+2025-12-29 01:53:21 | INFO     | trading_bot | Model Prediction for US500: 52.62% (UP)
+2025-12-29 01:53:21 | INFO     | trading_bot | Model Prediction for US30: 52.78% (UP)
+2025-12-29 01:53:21 | INFO     | trading_bot | Model Prediction for NAS100: 53.09% (UP)
+2025-12-29 01:53:21 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:53:21 | INFO     | trading_bot | ==============================
+2025-12-29 01:53:21 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 01:59:35 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-29 01:59:35 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-29 01:59:35 | WARNING  | trading_bot | LSTM Model not found at models/trained_lstm.pth. Using untrained model.
+2025-12-29 01:59:35 | INFO     | trading_bot | Bot initialized for ['US500', 'US30', 'NAS100'] (Paper trading)
+2025-12-29 01:59:35 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-29 01:59:35 | INFO     | trading_bot | Trading Cycle - 2025-12-29 01:59:35
+2025-12-29 01:59:35 | INFO     | trading_bot | Model Prediction for US500: 43.85% (DOWN)
+2025-12-29 01:59:35 | INFO     | trading_bot | Model Prediction for US30: 45.03% (DOWN)
+2025-12-29 01:59:35 | INFO     | trading_bot | Model Prediction for NAS100: 44.24% (DOWN)
+2025-12-29 01:59:35 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 01:59:35 | INFO     | trading_bot | ==============================
+2025-12-29 01:59:35 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 02:00:35 | INFO     | trading_bot | Trading Cycle - 2025-12-29 02:00:35
+2025-12-29 02:00:36 | INFO     | trading_bot | Model Prediction for US500: 43.79% (DOWN)
+2025-12-29 02:00:36 | INFO     | trading_bot | Model Prediction for US30: 44.30% (DOWN)
+2025-12-29 02:00:36 | INFO     | trading_bot | Model Prediction for NAS100: 43.91% (DOWN)
+2025-12-29 02:00:36 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 02:00:36 | INFO     | trading_bot | ==============================
+2025-12-29 02:00:36 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 02:01:36 | INFO     | trading_bot | Trading Cycle - 2025-12-29 02:01:36
+2025-12-29 02:01:36 | INFO     | trading_bot | Model Prediction for US500: 43.98% (DOWN)
+2025-12-29 02:01:36 | INFO     | trading_bot | Model Prediction for US30: 43.71% (DOWN)
+2025-12-29 02:01:36 | INFO     | trading_bot | Model Prediction for NAS100: 44.14% (DOWN)
+2025-12-29 02:01:36 | INFO     | trading_bot | Account: Cash=$500.00, Equity=$500.00, Return=0.00%
+2025-12-29 02:01:36 | INFO     | trading_bot | ==============================
+2025-12-29 02:01:36 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-29 12:22:54 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-29 12:22:54 | INFO     | trading_bot | Initializing Trading Bot...

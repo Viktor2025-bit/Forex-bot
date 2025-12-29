@@ -39,19 +39,22 @@ class Order:
     quantity: int
     order_type: str  # 'market', 'limit'
     limit_price: Optional[float] = None
+    stop_loss: Optional[float] = None
+    take_profit: Optional[float] = None
     status: OrderStatus = OrderStatus.PENDING
     filled_price: Optional[float] = None
     filled_at: Optional[datetime] = None
-    
+
 
 class OrderExecutor(ABC):
     """Abstract base class for order execution."""
-    
+
     @abstractmethod
-    def submit_order(self, symbol: str, side: OrderSide, quantity: int, 
-                     order_type: str = "market", limit_price: Optional[float] = None) -> Order:
+    def submit_order(self, symbol: str, side: OrderSide, quantity: int,
+                     order_type: str = "market", limit_price: Optional[float] = None,
+                     stop_loss: Optional[float] = None, take_profit: Optional[float] = None) -> Order:
         pass
-    
+
     @abstractmethod
     def cancel_order(self, order_id: str) -> bool:
         pass
@@ -77,20 +80,41 @@ class PaperTradingExecutor(OrderExecutor):
     
     def __init__(self, initial_capital: float = 10000):
         self.cash = initial_capital
-        self.cash = initial_capital
         self.initial_capital = initial_capital
         self.paper_trading = True # Interface compatibility
-        self.positions = {}  # symbol -> {qty, avg_price}
+        self.positions = {}  # symbol -> {qty, avg_price, sl, tp}
         self.orders = {}
         self.order_counter = 0
         self.current_prices = {}  # symbol -> price (must be updated externally)
         
     def set_price(self, symbol: str, price: float):
-        """Update the current price for a symbol (called by data feed)."""
+        """Update the current price for a symbol and check for SL/TP triggers."""
         self.current_prices[symbol] = price
+        self._check_triggers(symbol, price)
         
+    def _check_triggers(self, symbol: str, price: float):
+        """Check for stop-loss or take-profit triggers for a given symbol."""
+        if symbol not in self.positions:
+            return
+
+        pos = self.positions[symbol]
+        if pos['qty'] == 0:
+            return
+
+        triggered = False
+        if pos.get('stop_loss') and price <= pos['stop_loss']:
+            logger.info(f"[PAPER] Stop-loss triggered for {symbol} at ${price:.2f}")
+            triggered = True
+        elif pos.get('take_profit') and price >= pos['take_profit']:
+            logger.info(f"[PAPER] Take-profit triggered for {symbol} at ${price:.2f}")
+            triggered = True
+            
+        if triggered:
+            self.submit_order(symbol, OrderSide.SELL, pos['qty'], stop_loss=None, take_profit=None)
+
     def submit_order(self, symbol: str, side: OrderSide, quantity: int,
-                     order_type: str = "market", limit_price: Optional[float] = None) -> Order:
+                     order_type: str = "market", limit_price: Optional[float] = None,
+                     stop_loss: Optional[float] = None, take_profit: Optional[float] = None) -> Order:
         """Submit a paper order (executed immediately for market orders)."""
         
         self.order_counter += 1
@@ -106,7 +130,9 @@ class PaperTradingExecutor(OrderExecutor):
             side=side,
             quantity=quantity,
             order_type=order_type,
-            limit_price=limit_price
+            limit_price=limit_price,
+            stop_loss=stop_loss,
+            take_profit=take_profit
         )
         
         # Execute immediately for market orders (paper trading)
@@ -116,7 +142,9 @@ class PaperTradingExecutor(OrderExecutor):
                 order.status = OrderStatus.FILLED
                 order.filled_price = price
                 order.filled_at = datetime.now()
-                logger.info(f"[PAPER] Order filled: {side.value} {quantity} {symbol} @ ${price:.2f}")
+                # Don't log fills for trigger-based sells to avoid confusion
+                if "triggered" not in order.id:
+                    logger.info(f"[PAPER] Order filled: {side.value} {quantity} {symbol} @ ${price:.2f}")
             else:
                 order.status = OrderStatus.REJECTED
                 logger.warning(f"[PAPER] Order rejected: Insufficient funds/shares")
@@ -141,7 +169,12 @@ class PaperTradingExecutor(OrderExecutor):
                 pos['avg_price'] = total_cost_basis / total_qty
                 pos['qty'] = total_qty
             else:
-                self.positions[order.symbol] = {'qty': order.quantity, 'avg_price': price}
+                self.positions[order.symbol] = {
+                    'qty': order.quantity, 
+                    'avg_price': price,
+                    'stop_loss': order.stop_loss,
+                    'take_profit': order.take_profit
+                }
                 
         else:  # SELL
             if order.symbol not in self.positions or self.positions[order.symbol]['qty'] < order.quantity:
@@ -217,17 +250,26 @@ class AlpacaExecutor(OrderExecutor):
         logger.info(f"Connected to Alpaca ({'Paper' if paper else 'LIVE'} trading)")
         
     def submit_order(self, symbol: str, side: OrderSide, quantity: int,
-                     order_type: str = "market", limit_price: Optional[float] = None) -> Order:
+                     order_type: str = "market", limit_price: Optional[float] = None,
+                     stop_loss: Optional[float] = None, take_profit: Optional[float] = None) -> Order:
         """Submit order to Alpaca."""
+        order_data = {
+            'symbol': symbol,
+            'qty': quantity,
+            'side': side.value,
+            'type': order_type,
+            'time_in_force': 'day'
+        }
+        if order_type == 'limit':
+            order_data['limit_price'] = limit_price
+
+        if stop_loss is not None or take_profit is not None:
+            order_data['order_class'] = 'bracket'
+            order_data['stop_loss'] = {'stop_price': stop_loss}
+            order_data['take_profit'] = {'limit_price': take_profit}
+
         try:
-            alpaca_order = self.api.submit_order(
-                symbol=symbol,
-                qty=quantity,
-                side=side.value,
-                type=order_type,
-                time_in_force='day',
-                limit_price=limit_price if order_type == 'limit' else None
-            )
+            alpaca_order = self.api.submit_order(**order_data)
             
             order = Order(
                 id=alpaca_order.id,
@@ -236,6 +278,8 @@ class AlpacaExecutor(OrderExecutor):
                 quantity=quantity,
                 order_type=order_type,
                 limit_price=limit_price,
+                stop_loss=stop_loss,
+                take_profit=take_profit,
                 status=OrderStatus.PENDING
             )
             
@@ -371,82 +415,53 @@ class OandaExecutor(OrderExecutor):
 
 
 
-    def submit_order(self, symbol: str, side: OrderSide, quantity: int, order_type: str = "market", limit_price: Optional[float] = None) -> Order:
-
+    def submit_order(self, symbol: str, side: OrderSide, quantity: int,
+                     order_type: str = "market", limit_price: Optional[float] = None,
+                     stop_loss: Optional[float] = None, take_profit: Optional[float] = None) -> Order:
         """Submit order to OANDA."""
-
         oanda_instrument = symbol.replace("/", "_") # OANDA uses "_" instead of "/"
 
-        
-
         order_data = {
-
             "order": {
-
                 "units": str(quantity) if side == OrderSide.BUY else str(-quantity),
-
                 "instrument": oanda_instrument,
-
                 "timeInForce": "FOK", # Fill Or Kill
-
                 "type": order_type.upper(),
-
                 "positionFill": "DEFAULT"
-
             }
-
         }
 
-        
-
         if order_type == 'limit' and limit_price:
-
             order_data['order']['price'] = str(limit_price)
 
-
+        if stop_loss:
+            order_data['order']['stopLossOnFill'] = {'price': str(stop_loss)}
+        if take_profit:
+            order_data['order']['takeProfitOnFill'] = {'price': str(take_profit)}
 
         r = self.orders_api.OrderCreate(self.account_id, data=order_data)
 
-
-
         try:
-
             self.api.request(r)
-
             response = r.response
-
             
-
             order_id = response.get('orderCreateTransaction', {}).get('id')
-
             if order_id:
-
                 return Order(
-
                     id=order_id,
-
                     symbol=symbol,
-
                     side=side,
-
                     quantity=quantity,
-
                     order_type=order_type,
-
+                    stop_loss=stop_loss,
+                    take_profit=take_profit,
                     status=OrderStatus.FILLED # OANDA FOK orders are either filled or rejected
-
                 )
-
             else:
-
                  logger.error(f"[OANDA] Order failed: {response}")
-
                  return self._create_rejected_order(symbol, side, quantity, order_type)
-
         except Exception as e:
-
             logger.error(f"[OANDA] Order failed: {e}")
-
             return self._create_rejected_order(symbol, side, quantity, order_type)
 
 
@@ -623,84 +638,54 @@ class MT5Executor(OrderExecutor):
 
 
 
-    def submit_order(self, symbol: str, side: OrderSide, quantity: int, order_type: str = "market", limit_price: Optional[float] = None) -> Order:
-
+    def submit_order(self, symbol: str, side: OrderSide, quantity: int,
+                     order_type: str = "market", limit_price: Optional[float] = None,
+                     stop_loss: Optional[float] = None, take_profit: Optional[float] = None) -> Order:
         import MetaTrader5 as mt5
-
         
-
         # Prepare the request
-
         request = {
-
             "action": mt5.TRADE_ACTION_DEAL,
-
             "symbol": symbol,
-
             "volume": float(quantity),
-
             "type": mt5.ORDER_TYPE_BUY if side == OrderSide.BUY else mt5.ORDER_TYPE_SELL,
-
             "price": mt5.symbol_info_tick(symbol).ask if side == OrderSide.BUY else mt5.symbol_info_tick(symbol).bid,
-
-            "type_filling": mt5.ORDER_FILLING_FOC, # Fill or Kill
-
-            "deviation": 20, # deviation from the requested price
-
+            "type_filling": mt5.ORDER_FILLING_FOC,
+            "deviation": 20,
             "comment": "python script order",
-
-            "type_time": mt5.ORDER_TIME_GTC, # Good Till Cancel
-
+            "type_time": mt5.ORDER_TIME_GTC,
         }
 
+        if stop_loss:
+            request["sl"] = float(stop_loss)
+        if take_profit:
+            request["tp"] = float(take_profit)
         
-
         # Execute the order
-
         result = mt5.order_send(request)
-
         
-
         if result.retcode == mt5.TRADE_RETCODE_DONE:
-
             logger.info(f"[MT5] Order placed successfully: {side.value} {quantity} {symbol}")
-
             return Order(
-
                 id=str(result.order),
-
                 symbol=symbol,
-
                 side=side,
-
                 quantity=quantity,
-
                 order_type=order_type,
-
+                stop_loss=stop_loss,
+                take_profit=take_profit,
                 status=OrderStatus.FILLED,
-
                 filled_price=result.price
-
             )
-
         else:
-
             logger.error(f"[MT5] Order failed, retcode={result.retcode}, comment={result.comment}")
-
             return Order(
-
                 id="ERROR",
-
                 symbol=symbol,
-
                 side=side,
-
                 quantity=quantity,
-
                 order_type=order_type,
-
                 status=OrderStatus.REJECTED
-
             )
 
 

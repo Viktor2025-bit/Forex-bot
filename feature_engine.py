@@ -31,11 +31,21 @@ class FeatureEngine:
                 pass
 
         required_cols = ['Open', 'High', 'Low', 'Close', 'Volume']
-        if not all(col in data.columns for col in required_cols):
-             # Try simple mapping if case differs
-             data.columns = [c.capitalize() for c in data.columns]
-             if not all(col in data.columns for col in required_cols):
-                raise ValueError(f"Dataframe must contain columns: {required_cols}")
+        if isinstance(data.columns, pd.MultiIndex):
+            data.columns = data.columns.get_level_values(0)
+
+        required_cols = ['Open', 'High', 'Low', 'Close', 'Volume']
+        
+        # Standardize column names
+        data.columns = [c.capitalize() for c in data.columns]
+        
+        # Ensure all required columns exist and are 1D Series
+        for col in required_cols:
+            if col not in data.columns:
+                 raise ValueError(f"Dataframe missing column: {col}")
+            # Force squeeze if 2D (e.g. shape (N, 1))
+            if isinstance(data[col], pd.DataFrame):
+                data[col] = data[col].iloc[:, 0]
 
         # --- 1. Forex Session Features (Cyclical Encoding) ---
         if isinstance(data.index, pd.DatetimeIndex):
@@ -100,9 +110,42 @@ class FeatureEngine:
         # Normalized ATR
         atr = AverageTrueRange(high=data['High'], low=data['Low'], close=data['Close'], window=14)
         data['ATR'] = atr.average_true_range()
-        data['ATR_Pct'] = data['ATR'] / data['Close'] # Volatility relative to price
+        data['ATR_Pct'] = data['ATR'] / data['Close']
 
-        # --- 5. Price Action ---
+        # --- 5. Institutional Indicators (NEW) ---
+        
+        # VWAP (Volume Weighted Average Price) - Intraday mainly, but valid for sessions
+        # Approximation: Cumulative(Price * Volume) / Cumulative(Volume)
+        # We reset on daily basis roughly by using a large rolling window or just cumulative for the dataset if short
+        v = data['Volume'].replace(0, 1) # Avoid div by zero
+        tp = (data['High'] + data['Low'] + data['Close']) / 3
+        data['VWAP'] = (tp * v).cumsum() / v.cumsum()
+        data['Dist_VWAP'] = (data['Close'] - data['VWAP']) / data['VWAP']
+
+        # SuperTrend
+        # Basic implementation: (High + Low) / 2 + Multiplier * ATR
+        atr_period = 10
+        atr_multiplier = 3.0
+        hl2 = (data['High'] + data['Low']) / 2
+        # Note: True SuperTrend requires recursive calculation, using a simplified vectorial proxy here
+        # or we just use the bands as features
+        data['SuperTrend_Upper'] = hl2 + (atr_multiplier * data['ATR'])
+        data['SuperTrend_Lower'] = hl2 - (atr_multiplier * data['ATR'])
+        # Feature: Position relative to bands
+        data['Dist_ST_Upper'] = (data['Close'] - data['SuperTrend_Upper']) / data['Close'] 
+        data['Dist_ST_Lower'] = (data['Close'] - data['SuperTrend_Lower']) / data['Close']
+
+        # Pivot Points (Classic)
+        # PP = (H + L + C) / 3
+        # R1 = 2*PP - L
+        # S1 = 2*PP - H
+        pp = (data['High'] + data['Low'] + data['Close']) / 3
+        data['Pivot_Point'] = pp
+        data['Pivot_R1'] = (2 * pp) - data['Low']
+        data['Pivot_S1'] = (2 * pp) - data['High']
+        data['Dist_Pivot'] = (data['Close'] - data['Pivot_Point']) / data['Close']
+
+        # --- 6. Price Action ---
         data['Log_Return'] = np.log(data['Close'] / data['Close'].shift(1))
         
         # Lagged Returns

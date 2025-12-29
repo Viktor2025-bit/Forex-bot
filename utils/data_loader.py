@@ -33,10 +33,23 @@ def fetch_historical_data(ticker, start_date, end_date, interval="1d"):
         print("Error: yfinance module not available.")
         return None
 
-    data = yf.download(ticker, start=start_date, end=end_date, interval=interval, progress=False)
+    # Ticker Mapping for Indices (Broker -> Yahoo)
+    ticker_map = {
+        "US500": "^GSPC",
+        "US30": "^DJI",
+        "NAS100": "^NDX",
+        "GER40": "^GDAXI",
+        "UK100": "^FTSE"
+    }
+    
+    # Use mapped ticker if available, else original
+    search_ticker = ticker_map.get(ticker, ticker)
+
+    data = yf.download(search_ticker, start=start_date, end=end_date, interval=interval, progress=False)
     
     if data.empty:
-        print(f"Warning: No data found for {ticker}.")
+        # Try finding futures if index fails (e.g., GC=F for Gold)
+        print(f"Warning: No data found for {ticker} (mapped: {search_ticker}).")
         return None
         
     return data
