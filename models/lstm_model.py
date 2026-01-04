@@ -36,10 +36,9 @@ class TradingLSTM(nn.Module):
         
         self.fc = nn.Sequential(
             nn.Linear(hidden_size, 32),
-            nn.ReLU(),
+            nn.LeakyReLU(0.01),          # LeakyReLU prevents dead neurons
             nn.Dropout(dropout),
-            nn.Linear(32, 1),
-            nn.Sigmoid()  # Output probability between 0 and 1
+            nn.Linear(32, 1)             # No Sigmoid here; we'll use BCEWithLogitsLoss
         )
         
     def forward(self, x):

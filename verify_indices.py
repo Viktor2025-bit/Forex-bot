@@ -8,7 +8,7 @@ def scan_indices():
         return
 
     # Common search terms for indices
-    search_terms = ["US500", "SPX", "NAS", "US30", "DJI", "GER", "UK100", "JAP225", "AUS200"]
+    search_terms = ["CRASH", "BOOM", "R_"]
     
     found_symbols = []
     all_symbols = mt5.symbols_get()

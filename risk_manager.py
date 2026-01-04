@@ -223,6 +223,31 @@ class RiskManager:
         self.trading_enabled = True
         self.peak_balance = 0
 
+    def check_daily_loss(self, current_daily_pnl, initial_capital=1000):
+        """
+        Check if the daily loss limit has been hit.
+        
+        Args:
+            current_daily_pnl (float): Net PnL for the day (negative = loss)
+            initial_capital (float): Starting capital for reference (default 1000 or config)
+            
+        Returns:
+            bool: True if safe to trade, False if limit hit.
+        """
+        # E.g. max_daily_loss_pct = 2.0 (2%)
+        # If capital = 1000, max loss = 20.
+        # If PnL is -25, we return False (Stop Trading).
+        
+        # Default to 2% if not set (though bot sets it)
+        limit_pct = getattr(self, 'max_daily_loss_pct', 2.0)
+        max_loss_amount = initial_capital * (limit_pct / 100.0)
+        
+        # Check against negative PnL
+        if current_daily_pnl < -max_loss_amount:
+            return False
+            
+        return True
+
 
 if __name__ == "__main__":
     # Test the Risk Manager with example scenarios

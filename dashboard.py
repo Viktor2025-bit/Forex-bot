@@ -199,12 +199,13 @@ with m3:
     """, unsafe_allow_html=True)
 
 with m4:
-    market = state.get('market_type', 'UNK').upper()
+    daily_pnl = acc.get('daily_pnl', 0.0)
+    dpnl_color = "#4ade80" if daily_pnl >= 0 else "#f87171"
     st.markdown(f"""
         <div class="metric-card">
-            <div class="sub-stat">Market Protocol</div>
-            <div class="big-stat" style="font-size:1.8rem; color:#fff; background:none; text-shadow:0 0 15px rgba(255,255,255,0.2);">{market}</div>
-            <div class="sub-stat" style="color:#64748b; margin-top:5px;">MT5 Feed Active</div>
+            <div class="sub-stat">Daily P&L</div>
+            <div class="big-stat" style="font-size:1.8rem; color:{dpnl_color}; background:none;">${daily_pnl:,.2f}</div>
+            <div class="sub-stat" style="color:#64748b; margin-top:5px;">Today's Realized</div>
         </div>
     """, unsafe_allow_html=True)
 
@@ -226,8 +227,36 @@ with col_main:
             open=df['Open'], high=df['High'],
             low=df['Low'], close=df['Close'],
             increasing_line_color='#4ade80', 
-            decreasing_line_color='#f87171'
+            decreasing_line_color='#f87171',
+            name="Price"
         )])
+        
+        # Add Trade Markers
+        chart_trades = [t for t in state.get('trade_history', []) if t['symbol'] == selected_symbol]
+        if chart_trades:
+            buys = [t for t in chart_trades if t['side'] == 'BUY' or (t['side'] == 'CLOSE' and t.get('pnl', 0) > 0)] # Simplified logic, ideally check exact entry
+            # Actually, simply allow plotting all executions at their price
+            
+            # Map trades to markers
+            for t in chart_trades:
+                marker_symbol = "triangle-up" if t['side'] == 'BUY' else "triangle-down"
+                marker_color = "#4ade80" if t['side'] == 'BUY' else ("#f87171" if t['side'] in ['SELL', 'SHORT'] else "#fbbf24")
+                
+                # Handling CLOSE trades (Green if profit, Red if loss)
+                if t['side'] == 'CLOSE':
+                    marker_symbol = "circle" # Exit point
+                    pnl_val = t.get('pnl')
+                    if pnl_val is not None:
+                         marker_color = "#4ade80" if pnl_val >= 0 else "#f87171"
+                
+                fig.add_trace(go.Scatter(
+                    x=[t['timestamp']], 
+                    y=[t['price']],
+                    mode='markers',
+                    marker=dict(symbol=marker_symbol, size=10, color=marker_color, line=dict(width=1, color='white')),
+                    name=f"{t['side']} {t['quantity']}",
+                    hovertext=f"{t['side']} {t['quantity']} @ {t['price']}<br>{t.get('notes', '')}"
+                ))
         
         fig.update_layout(
             xaxis_rangeslider_visible=False,
@@ -276,6 +305,29 @@ with col_side:
             </div>
         </div>
     """, unsafe_allow_html=True)
+
+    # Ensemble Breakdown
+    ensemble_data = preds.get('ensemble')
+    if ensemble_data and isinstance(ensemble_data, dict):
+        xgb_val = ensemble_data.get('xgboost', 0.0)
+        lstm_val = ensemble_data.get('lstm', 0.0)
+        
+        st.markdown(f"""
+        <div style="display:flex; justify-content:space-between; margin-top:-10px; margin-bottom:15px; gap:10px;">
+            <div class="metric-card" style="flex:1; text-align:center; padding:12px; background:rgba(30, 41, 59, 0.6); margin-bottom:0;">
+                <div style="font-size:0.75rem; color:#94a3b8; letter-spacing:1px;">XGBOOST</div>
+                <div style="font-size:1.2rem; font-weight:700; color:{'#4ade80' if xgb_val > 0.5 else '#f87171'};">
+                    {xgb_val:.1%}
+                </div>
+            </div>
+            <div class="metric-card" style="flex:1; text-align:center; padding:12px; background:rgba(30, 41, 59, 0.6); margin-bottom:0;">
+                <div style="font-size:0.75rem; color:#94a3b8; letter-spacing:1px;">LSTM</div>
+                <div style="font-size:1.2rem; font-weight:700; color:{'#4ade80' if lstm_val > 0.5 else '#f87171'};">
+                    {lstm_val:.1%}
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
     
     # Active Position Card
     my_pos = next((p for p in state.get('positions', []) if p['symbol'] == selected_symbol), None)
@@ -296,24 +348,46 @@ trades = state.get('trade_history', [])
 if not trades:
     st.caption("AI is scanning... No trades executed this session yet.")
 else:
-    for t in reversed(trades[-5:]): # Show last 5
-        color = "#4ade80" if t['side'] == 'BUY' else "#f87171"
-        direction_icon = "↗" if t['side'] == 'BUY' else "↘"
+    for t in reversed(trades[-10:]): # Show last 10
+        side = t['side'].upper()
+        pnl_val = t.get('pnl')
         
+        if side == 'BUY':
+            color = "#4ade80"
+            icon = "↗"
+            label = "BUY ENTRY"
+        elif side in ['SELL', 'SHORT']:
+            color = "#f87171" 
+            icon = "↘"
+            label = "SELL ENTRY"
+        elif side == 'CLOSE':
+            icon = "✓"
+            if pnl_val and pnl_val >= 0:
+                color = "#4ade80"
+                label = f"PROFIT (+${pnl_val:.2f})"
+            else:
+                color = "#f87171"
+                label = f"LOSS (${pnl_val:.2f})" if pnl_val else "CLOSE"
+        else:
+            color = "#94a3b8"
+            icon = "•"
+            label = side
+            
         st.markdown(f"""
         <div style="background:rgba(255,255,255,0.02); border-bottom:1px solid rgba(255,255,255,0.05); padding:12px; display:flex; align-items:center; justify-content:space-between; margin-bottom:5px; border-radius:8px;">
             <div style="display:flex; align-items:center; gap:15px;">
                 <div style="font-size:1.2rem; background:{color}20; width:40px; height:40px; display:flex; align-items:center; justify-content:center; border-radius:50%; color:{color};">
-                    {direction_icon}
+                    {icon}
                 </div>
                 <div>
                     <div style="font-weight:700; color:#e2e8f0;">{t['symbol']}</div>
-                    <div style="font-size:0.8rem; color:{color}; font-weight:600;">{t['side']}</div>
+                    <div style="font-size:0.8rem; color:{color}; font-weight:600;">{label}</div>
                 </div>
             </div>
             <div style="text-align:right;">
                 <div style="font-weight:600; color:#cbd5e1;">{t['quantity']} Units</div>
                 <div style="font-size:0.8rem; color:#64748b;">@ {t['price']:.2f}</div>
+                <div style="font-size:0.7rem; color:#475569;">{t['timestamp'][11:19]}</div>
             </div>
         </div>
         """, unsafe_allow_html=True)

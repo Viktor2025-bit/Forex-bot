@@ -36,7 +36,7 @@ class Order:
     id: str
     symbol: str
     side: OrderSide
-    quantity: int
+    quantity: float
     order_type: str  # 'market', 'limit'
     limit_price: Optional[float] = None
     stop_loss: Optional[float] = None
@@ -156,33 +156,55 @@ class PaperTradingExecutor(OrderExecutor):
         """Execute the order and update positions/cash."""
         total_cost = price * order.quantity
         
+        # Simple cash model: Buying cost money, Selling gives money
         if order.side == OrderSide.BUY:
             if self.cash < total_cost:
                 return False
             self.cash -= total_cost
-            
-            # Update position
-            if order.symbol in self.positions:
-                pos = self.positions[order.symbol]
-                total_qty = pos['qty'] + order.quantity
-                total_cost_basis = (pos['avg_price'] * pos['qty']) + total_cost
-                pos['avg_price'] = total_cost_basis / total_qty
-                pos['qty'] = total_qty
-            else:
-                self.positions[order.symbol] = {
-                    'qty': order.quantity, 
-                    'avg_price': price,
-                    'stop_loss': order.stop_loss,
-                    'take_profit': order.take_profit
-                }
-                
-        else:  # SELL
-            if order.symbol not in self.positions or self.positions[order.symbol]['qty'] < order.quantity:
-                return False
+        else:
             self.cash += total_cost
-            self.positions[order.symbol]['qty'] -= order.quantity
-            if self.positions[order.symbol]['qty'] == 0:
-                del self.positions[order.symbol]
+            
+        # Update Position
+        symbol = order.symbol
+        if symbol not in self.positions:
+            self.positions[symbol] = {'qty': 0, 'avg_price': 0, 'stop_loss': None, 'take_profit': None}
+            
+        pos = self.positions[symbol]
+        current_qty = pos.get('qty', 0)
+        signed_order_qty = order.quantity if order.side == OrderSide.BUY else -order.quantity
+        new_qty = current_qty + signed_order_qty
+        
+        # Update Avg Price
+        # Case 1: Increasing position (Long->More Long, Short->More Short, Flat->Any)
+        increasing = (current_qty == 0) or (current_qty > 0 and signed_order_qty > 0) or (current_qty < 0 and signed_order_qty < 0)
+        
+        # Case 2: Flipping position (Long->Short, Short->Long)
+        flipping = (current_qty > 0 and new_qty < 0) or (current_qty < 0 and new_qty > 0)
+        
+        if increasing:
+            total_current_val = abs(current_qty) * pos.get('avg_price', 0)
+            total_order_val = order.quantity * price
+            if abs(new_qty) > 0:
+                pos['avg_price'] = (total_current_val + total_order_val) / abs(new_qty)
+            else:
+                 pos['avg_price'] = 0
+                 
+        elif flipping:
+            # If flipping, the avg price becomes the new entry price for the remainder
+            pos['avg_price'] = price
+            
+        # If decreasing but not flipping, avg_price stays same (realizing PnL)
+        
+        pos['qty'] = new_qty
+        
+        # Update SL/TP only if provided in new order
+        if order.stop_loss: pos['stop_loss'] = order.stop_loss
+        if order.take_profit: pos['take_profit'] = order.take_profit
+        
+        # Cleanup if flat
+        if abs(new_qty) < 1e-9:
+            if symbol in self.positions:
+                del self.positions[symbol]
         
         return True
     

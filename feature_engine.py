@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
-from ta.trend import SMAIndicator, EMAIndicator, MACD, ADXIndicator
-from ta.momentum import RSIIndicator, StochasticOscillator, ROCIndicator
+from ta.trend import SMAIndicator, EMAIndicator, MACD, ADXIndicator, AroonIndicator
+from ta.momentum import RSIIndicator, StochasticOscillator, ROCIndicator, AwesomeOscillatorIndicator
 from ta.volatility import BollingerBands, AverageTrueRange
 
 class FeatureEngine:
@@ -158,6 +158,55 @@ class FeatureEngine:
              data['Volume_Change'] = data['Volume'].pct_change().replace([np.inf, -np.inf], 0).fillna(0)
         else:
              data['Volume_Change'] = 0
+
+        # --- 7. Advanced Indicators for Synthetics (R_75 Optimized) ---
+        
+        # Aroon Oscillator - Trend strength detection
+        aroon = AroonIndicator(high=data['High'], low=data['Low'], window=25)
+        data['Aroon_Up'] = aroon.aroon_up()
+        data['Aroon_Down'] = aroon.aroon_down()
+        data['Aroon_Osc'] = data['Aroon_Up'] - data['Aroon_Down']
+        
+        # Awesome Oscillator - Momentum on clean synthetic patterns
+        ao = AwesomeOscillatorIndicator(high=data['High'], low=data['Low'], window1=5, window2=34)
+        data['AO'] = ao.awesome_oscillator()
+        
+        # Historical Volatility (Annualized) - Detect deviations from R_75's baseline 75% vol
+        data['Hist_Vol'] = data['Log_Return'].rolling(window=20).std() * np.sqrt(252)
+        
+        # Relative Volatility Index (RVI) - RSI applied to volatility
+        change = data['Close'].diff()
+        std_up = change.where(change > 0, 0).rolling(14).std()
+        std_down = change.where(change < 0, 0).abs().rolling(14).std()
+        data['RVI'] = 100 * std_up / (std_up + std_down + 1e-10)  # Avoid div by zero
+        
+        # Williams Fractals - Clear reversal points on algorithmic data
+        # Fractal Up: Current high is highest in 5-bar window
+        # Fractal Down: Current low is lowest in 5-bar window
+        data['Fractal_Up'] = (
+            (data['High'] > data['High'].shift(1)) & 
+            (data['High'] > data['High'].shift(2)) &
+            (data['High'] > data['High'].shift(-1)) & 
+            (data['High'] > data['High'].shift(-2))
+        ).astype(int)
+        
+        data['Fractal_Down'] = (
+            (data['Low'] < data['Low'].shift(1)) & 
+            (data['Low'] < data['Low'].shift(2)) &
+            (data['Low'] < data['Low'].shift(-1)) & 
+            (data['Low'] < data['Low'].shift(-2))
+        ).astype(int)
+        
+        # Distance to last fractal (useful feature for LSTM)
+        data['Bars_Since_Fractal_Up'] = data['Fractal_Up'].groupby((data['Fractal_Up'] != data['Fractal_Up'].shift()).cumsum()).cumcount()
+        data['Bars_Since_Fractal_Down'] = data['Fractal_Down'].groupby((data['Fractal_Down'] != data['Fractal_Down'].shift()).cumsum()).cumcount()
+        
+        # Enhanced Bollinger Bands features
+        bb = BollingerBands(close=data['Close'], window=20, window_dev=2)
+        data['BB_Upper'] = bb.bollinger_hband()
+        data['BB_Lower'] = bb.bollinger_lband()
+        data['BB_Mid'] = bb.bollinger_mavg()
+        data['BB_PctB'] = bb.bollinger_pband()  # %B indicator (0-1 scale)
 
         # --- Cleanup ---
         # Instead of generic dropna, we drop only the initialization rows

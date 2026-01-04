@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  trading-bot:
+    build: .
+    container_name: derivatives_bot
+    restart: unless-stopped # Auto-restart if it crashes
+    ports:
+      - "8501:8501" # Streamlit Dashboard
+    volumes:
+      - ./models:/app/models # Persist trained brains
+      - ./logs:/app/logs # Persist logs
+      - ./data:/app/data # Persist historical data
+      - ./config.json:/app/config.json # Allow config updates without rebuild
+    environment:
+      - PYTHONUNBUFFERED=1

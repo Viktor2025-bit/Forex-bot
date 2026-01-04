@@ -1577,3 +1577,1130 @@
 2025-12-29 02:01:36 | INFO     | trading_bot | Sleeping 60s until next cycle...
 2025-12-29 12:22:54 | INFO     | trading_bot | Bot monitoring system initialized
 2025-12-29 12:22:54 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-30 15:54:57 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-30 15:54:57 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-30 15:55:48 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-30 15:55:48 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-30 15:56:14 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-30 15:56:14 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-30 15:58:30 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-30 15:58:30 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-30 15:58:30 | WARNING  | trading_bot | LSTM model not found at models/synthetics_lstm.pth. Using untrained model.
+2025-12-30 16:01:41 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-30 16:01:41 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-30 16:01:41 | WARNING  | trading_bot | LSTM model not found at models/synthetics_lstm.pth. Using untrained model.
+2025-12-30 16:01:41 | WARNING  | trading_bot | XGBoost model not found at models/synthetics_xgboost.json. Using untrained model.
+2025-12-30 16:01:41 | INFO     | trading_bot | Using Ensemble Strategy
+2025-12-30 16:01:41 | INFO     | trading_bot | Bot initialized for ['R_75'] (Paper trading)
+2025-12-30 16:01:41 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-30 16:01:41 | INFO     | trading_bot | Trading Cycle - 2025-12-30 16:01:41
+2025-12-30 16:03:22 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-30 16:03:22 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-30 16:03:22 | ERROR    | trading_bot | Failed to load LSTM model weights (likely due to new input size). Using untrained model. Error: Error(s) in loading state_dict for TradingLSTM:
+	size mismatch for lstm.weight_ih_l0: copying a param with shape torch.Size([256, 7]) from checkpoint, the shape in current model is torch.Size([256, 10]).
+2025-12-30 16:03:22 | INFO     | trading_bot | XGBoost Model loaded from models/synthetics_xgboost.json
+2025-12-30 16:03:22 | INFO     | trading_bot | Using Ensemble Strategy
+2025-12-30 16:03:22 | INFO     | trading_bot | Bot initialized for ['R_75'] (Paper trading)
+2025-12-30 16:03:22 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-30 16:03:22 | INFO     | trading_bot | Trading Cycle - 2025-12-30 16:03:22
+2025-12-30 16:03:25 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-2.81%', 'xgboost': '50.00%'}
+2025-12-30 16:03:25 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-30 16:04:25 | INFO     | trading_bot | Trading Cycle - 2025-12-30 16:04:25
+2025-12-30 16:04:27 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-4.99%', 'xgboost': '50.00%'}
+2025-12-30 16:04:27 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-30 16:05:27 | INFO     | trading_bot | Trading Cycle - 2025-12-30 16:05:27
+2025-12-30 16:05:30 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-2.72%', 'xgboost': '50.00%'}
+2025-12-30 16:05:30 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-30 16:06:30 | INFO     | trading_bot | Trading Cycle - 2025-12-30 16:06:30
+2025-12-30 16:06:32 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-4.06%', 'xgboost': '50.00%'}
+2025-12-30 16:06:32 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-30 16:07:32 | INFO     | trading_bot | Trading Cycle - 2025-12-30 16:07:32
+2025-12-30 16:07:35 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-4.58%', 'xgboost': '50.00%'}
+2025-12-30 16:07:35 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-30 16:08:23 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-30 16:08:23 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-30 16:08:23 | ERROR    | trading_bot | Failed to load LSTM model weights (likely due to new input size). Using untrained model. Error: Error(s) in loading state_dict for TradingLSTM:
+	size mismatch for lstm.weight_ih_l0: copying a param with shape torch.Size([256, 7]) from checkpoint, the shape in current model is torch.Size([256, 10]).
+2025-12-30 16:08:23 | INFO     | trading_bot | XGBoost Model loaded from models/synthetics_xgboost.json
+2025-12-30 16:08:23 | INFO     | trading_bot | Using Ensemble Strategy
+2025-12-30 16:08:23 | INFO     | trading_bot | Bot initialized for ['R_75'] (Paper trading)
+2025-12-30 16:08:23 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-30 16:08:23 | INFO     | trading_bot | Trading Cycle - 2025-12-30 16:08:23
+2025-12-30 16:08:26 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-7.60%', 'xgboost': '50.00%'}
+2025-12-30 16:08:26 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-30 16:09:26 | INFO     | trading_bot | Trading Cycle - 2025-12-30 16:09:26
+2025-12-30 16:09:29 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-6.76%', 'xgboost': '50.00%'}
+2025-12-30 16:09:29 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-30 16:10:29 | INFO     | trading_bot | Trading Cycle - 2025-12-30 16:10:29
+2025-12-31 13:02:59 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-31 13:02:59 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-31 13:02:59 | ERROR    | trading_bot | Failed to load LSTM model weights (likely due to new input size). Using untrained model. Error: Error(s) in loading state_dict for TradingLSTM:
+	size mismatch for lstm.weight_ih_l0: copying a param with shape torch.Size([256, 7]) from checkpoint, the shape in current model is torch.Size([256, 10]).
+2025-12-31 13:02:59 | INFO     | trading_bot | XGBoost Model loaded from models/synthetics_xgboost.json
+2025-12-31 13:02:59 | INFO     | trading_bot | Using Ensemble Strategy
+2025-12-31 13:02:59 | INFO     | trading_bot | Bot initialized for ['R_75'] (Paper trading)
+2025-12-31 13:02:59 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-31 13:02:59 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:02:59
+2025-12-31 13:03:02 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-3.67%', 'xgboost': '50.00%'}
+2025-12-31 13:03:02 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:04:02 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:04:02
+2025-12-31 13:04:05 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-4.98%', 'xgboost': '50.00%'}
+2025-12-31 13:04:05 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:05:05 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:05:05
+2025-12-31 13:05:07 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-5.48%', 'xgboost': '50.00%'}
+2025-12-31 13:05:07 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:06:07 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:06:07
+2025-12-31 13:06:10 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-4.98%', 'xgboost': '50.00%'}
+2025-12-31 13:06:10 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:07:10 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:07:10
+2025-12-31 13:07:12 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-6.31%', 'xgboost': '50.00%'}
+2025-12-31 13:07:12 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:08:12 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:08:12
+2025-12-31 13:08:15 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-7.87%', 'xgboost': '50.00%'}
+2025-12-31 13:08:15 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:09:15 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:09:15
+2025-12-31 13:09:18 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-7.64%', 'xgboost': '50.00%'}
+2025-12-31 13:09:18 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:10:18 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:10:18
+2025-12-31 13:10:22 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-7.97%', 'xgboost': '50.00%'}
+2025-12-31 13:10:22 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:11:22 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:11:22
+2025-12-31 13:11:26 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-7.98%', 'xgboost': '50.00%'}
+2025-12-31 13:11:27 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:12:27 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:12:27
+2025-12-31 13:12:29 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-7.62%', 'xgboost': '50.00%'}
+2025-12-31 13:12:29 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:13:29 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:13:29
+2025-12-31 13:13:32 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-7.54%', 'xgboost': '50.00%'}
+2025-12-31 13:13:32 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:14:32 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:14:32
+2025-12-31 13:14:35 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-6.99%', 'xgboost': '50.00%'}
+2025-12-31 13:14:35 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:15:35 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:15:35
+2025-12-31 13:15:37 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-9.94%', 'xgboost': '50.00%'}
+2025-12-31 13:15:37 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:16:37 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:16:37
+2025-12-31 13:16:40 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-8.41%', 'xgboost': '50.00%'}
+2025-12-31 13:16:40 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:17:40 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:17:40
+2025-12-31 13:17:43 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-8.46%', 'xgboost': '50.00%'}
+2025-12-31 13:17:43 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:18:43 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:18:43
+2025-12-31 13:18:46 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-8.87%', 'xgboost': '50.00%'}
+2025-12-31 13:18:46 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:19:46 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:19:46
+2025-12-31 13:19:48 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-8.86%', 'xgboost': '50.00%'}
+2025-12-31 13:19:48 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:20:48 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:20:48
+2025-12-31 13:20:51 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-8.85%', 'xgboost': '50.00%'}
+2025-12-31 13:20:51 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:21:51 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:21:51
+2025-12-31 13:21:54 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-7.88%', 'xgboost': '50.00%'}
+2025-12-31 13:21:54 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:22:54 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:22:54
+2025-12-31 13:22:56 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-8.85%', 'xgboost': '50.00%'}
+2025-12-31 13:22:56 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:23:56 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:23:56
+2025-12-31 13:24:00 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-9.12%', 'xgboost': '50.00%'}
+2025-12-31 13:24:00 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:25:00 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:25:00
+2025-12-31 13:25:02 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-7.32%', 'xgboost': '50.00%'}
+2025-12-31 13:25:02 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:26:02 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:26:02
+2025-12-31 13:26:05 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-8.73%', 'xgboost': '50.00%'}
+2025-12-31 13:26:05 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:27:05 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:27:05
+2025-12-31 13:27:08 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-8.40%', 'xgboost': '50.00%'}
+2025-12-31 13:27:08 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:28:08 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:28:08
+2025-12-31 13:28:11 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-7.38%', 'xgboost': '50.00%'}
+2025-12-31 13:28:11 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:29:11 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:29:11
+2025-12-31 13:29:13 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-8.02%', 'xgboost': '50.00%'}
+2025-12-31 13:29:13 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:30:13 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:30:13
+2025-12-31 13:30:16 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-9.73%', 'xgboost': '50.00%'}
+2025-12-31 13:30:16 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:31:16 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:31:16
+2025-12-31 13:31:19 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-8.92%', 'xgboost': '50.00%'}
+2025-12-31 13:31:19 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:32:19 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:32:19
+2025-12-31 13:32:21 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-7.43%', 'xgboost': '50.00%'}
+2025-12-31 13:32:21 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:33:21 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:33:21
+2025-12-31 13:33:24 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-8.85%', 'xgboost': '50.00%'}
+2025-12-31 13:33:24 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:34:24 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:34:24
+2025-12-31 13:34:27 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-8.58%', 'xgboost': '50.00%'}
+2025-12-31 13:34:27 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:35:27 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:35:27
+2025-12-31 13:35:30 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '-8.63%', 'xgboost': '50.00%'}
+2025-12-31 13:35:30 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:36:30 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:36:30
+2025-12-31 13:36:44 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-31 13:36:44 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-31 13:36:44 | ERROR    | trading_bot | Failed to load LSTM model weights (likely due to new input size). Using untrained model. Error: Error(s) in loading state_dict for TradingLSTM:
+	size mismatch for lstm.weight_ih_l0: copying a param with shape torch.Size([256, 7]) from checkpoint, the shape in current model is torch.Size([256, 57]).
+2025-12-31 13:36:44 | INFO     | trading_bot | XGBoost Model loaded from models/synthetics_xgboost.json
+2025-12-31 13:36:44 | INFO     | trading_bot | Using Ensemble Strategy
+2025-12-31 13:36:44 | INFO     | trading_bot | Bot initialized for ['R_75'] (Paper trading)
+2025-12-31 13:36:44 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-31 13:36:44 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:36:44
+2025-12-31 13:36:47 | ERROR    | trading_bot | Error preparing features for lstm: Found array with 0 sample(s) (shape=(0, 57)) while a minimum of 1 is required by StandardScaler.
+2025-12-31 13:36:47 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '50.00%', 'xgboost': '50.00%'}
+2025-12-31 13:36:47 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:37:35 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-31 13:37:35 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-31 13:37:35 | INFO     | trading_bot | LSTM Model loaded from models/synthetics_lstm.pth
+2025-12-31 13:37:35 | INFO     | trading_bot | XGBoost Model loaded from models/synthetics_xgboost.json
+2025-12-31 13:37:35 | INFO     | trading_bot | Using Ensemble Strategy
+2025-12-31 13:37:35 | INFO     | trading_bot | Bot initialized for ['R_75'] (Paper trading)
+2025-12-31 13:37:35 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-31 13:37:35 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:37:35
+2025-12-31 13:37:38 | ERROR    | trading_bot | Error preparing features for lstm: Found array with 0 sample(s) (shape=(0, 57)) while a minimum of 1 is required by StandardScaler.
+2025-12-31 13:37:38 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '50.00%', 'xgboost': '50.00%'}
+2025-12-31 13:37:38 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:38:45 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-31 13:38:45 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-31 13:38:45 | INFO     | trading_bot | LSTM Model loaded from models/synthetics_lstm.pth
+2025-12-31 13:38:45 | INFO     | trading_bot | XGBoost Model loaded from models/synthetics_xgboost.json
+2025-12-31 13:38:45 | INFO     | trading_bot | Using Ensemble Strategy
+2025-12-31 13:38:45 | INFO     | trading_bot | Bot initialized for ['R_75'] (Paper trading)
+2025-12-31 13:38:45 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-31 13:38:45 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:38:45
+2025-12-31 13:38:49 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '289.31%', 'xgboost': '42.78%'}
+2025-12-31 13:38:49 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:39:49 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:39:49
+2025-12-31 13:39:52 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '286.58%', 'xgboost': '41.77%'}
+2025-12-31 13:39:52 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:40:19 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-31 13:40:19 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-31 13:40:19 | INFO     | trading_bot | LSTM Model loaded from models/synthetics_lstm.pth
+2025-12-31 13:40:19 | INFO     | trading_bot | XGBoost Model loaded from models/synthetics_xgboost.json
+2025-12-31 13:40:19 | INFO     | trading_bot | Using Ensemble Strategy
+2025-12-31 13:40:19 | INFO     | trading_bot | Bot initialized for ['R_75'] (Paper trading)
+2025-12-31 13:40:19 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-31 13:40:19 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:40:19
+2025-12-31 13:40:22 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '94.68%', 'xgboost': '39.90%'}
+2025-12-31 13:40:22 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:41:22 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:41:22
+2025-12-31 13:41:25 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '93.41%', 'xgboost': '46.32%'}
+2025-12-31 13:41:25 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:42:25 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:42:25
+2025-12-31 13:42:29 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '94.75%', 'xgboost': '39.18%'}
+2025-12-31 13:42:29 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:43:29 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:43:29
+2025-12-31 13:43:32 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '92.16%', 'xgboost': '55.33%'}
+2025-12-31 13:43:32 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:44:32 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:44:32
+2025-12-31 13:44:34 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '93.97%', 'xgboost': '45.54%'}
+2025-12-31 13:44:34 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:45:34 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:45:34
+2025-12-31 13:45:37 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '93.62%', 'xgboost': '46.32%'}
+2025-12-31 13:45:37 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:46:37 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:46:37
+2025-12-31 13:46:41 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '93.23%', 'xgboost': '47.25%'}
+2025-12-31 13:46:41 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:47:41 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:47:41
+2025-12-31 13:47:44 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '94.31%', 'xgboost': '42.78%'}
+2025-12-31 13:47:44 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:48:44 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:48:44
+2025-12-31 13:48:47 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '95.37%', 'xgboost': '41.25%'}
+2025-12-31 13:48:47 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:49:47 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:49:47
+2025-12-31 13:49:50 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '94.64%', 'xgboost': '42.59%'}
+2025-12-31 13:49:50 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:50:50 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:50:50
+2025-12-31 13:50:53 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '95.06%', 'xgboost': '43.65%'}
+2025-12-31 13:50:53 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:51:53 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:51:53
+2025-12-31 13:51:56 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '95.81%', 'xgboost': '44.48%'}
+2025-12-31 13:51:56 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:52:56 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:52:56
+2025-12-31 13:52:59 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '95.57%', 'xgboost': '45.66%'}
+2025-12-31 13:52:59 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:53:59 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:53:59
+2025-12-31 13:54:02 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '95.84%', 'xgboost': '44.48%'}
+2025-12-31 13:54:02 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:55:02 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:55:02
+2025-12-31 13:55:05 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '95.08%', 'xgboost': '43.65%'}
+2025-12-31 13:55:05 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:56:05 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:56:05
+2025-12-31 13:56:16 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '95.78%', 'xgboost': '44.48%'}
+2025-12-31 13:56:16 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:57:16 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:57:16
+2025-12-31 13:57:19 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '96.11%', 'xgboost': '46.87%'}
+2025-12-31 13:57:19 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:58:19 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:58:19
+2025-12-31 13:58:22 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '96.25%', 'xgboost': '43.44%'}
+2025-12-31 13:58:22 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 13:59:31 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-31 13:59:31 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-31 13:59:31 | INFO     | trading_bot | Loading models for R_75...
+2025-12-31 13:59:31 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2025-12-31 13:59:31 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2025-12-31 13:59:31 | INFO     | trading_bot | Loading models for CRASH_500...
+2025-12-31 13:59:31 | WARNING  | trading_bot | [CRASH_500] LSTM model not found at models/CRASH_500_lstm.pth. Using untrained model.
+2025-12-31 13:59:31 | WARNING  | trading_bot | [CRASH_500] XGBoost model not found at models/CRASH_500_xgboost.json. Using untrained model/fallback.
+2025-12-31 13:59:31 | INFO     | trading_bot | Loading models for BOOM_1000...
+2025-12-31 13:59:31 | WARNING  | trading_bot | [BOOM_1000] LSTM model not found at models/BOOM_1000_lstm.pth. Using untrained model.
+2025-12-31 13:59:31 | WARNING  | trading_bot | [BOOM_1000] XGBoost model not found at models/BOOM_1000_xgboost.json. Using untrained model/fallback.
+2025-12-31 13:59:31 | INFO     | trading_bot | Using Ensemble Strategy
+2025-12-31 13:59:31 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH_500', 'BOOM_1000'] (Paper trading)
+2025-12-31 13:59:31 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-31 13:59:31 | INFO     | trading_bot | Trading Cycle - 2025-12-31 13:59:31
+2025-12-31 13:59:41 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '95.12%', 'xgboost': '43.26%'}
+2025-12-31 13:59:41 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 14:00:41 | INFO     | trading_bot | Trading Cycle - 2025-12-31 14:00:41
+2025-12-31 14:57:12 | INFO     | trading_bot | Bot monitoring system initialized
+2025-12-31 14:57:12 | INFO     | trading_bot | Initializing Trading Bot...
+2025-12-31 14:57:12 | INFO     | trading_bot | Loading models for R_75...
+2025-12-31 14:57:12 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2025-12-31 14:57:12 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2025-12-31 14:57:12 | INFO     | trading_bot | Loading models for CRASH500...
+2025-12-31 14:57:12 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2025-12-31 14:57:12 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2025-12-31 14:57:12 | INFO     | trading_bot | Loading models for BOOM1000...
+2025-12-31 14:57:12 | WARNING  | trading_bot | [BOOM1000] LSTM model not found at models/BOOM1000_lstm.pth. Using untrained model.
+2025-12-31 14:57:13 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2025-12-31 14:57:13 | INFO     | trading_bot | Using Ensemble Strategy
+2025-12-31 14:57:13 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2025-12-31 14:57:13 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2025-12-31 14:57:13 | INFO     | trading_bot | Trading Cycle - 2025-12-31 14:57:13
+2025-12-31 14:57:22 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '94.84%', 'xgboost': '51.97%'}
+2025-12-31 14:57:22 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '90.78%', 'xgboost': '22.46%'}
+2025-12-31 14:57:23 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '50.72%', 'xgboost': '95.89%'}
+2025-12-31 14:57:23 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 14:58:23 | INFO     | trading_bot | Trading Cycle - 2025-12-31 14:58:23
+2025-12-31 14:58:31 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '93.46%', 'xgboost': '55.75%'}
+2025-12-31 14:58:31 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '90.46%', 'xgboost': '16.30%'}
+2025-12-31 14:58:32 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '49.15%', 'xgboost': '96.37%'}
+2025-12-31 14:58:32 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 14:59:32 | INFO     | trading_bot | Trading Cycle - 2025-12-31 14:59:32
+2025-12-31 14:59:41 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '94.06%', 'xgboost': '53.59%'}
+2025-12-31 14:59:41 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '90.09%', 'xgboost': '17.02%'}
+2025-12-31 14:59:42 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '49.34%', 'xgboost': '35.84%'}
+2025-12-31 14:59:42 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 15:00:42 | INFO     | trading_bot | Trading Cycle - 2025-12-31 15:00:42
+2025-12-31 15:00:50 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '71.22%', 'xgboost': '42.01%'}
+2025-12-31 15:00:51 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '88.12%', 'xgboost': '25.03%'}
+2025-12-31 15:00:51 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '50.00%', 'xgboost': '35.84%'}
+2025-12-31 15:00:51 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 15:01:51 | INFO     | trading_bot | Trading Cycle - 2025-12-31 15:01:51
+2025-12-31 15:01:59 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '81.93%', 'xgboost': '61.35%'}
+2025-12-31 15:02:00 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '87.81%', 'xgboost': '22.54%'}
+2025-12-31 15:02:00 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '49.84%', 'xgboost': '34.55%'}
+2025-12-31 15:02:00 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 15:03:00 | INFO     | trading_bot | Trading Cycle - 2025-12-31 15:03:00
+2025-12-31 15:03:08 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '84.91%', 'xgboost': '51.39%'}
+2025-12-31 15:03:08 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '87.30%', 'xgboost': '22.93%'}
+2025-12-31 15:03:08 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '49.92%', 'xgboost': '34.55%'}
+2025-12-31 15:03:08 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 15:04:08 | INFO     | trading_bot | Trading Cycle - 2025-12-31 15:04:08
+2025-12-31 15:04:17 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '77.58%', 'xgboost': '36.43%'}
+2025-12-31 15:04:18 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '86.83%', 'xgboost': '23.74%'}
+2025-12-31 15:04:18 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '49.62%', 'xgboost': '35.16%'}
+2025-12-31 15:04:18 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 15:05:18 | INFO     | trading_bot | Trading Cycle - 2025-12-31 15:05:18
+2025-12-31 15:05:26 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '79.56%', 'xgboost': '36.43%'}
+2025-12-31 15:05:26 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '86.20%', 'xgboost': '24.85%'}
+2025-12-31 15:05:27 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '49.37%', 'xgboost': '37.40%'}
+2025-12-31 15:05:27 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 15:06:27 | INFO     | trading_bot | Trading Cycle - 2025-12-31 15:06:27
+2025-12-31 15:06:35 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '77.18%', 'xgboost': '36.43%'}
+2025-12-31 15:06:35 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '85.52%', 'xgboost': '24.85%'}
+2025-12-31 15:06:36 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '49.17%', 'xgboost': '40.30%'}
+2025-12-31 15:06:36 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 15:07:36 | INFO     | trading_bot | Trading Cycle - 2025-12-31 15:07:36
+2025-12-31 15:08:19 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '68.26%', 'xgboost': '41.82%'}
+2025-12-31 15:08:20 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '84.42%', 'xgboost': '24.75%'}
+2025-12-31 15:08:20 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '49.37%', 'xgboost': '44.25%'}
+2025-12-31 15:08:20 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2025-12-31 15:09:20 | INFO     | trading_bot | Trading Cycle - 2025-12-31 15:09:20
+2026-01-01 02:05:38 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-01 02:05:38 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-01 02:05:38 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-01 02:05:38 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-01 02:05:38 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-01 02:05:38 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-01 02:05:38 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-01 02:05:38 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-01 02:05:38 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-01 02:05:38 | INFO     | trading_bot | Bot initialized for ['CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-01 02:05:38 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-01 02:05:38 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:05:38
+2026-01-01 02:05:44 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '78.19%', 'xgboost': '38.74%'}
+2026-01-01 02:05:44 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '5.58%', 'xgboost': '19.78%'}
+2026-01-01 02:05:44 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:06:44 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:06:44
+2026-01-01 02:06:50 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '76.87%', 'xgboost': '24.56%'}
+2026-01-01 02:06:50 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '5.92%', 'xgboost': '21.43%'}
+2026-01-01 02:06:50 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:07:18 | INFO     | trading_bot | Bot stopped by user
+2026-01-01 02:07:52 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-01 02:07:52 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-01 02:07:52 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-01 02:07:52 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-01 02:07:52 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-01 02:07:52 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-01 02:07:52 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-01 02:07:52 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-01 02:07:52 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-01 02:07:52 | INFO     | trading_bot | Bot initialized for ['CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-01 02:07:52 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-01 02:07:52 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:07:52
+2026-01-01 02:08:34 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '89.49%', 'xgboost': '21.02%'}
+2026-01-01 02:08:34 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '6.40%', 'xgboost': '18.33%'}
+2026-01-01 02:08:34 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:09:34 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:09:34
+2026-01-01 02:09:40 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '88.02%', 'xgboost': '31.74%'}
+2026-01-01 02:09:40 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '7.94%', 'xgboost': '12.84%'}
+2026-01-01 02:09:40 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:10:40 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:10:40
+2026-01-01 02:10:45 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '30.96%', 'xgboost': '25.16%'}
+2026-01-01 02:10:46 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '8.27%', 'xgboost': '24.79%'}
+2026-01-01 02:10:46 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:11:46 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:11:46
+2026-01-01 02:11:51 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '30.60%', 'xgboost': '15.40%'}
+2026-01-01 02:11:51 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '6.65%', 'xgboost': '11.52%'}
+2026-01-01 02:11:51 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:12:51 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:12:51
+2026-01-01 02:12:56 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '30.32%', 'xgboost': '11.66%'}
+2026-01-01 02:12:57 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '7.15%', 'xgboost': '11.42%'}
+2026-01-01 02:12:57 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:13:57 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:13:57
+2026-01-01 02:14:02 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '30.06%', 'xgboost': '12.17%'}
+2026-01-01 02:14:03 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '7.67%', 'xgboost': '12.96%'}
+2026-01-01 02:14:03 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:15:03 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:15:03
+2026-01-01 02:16:20 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '68.57%', 'xgboost': '82.76%'}
+2026-01-01 02:16:20 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '8.63%', 'xgboost': '16.95%'}
+2026-01-01 02:16:20 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:17:20 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:17:20
+2026-01-01 02:17:25 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '64.57%', 'xgboost': '78.88%'}
+2026-01-01 02:17:25 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '8.86%', 'xgboost': '18.61%'}
+2026-01-01 02:17:26 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:18:26 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:18:26
+2026-01-01 02:18:31 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '62.48%', 'xgboost': '81.02%'}
+2026-01-01 02:18:31 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '9.14%', 'xgboost': '14.37%'}
+2026-01-01 02:18:31 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:19:31 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:19:31
+2026-01-01 02:19:37 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '60.31%', 'xgboost': '81.57%'}
+2026-01-01 02:19:37 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '9.41%', 'xgboost': '14.80%'}
+2026-01-01 02:19:37 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:20:37 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:20:37
+2026-01-01 02:20:42 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '74.89%', 'xgboost': '80.31%'}
+2026-01-01 02:20:43 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '9.50%', 'xgboost': '24.37%'}
+2026-01-01 02:20:43 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:21:43 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:21:43
+2026-01-01 02:21:48 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '72.54%', 'xgboost': '79.56%'}
+2026-01-01 02:21:48 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '9.84%', 'xgboost': '29.02%'}
+2026-01-01 02:21:48 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:22:48 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:22:48
+2026-01-01 02:22:54 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '70.42%', 'xgboost': '81.86%'}
+2026-01-01 02:22:54 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '10.19%', 'xgboost': '31.44%'}
+2026-01-01 02:22:54 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:23:54 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:23:54
+2026-01-01 02:24:00 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '67.81%', 'xgboost': '91.08%'}
+2026-01-01 02:24:00 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '10.58%', 'xgboost': '31.11%'}
+2026-01-01 02:24:00 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:25:00 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:25:00
+2026-01-01 02:25:05 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '86.91%', 'xgboost': '86.67%'}
+2026-01-01 02:25:05 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '14.12%', 'xgboost': '34.33%'}
+2026-01-01 02:25:05 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:26:05 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:26:05
+2026-01-01 02:26:11 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '85.33%', 'xgboost': '82.10%'}
+2026-01-01 02:26:11 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '14.58%', 'xgboost': '19.56%'}
+2026-01-01 02:26:11 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:27:11 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:27:11
+2026-01-01 02:27:17 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '90.77%', 'xgboost': '95.73%'}
+2026-01-01 02:27:18 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '10.98%', 'xgboost': '64.13%'}
+2026-01-01 02:27:18 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:28:18 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:28:18
+2026-01-01 02:28:23 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '89.39%', 'xgboost': '96.26%'}
+2026-01-01 02:28:23 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '11.68%', 'xgboost': '55.58%'}
+2026-01-01 02:28:23 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:29:23 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:29:23
+2026-01-01 02:29:28 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '87.38%', 'xgboost': '89.84%'}
+2026-01-01 02:29:29 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '12.34%', 'xgboost': '38.11%'}
+2026-01-01 02:29:29 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:30:29 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:30:29
+2026-01-01 02:30:34 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '88.54%', 'xgboost': '84.63%'}
+2026-01-01 02:30:34 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '14.19%', 'xgboost': '38.76%'}
+2026-01-01 02:30:34 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:31:34 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:31:34
+2026-01-01 02:31:39 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '87.52%', 'xgboost': '82.89%'}
+2026-01-01 02:31:40 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '14.66%', 'xgboost': '49.27%'}
+2026-01-01 02:31:40 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:32:40 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:32:40
+2026-01-01 02:32:45 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '86.44%', 'xgboost': '85.68%'}
+2026-01-01 02:32:45 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '15.10%', 'xgboost': '51.46%'}
+2026-01-01 02:32:45 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:33:45 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:33:45
+2026-01-01 02:33:50 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '85.19%', 'xgboost': '90.24%'}
+2026-01-01 02:33:51 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '15.59%', 'xgboost': '54.65%'}
+2026-01-01 02:33:51 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:34:51 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:34:51
+2026-01-01 02:35:32 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '85.45%', 'xgboost': '77.54%'}
+2026-01-01 02:35:32 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '31.33%', 'xgboost': '62.69%'}
+2026-01-01 02:35:32 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:36:32 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:36:32
+2026-01-01 02:37:13 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '92.93%', 'xgboost': '65.19%'}
+2026-01-01 02:37:13 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '32.21%', 'xgboost': '66.30%'}
+2026-01-01 02:37:13 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:38:13 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:38:13
+2026-01-01 02:38:18 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '92.03%', 'xgboost': '59.10%'}
+2026-01-01 02:38:19 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '24.88%', 'xgboost': '81.62%'}
+2026-01-01 02:38:19 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:39:19 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:39:19
+2026-01-01 02:40:00 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '91.77%', 'xgboost': '59.10%'}
+2026-01-01 02:40:00 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '20.70%', 'xgboost': '91.85%'}
+2026-01-01 02:40:00 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:41:00 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:41:00
+2026-01-01 02:41:41 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '76.79%', 'xgboost': '24.01%'}
+2026-01-01 02:41:41 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '21.90%', 'xgboost': '94.70%'}
+2026-01-01 02:41:41 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-01 02:49:47 | INFO     | trading_bot | Trading Cycle - 2026-01-01 02:49:47
+2026-01-03 11:16:22 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-03 11:16:22 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-03 11:16:22 | INFO     | trading_bot | Loading models for R_75...
+2026-01-03 11:16:22 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-03 11:16:22 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-03 11:16:22 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-03 11:16:22 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-03 11:16:22 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-03 11:16:22 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-03 11:16:23 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-03 11:16:23 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-03 11:16:23 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-03 11:16:23 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-03 11:16:23 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-03 11:16:23 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:16:23
+2026-01-03 11:16:33 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '12.43%', 'xgboost': '77.24%'}
+2026-01-03 11:16:33 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '67.73%', 'xgboost': '66.00%'}
+2026-01-03 11:16:34 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.88%', 'xgboost': '4.64%'}
+2026-01-03 11:16:34 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:17:34 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:17:34
+2026-01-03 11:17:43 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '10.40%', 'xgboost': '64.70%'}
+2026-01-03 11:17:43 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '64.82%', 'xgboost': '66.05%'}
+2026-01-03 11:17:44 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.98%', 'xgboost': '4.36%'}
+2026-01-03 11:17:44 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:18:44 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:18:44
+2026-01-03 11:18:53 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '16.15%', 'xgboost': '71.54%'}
+2026-01-03 11:18:53 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '61.72%', 'xgboost': '76.03%'}
+2026-01-03 11:18:54 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '3.07%', 'xgboost': '4.63%'}
+2026-01-03 11:18:54 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:19:54 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:19:54
+2026-01-03 11:21:14 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '36.11%', 'xgboost': '91.49%'}
+2026-01-03 11:21:15 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '61.41%', 'xgboost': '67.48%'}
+2026-01-03 11:21:16 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.61%', 'xgboost': '13.28%'}
+2026-01-03 11:21:16 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:22:16 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:22:16
+2026-01-03 11:22:24 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '21.70%', 'xgboost': '72.41%'}
+2026-01-03 11:22:25 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '58.97%', 'xgboost': '71.55%'}
+2026-01-03 11:22:25 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.69%', 'xgboost': '11.55%'}
+2026-01-03 11:22:25 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:23:25 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:23:25
+2026-01-03 11:24:09 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '40.83%', 'xgboost': '89.27%'}
+2026-01-03 11:24:10 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '56.25%', 'xgboost': '74.67%'}
+2026-01-03 11:24:11 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.82%', 'xgboost': '13.64%'}
+2026-01-03 11:24:11 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:25:11 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:25:11
+2026-01-03 11:25:59 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '39.28%', 'xgboost': '95.63%'}
+2026-01-03 11:26:00 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '57.83%', 'xgboost': '72.81%'}
+2026-01-03 11:26:02 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '7.62%', 'xgboost': '94.59%'}
+2026-01-03 11:26:02 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:27:02 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:27:02
+2026-01-03 11:27:12 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '19.25%', 'xgboost': '69.17%'}
+2026-01-03 11:27:14 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '54.99%', 'xgboost': '69.76%'}
+2026-01-03 11:27:15 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '7.72%', 'xgboost': '94.07%'}
+2026-01-03 11:27:15 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:28:15 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:28:15
+2026-01-03 11:29:03 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '32.87%', 'xgboost': '90.80%'}
+2026-01-03 11:29:05 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '51.47%', 'xgboost': '70.05%'}
+2026-01-03 11:29:07 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '7.83%', 'xgboost': '95.90%'}
+2026-01-03 11:29:07 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:30:07 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:30:07
+2026-01-03 11:30:48 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-03 11:30:49 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-03 11:30:49 | INFO     | trading_bot | Loading models for R_75...
+2026-01-03 11:30:49 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-03 11:30:49 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-03 11:30:50 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-03 11:30:50 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-03 11:30:50 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-03 11:30:50 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-03 11:30:50 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-03 11:30:51 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-03 11:30:51 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-03 11:30:51 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-03 11:30:51 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-03 11:30:51 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:30:51
+2026-01-03 11:31:08 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '11.81%', 'xgboost': '64.14%'}
+2026-01-03 11:31:09 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '68.78%', 'xgboost': '93.47%'}
+2026-01-03 11:35:08 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-03 11:35:08 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-03 11:35:08 | INFO     | trading_bot | Loading models for R_75...
+2026-01-03 11:35:08 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-03 11:35:09 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-03 11:35:09 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-03 11:35:09 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-03 11:35:09 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-03 11:35:09 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-03 11:35:09 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-03 11:35:10 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-03 11:35:10 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-03 11:35:10 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-03 11:35:10 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-03 11:35:10 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:35:10
+2026-01-03 11:35:22 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '11.85%', 'xgboost': '67.17%'}
+2026-01-03 11:35:23 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '53.29%', 'xgboost': '77.03%'}
+2026-01-03 11:36:09 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-03 11:36:09 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-03 11:36:09 | INFO     | trading_bot | Loading models for R_75...
+2026-01-03 11:36:09 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-03 11:36:09 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-03 11:36:10 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-03 11:36:10 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-03 11:36:10 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-03 11:36:10 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-03 11:36:10 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-03 11:36:11 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-03 11:36:11 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-03 11:36:11 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-03 11:36:11 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-03 11:36:11 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:36:11
+2026-01-03 11:36:22 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '13.01%', 'xgboost': '66.16%'}
+2026-01-03 11:36:23 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '50.88%', 'xgboost': '71.43%'}
+2026-01-03 11:36:24 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '3.48%', 'xgboost': '8.68%'}
+2026-01-03 11:39:35 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-03 11:39:35 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-03 11:39:35 | INFO     | trading_bot | Loading models for R_75...
+2026-01-03 11:39:35 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-03 11:39:35 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-03 11:39:35 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-03 11:39:35 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-03 11:39:35 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-03 11:39:35 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-03 11:39:35 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-03 11:39:35 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-03 11:39:35 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-03 11:39:35 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-03 11:39:35 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-03 11:39:35 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:39:35
+2026-01-03 11:39:46 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '9.70%', 'xgboost': '39.87%'}
+2026-01-03 11:39:47 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:39:47 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:39:48 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '39.46%', 'xgboost': '54.76%'}
+2026-01-03 11:39:49 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.76%', 'xgboost': '6.97%'}
+2026-01-03 11:39:49 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:39:49 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:39:49 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:40:49 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:40:49
+2026-01-03 11:40:58 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '14.29%', 'xgboost': '62.80%'}
+2026-01-03 11:40:58 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '38.39%', 'xgboost': '48.19%'}
+2026-01-03 11:40:58 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:40:58 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:40:59 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.82%', 'xgboost': '7.32%'}
+2026-01-03 11:40:59 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:40:59 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:40:59 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:41:59 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:41:59
+2026-01-03 11:43:19 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '6.81%', 'xgboost': '16.29%'}
+2026-01-03 11:43:19 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:43:19 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:43:20 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '42.80%', 'xgboost': '67.79%'}
+2026-01-03 11:43:20 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.95%', 'xgboost': '9.77%'}
+2026-01-03 11:43:21 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:43:21 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:43:21 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:44:21 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:44:21
+2026-01-03 11:44:29 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '16.89%', 'xgboost': '62.82%'}
+2026-01-03 11:44:30 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '38.21%', 'xgboost': '62.38%'}
+2026-01-03 11:44:30 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '3.00%', 'xgboost': '11.99%'}
+2026-01-03 11:44:30 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:44:30 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:44:30 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:45:30 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:45:30
+2026-01-03 11:46:15 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '7.83%', 'xgboost': '19.86%'}
+2026-01-03 11:46:15 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:46:15 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:46:15 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '39.76%', 'xgboost': '49.48%'}
+2026-01-03 11:46:16 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.84%', 'xgboost': '15.87%'}
+2026-01-03 11:46:16 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:46:16 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:46:16 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:47:16 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:47:16
+2026-01-03 11:48:05 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '6.30%', 'xgboost': '14.94%'}
+2026-01-03 11:48:06 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:48:06 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:48:09 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '38.40%', 'xgboost': '53.55%'}
+2026-01-03 11:48:11 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.97%', 'xgboost': '14.67%'}
+2026-01-03 11:48:13 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:48:13 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:48:13 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:49:13 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:49:13
+2026-01-03 11:49:58 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '4.99%', 'xgboost': '7.47%'}
+2026-01-03 11:49:59 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:49:59 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:49:59 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '71.67%', 'xgboost': '78.30%'}
+2026-01-03 11:50:00 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:50:00 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:50:02 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.55%', 'xgboost': '10.61%'}
+2026-01-03 11:50:03 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:50:03 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:50:03 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:51:03 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:51:03
+2026-01-03 11:51:13 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '13.54%', 'xgboost': '36.81%'}
+2026-01-03 11:51:13 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:51:13 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:51:16 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '68.27%', 'xgboost': '76.88%'}
+2026-01-03 11:51:16 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:51:16 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:51:17 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.65%', 'xgboost': '14.80%'}
+2026-01-03 11:51:17 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:51:17 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:51:17 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:52:17 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:52:17
+2026-01-03 11:52:27 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '12.61%', 'xgboost': '36.81%'}
+2026-01-03 11:52:28 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:52:28 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:52:30 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '64.97%', 'xgboost': '74.68%'}
+2026-01-03 11:52:30 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:52:30 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:52:31 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.74%', 'xgboost': '15.94%'}
+2026-01-03 11:52:32 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:52:32 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:52:32 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:52:36 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-03 11:52:36 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-03 11:52:36 | INFO     | trading_bot | Loading models for R_75...
+2026-01-03 11:52:37 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-03 11:52:38 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-03 11:52:38 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-03 11:52:38 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-03 11:52:39 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-03 11:52:39 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-03 11:52:39 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-03 11:52:40 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-03 11:52:40 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-03 11:52:40 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-03 11:52:41 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-03 11:52:41 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:52:41
+2026-01-03 11:52:52 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '6.42%', 'xgboost': '23.22%'}
+2026-01-03 11:52:53 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:52:53 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:52:54 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '64.12%', 'xgboost': '74.63%'}
+2026-01-03 11:52:54 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:52:55 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:52:56 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.78%', 'xgboost': '16.24%'}
+2026-01-03 11:52:56 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:52:56 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:52:56 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:53:32 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:53:32
+2026-01-03 11:53:45 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '6.71%', 'xgboost': '21.41%'}
+2026-01-03 11:53:47 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:53:47 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:53:51 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '61.73%', 'xgboost': '74.36%'}
+2026-01-03 11:53:51 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:53:51 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:53:55 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.85%', 'xgboost': '16.24%'}
+2026-01-03 11:53:56 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:53:56 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:53:56 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:53:56 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:53:56
+2026-01-03 11:54:14 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '4.79%', 'xgboost': '22.29%'}
+2026-01-03 11:54:15 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:54:16 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:54:17 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '60.68%', 'xgboost': '73.70%'}
+2026-01-03 11:54:17 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:54:17 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:54:18 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.88%', 'xgboost': '23.24%'}
+2026-01-03 11:54:19 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:54:19 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:54:19 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:54:56 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:54:56
+2026-01-03 11:55:07 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '68.62%', 'xgboost': '88.89%'}
+2026-01-03 11:55:07 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:55:07 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:55:09 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '64.47%', 'xgboost': '71.55%'}
+2026-01-03 11:55:09 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:55:09 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:55:11 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.45%', 'xgboost': '8.40%'}
+2026-01-03 11:55:11 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:55:11 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:55:11 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:55:19 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:55:19
+2026-01-03 11:55:30 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '68.46%', 'xgboost': '84.29%'}
+2026-01-03 11:55:31 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:55:31 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:55:33 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '63.43%', 'xgboost': '71.48%'}
+2026-01-03 11:55:33 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:55:33 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:55:34 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.49%', 'xgboost': '7.83%'}
+2026-01-03 11:55:35 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:55:35 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:55:35 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:56:11 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:56:11
+2026-01-03 11:56:35 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:56:35
+2026-01-03 11:56:44 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '56.43%', 'xgboost': '81.93%'}
+2026-01-03 11:56:44 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:56:44 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:56:44 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '60.09%', 'xgboost': '65.69%'}
+2026-01-03 11:56:44 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:56:44 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:56:45 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.34%', 'xgboost': '10.56%'}
+2026-01-03 11:56:45 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:56:45 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:56:45 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:56:55 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '73.06%', 'xgboost': '86.50%'}
+2026-01-03 11:56:55 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:56:55 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:56:56 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '59.82%', 'xgboost': '65.69%'}
+2026-01-03 11:56:56 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:56:56 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:56:57 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.36%', 'xgboost': '8.79%'}
+2026-01-03 11:56:58 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:56:58 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:56:58 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:57:45 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:57:45
+2026-01-03 11:57:58 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:57:58
+2026-01-03 11:58:29 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '74.59%', 'xgboost': '86.97%'}
+2026-01-03 11:58:29 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:58:29 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:58:30 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '55.58%', 'xgboost': '67.54%'}
+2026-01-03 11:58:30 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:58:30 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:58:30 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.47%', 'xgboost': '7.33%'}
+2026-01-03 11:58:30 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:58:30 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:58:30 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:58:43 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '64.12%', 'xgboost': '80.52%'}
+2026-01-03 11:58:43 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:58:43 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:58:43 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '56.75%', 'xgboost': '67.54%'}
+2026-01-03 11:58:43 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:58:43 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:58:43 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.48%', 'xgboost': '9.12%'}
+2026-01-03 11:58:43 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:58:43 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:58:43 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:59:30 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:59:30
+2026-01-03 11:59:39 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '64.90%', 'xgboost': '85.03%'}
+2026-01-03 11:59:39 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:59:39 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:59:40 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '52.43%', 'xgboost': '65.44%'}
+2026-01-03 11:59:40 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:59:40 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:59:40 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.07%', 'xgboost': '12.08%'}
+2026-01-03 11:59:40 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:59:40 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:59:40 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 11:59:43 | INFO     | trading_bot | Trading Cycle - 2026-01-03 11:59:43
+2026-01-03 11:59:56 | INFO     | trading_bot | Bot stopped by user
+2026-01-03 12:00:23 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-03 12:00:23 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-03 12:00:23 | INFO     | trading_bot | Loading models for R_75...
+2026-01-03 12:00:23 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-03 12:00:23 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-03 12:00:23 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-03 12:00:23 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-03 12:00:24 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-03 12:00:24 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-03 12:00:24 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-03 12:00:24 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-03 12:00:24 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-03 12:00:24 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-03 12:00:24 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-03 12:00:24 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:00:24
+2026-01-03 12:00:33 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '59.23%', 'xgboost': '87.47%'}
+2026-01-03 12:00:33 | INFO     | trading_bot | GO LONG Signal for R_75 at 44608.4158
+2026-01-03 12:00:34 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '56.45%', 'xgboost': '78.57%'}
+2026-01-03 12:00:34 | INFO     | trading_bot | GO LONG Signal for CRASH500 at 3744.445
+2026-01-03 12:00:34 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.14%', 'xgboost': '6.95%'}
+2026-01-03 12:00:34 | INFO     | trading_bot | GO SHORT Signal for BOOM1000 at 17102.127
+2026-01-03 12:00:34 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:01:04 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '77.91%', 'xgboost': '74.72%'}
+2026-01-03 12:01:04 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 12:01:04 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 12:01:04 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '55.10%', 'xgboost': '77.96%'}
+2026-01-03 12:01:04 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 12:01:04 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 12:01:05 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.17%', 'xgboost': '7.14%'}
+2026-01-03 12:01:05 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 12:01:05 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 12:01:05 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:01:34 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:01:34
+2026-01-03 12:01:43 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '74.96%', 'xgboost': '74.29%'}
+2026-01-03 12:01:43 | INFO     | trading_bot | GO LONG Signal for R_75 at 44552.3505
+2026-01-03 12:01:43 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '53.11%', 'xgboost': '77.36%'}
+2026-01-03 12:01:43 | INFO     | trading_bot | GO LONG Signal for CRASH500 at 3744.994
+2026-01-03 12:01:44 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.22%', 'xgboost': '14.85%'}
+2026-01-03 12:01:44 | INFO     | trading_bot | GO SHORT Signal for BOOM1000 at 17100.821
+2026-01-03 12:01:44 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:02:05 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:02:05
+2026-01-03 12:02:13 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '62.44%', 'xgboost': '88.04%'}
+2026-01-03 12:02:13 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 12:02:13 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 12:02:14 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '51.77%', 'xgboost': '76.80%'}
+2026-01-03 12:02:14 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 12:02:14 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 12:02:14 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.26%', 'xgboost': '8.06%'}
+2026-01-03 12:02:14 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 12:02:14 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 12:02:14 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:02:46 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-03 12:02:46 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-03 12:02:46 | INFO     | trading_bot | Loading models for R_75...
+2026-01-03 12:02:46 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-03 12:02:46 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-03 12:02:46 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-03 12:02:46 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-03 12:02:46 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-03 12:02:46 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-03 12:02:46 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-03 12:02:46 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-03 12:02:46 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-03 12:02:46 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-03 12:02:46 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-03 12:02:46 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:02:46
+2026-01-03 12:02:56 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '68.98%', 'xgboost': '83.27%'}
+2026-01-03 12:02:56 | INFO     | trading_bot | GO LONG Signal for R_75 at 44565.6779
+2026-01-03 12:02:59 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '77.44%', 'xgboost': '92.38%'}
+2026-01-03 12:02:59 | INFO     | trading_bot | GO LONG Signal for CRASH500 at 3740.53
+2026-01-03 12:03:00 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.30%', 'xgboost': '8.02%'}
+2026-01-03 12:03:00 | INFO     | trading_bot | GO SHORT Signal for BOOM1000 at 17099.582
+2026-01-03 12:03:00 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:04:00 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:04:00
+2026-01-03 12:04:47 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '79.79%', 'xgboost': '76.41%'}
+2026-01-03 12:04:47 | INFO     | trading_bot | GO LONG Signal for R_75 at 44522.0002
+2026-01-03 12:04:47 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '73.76%', 'xgboost': '92.64%'}
+2026-01-03 12:04:47 | INFO     | trading_bot | GO LONG Signal for CRASH500 at 3741.073
+2026-01-03 12:04:48 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.11%', 'xgboost': '5.04%'}
+2026-01-03 12:04:48 | INFO     | trading_bot | GO SHORT Signal for BOOM1000 at 17097.651
+2026-01-03 12:04:48 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:05:22 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-03 12:05:22 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-03 12:05:22 | INFO     | trading_bot | Loading models for R_75...
+2026-01-03 12:05:22 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-03 12:05:22 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-03 12:05:22 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-03 12:05:22 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-03 12:05:23 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-03 12:05:23 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-03 12:05:23 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-03 12:05:23 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-03 12:05:23 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-03 12:05:23 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-03 12:05:23 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-03 12:05:23 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:05:23
+2026-01-03 12:06:08 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '8.21%', 'xgboost': '46.71%'}
+2026-01-03 12:06:08 | INFO     | trading_bot | GO SHORT Signal for R_75 at 44547.5164
+2026-01-03 12:06:08 | ERROR    | trading_bot | Order Execution Failed: name 'OrderStatus' is not defined
+2026-01-03 12:06:09 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '71.14%', 'xgboost': '71.32%'}
+2026-01-03 12:06:09 | INFO     | trading_bot | GO LONG Signal for CRASH500 at 3735.904
+2026-01-03 12:06:09 | ERROR    | trading_bot | Order Execution Failed: name 'OrderStatus' is not defined
+2026-01-03 12:06:09 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '2.20%', 'xgboost': '2.64%'}
+2026-01-03 12:06:09 | INFO     | trading_bot | GO SHORT Signal for BOOM1000 at 17096.282
+2026-01-03 12:06:09 | ERROR    | trading_bot | Order Execution Failed: name 'OrderStatus' is not defined
+2026-01-03 12:06:09 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:07:12 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-03 12:07:12 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-03 12:07:12 | INFO     | trading_bot | Loading models for R_75...
+2026-01-03 12:07:13 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-03 12:07:13 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-03 12:07:13 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-03 12:07:13 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-03 12:07:13 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-03 12:07:13 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-03 12:07:13 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-03 12:07:13 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-03 12:07:13 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-03 12:07:13 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-03 12:07:13 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-03 12:07:13 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:07:13
+2026-01-03 12:07:59 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '11.82%', 'xgboost': '59.71%'}
+2026-01-03 12:08:00 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '65.38%', 'xgboost': '63.69%'}
+2026-01-03 12:08:00 | INFO     | trading_bot | GO LONG Signal for CRASH500 at 3736.757
+2026-01-03 12:08:00 | ERROR    | trading_bot | Order Execution Failed: BotMonitor.log_trade() takes 2 positional arguments but 6 were given
+2026-01-03 12:08:01 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '1.28%', 'xgboost': '7.50%'}
+2026-01-03 12:08:01 | INFO     | trading_bot | GO SHORT Signal for BOOM1000 at 17136.368
+2026-01-03 12:08:01 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:09:01 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:09:01
+2026-01-03 12:09:43 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-03 12:09:43 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-03 12:09:43 | INFO     | trading_bot | Loading models for R_75...
+2026-01-03 12:09:43 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-03 12:09:44 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-03 12:09:44 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-03 12:09:44 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-03 12:09:44 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-03 12:09:44 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-03 12:09:44 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-03 12:09:44 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-03 12:09:44 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-03 12:09:44 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-03 12:09:44 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-03 12:09:44 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:09:44
+2026-01-03 12:09:53 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '11.22%', 'xgboost': '81.46%'}
+2026-01-03 12:09:54 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '22.91%', 'xgboost': '17.20%'}
+2026-01-03 12:09:54 | INFO     | trading_bot | GO SHORT Signal for CRASH500 at 3734.425
+2026-01-03 12:09:54 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '13.91%', 'xgboost': '89.27%'}
+2026-01-03 12:09:54 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:10:55 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:10:55
+2026-01-03 12:12:16 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-03 12:12:16 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-03 12:12:16 | INFO     | trading_bot | Loading models for R_75...
+2026-01-03 12:12:16 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-03 12:12:16 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-03 12:12:16 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-03 12:12:16 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-03 12:12:16 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-03 12:12:16 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-03 12:12:17 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-03 12:12:17 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-03 12:12:17 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-03 12:12:17 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-03 12:12:17 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-03 12:12:17 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:12:17
+2026-01-03 12:12:27 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '14.30%', 'xgboost': '83.89%'}
+2026-01-03 12:12:27 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '23.13%', 'xgboost': '19.75%'}
+2026-01-03 12:12:27 | INFO     | trading_bot | GO SHORT Signal for CRASH500 at 3730.29
+2026-01-03 12:12:28 | INFO     | trading_bot.alerts | ALERT: Trade Executed: SELL CRASH500 - Executed SELL order: 0.013403783620040265 CRASH500 @ $3730.29
+2026-01-03 12:12:32 | INFO     | trading_bot.alerts | Email alert sent: Trade Executed: SELL CRASH500
+2026-01-03 12:12:32 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '14.54%', 'xgboost': '92.20%'}
+2026-01-03 12:12:32 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:13:32 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:13:32
+2026-01-03 12:14:17 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '13.18%', 'xgboost': '81.15%'}
+2026-01-03 12:14:17 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '23.57%', 'xgboost': '18.78%'}
+2026-01-03 12:14:18 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '14.84%', 'xgboost': '91.63%'}
+2026-01-03 12:14:18 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:15:18 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:15:18
+2026-01-03 12:15:26 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '47.16%', 'xgboost': '78.81%'}
+2026-01-03 12:15:27 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '17.56%', 'xgboost': '8.04%'}
+2026-01-03 12:15:27 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '5.63%', 'xgboost': '10.88%'}
+2026-01-03 12:15:27 | INFO     | trading_bot | GO SHORT Signal for BOOM1000 at 17128.887
+2026-01-03 12:15:27 | INFO     | trading_bot.alerts | ALERT: Trade Executed: SELL BOOM1000 - Executed SELL order: 0.002919459660319441 BOOM1000 @ $17128.89
+2026-01-03 12:15:30 | INFO     | trading_bot.alerts | Email alert sent: Trade Executed: SELL BOOM1000
+2026-01-03 12:15:30 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:16:30 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:16:30
+2026-01-03 12:17:15 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '43.75%', 'xgboost': '77.90%'}
+2026-01-03 12:17:15 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '17.51%', 'xgboost': '6.40%'}
+2026-01-03 12:17:17 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '5.79%', 'xgboost': '10.88%'}
+2026-01-03 12:17:17 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:18:17 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:18:17
+2026-01-03 12:18:26 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '20.61%', 'xgboost': '70.91%'}
+2026-01-03 12:18:27 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '17.50%', 'xgboost': '8.11%'}
+2026-01-03 12:18:28 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '5.88%', 'xgboost': '10.59%'}
+2026-01-03 12:18:28 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:19:28 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:19:28
+2026-01-03 12:19:36 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '50.43%', 'xgboost': '82.53%'}
+2026-01-03 12:19:37 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '17.52%', 'xgboost': '6.06%'}
+2026-01-03 12:19:38 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '5.97%', 'xgboost': '15.19%'}
+2026-01-03 12:19:38 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:20:38 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:20:38
+2026-01-03 12:20:46 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '27.03%', 'xgboost': '76.01%'}
+2026-01-03 12:20:47 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '37.39%', 'xgboost': '76.66%'}
+2026-01-03 12:20:47 | INFO     | trading_bot | Closing Position for CRASH500
+2026-01-03 12:20:47 | INFO     | trading_bot.alerts | ALERT: Trade Executed: CLOSE CRASH500 - Executed CLOSE order: 0.013403783620040265 CRASH500 @ $3727.46
+2026-01-03 12:20:51 | INFO     | trading_bot.alerts | Email alert sent: Trade Executed: CLOSE CRASH500
+2026-01-03 12:20:51 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '4.60%', 'xgboost': '9.67%'}
+2026-01-03 12:20:51 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:21:51 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:21:51
+2026-01-03 12:21:59 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '61.11%', 'xgboost': '86.52%'}
+2026-01-03 12:21:59 | INFO     | trading_bot | GO LONG Signal for R_75 at 44517.7131
+2026-01-03 12:21:59 | INFO     | trading_bot.alerts | ALERT: Trade Executed: BUY R_75 - Executed BUY order: 0.0011232705443011133 R_75 @ $44517.71
+2026-01-03 12:22:03 | INFO     | trading_bot.alerts | Email alert sent: Trade Executed: BUY R_75
+2026-01-03 12:22:04 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '36.05%', 'xgboost': '74.86%'}
+2026-01-03 12:22:04 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '4.69%', 'xgboost': '10.00%'}
+2026-01-03 12:22:04 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:23:04 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:23:04
+2026-01-03 12:23:14 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '66.03%', 'xgboost': '80.31%'}
+2026-01-03 12:23:15 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '34.83%', 'xgboost': '75.87%'}
+2026-01-03 12:23:16 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '4.79%', 'xgboost': '7.10%'}
+2026-01-03 12:23:16 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:23:50 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-03 12:23:50 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-03 12:23:50 | INFO     | trading_bot | Loading models for R_75...
+2026-01-03 12:23:50 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-03 12:23:50 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-03 12:23:50 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-03 12:23:50 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-03 12:23:50 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-03 12:23:50 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-03 12:23:50 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-03 12:23:51 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-03 12:23:51 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-03 12:23:51 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-03 12:23:51 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-03 12:23:51 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:23:51
+2026-01-03 12:24:00 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '73.29%', 'xgboost': '80.76%'}
+2026-01-03 12:24:00 | INFO     | trading_bot | GO LONG Signal for R_75 at 44465.5862
+2026-01-03 12:24:00 | INFO     | trading_bot.alerts | ALERT: Trade Executed: BUY R_75 - Executed BUY order: 0.0011244651037570265 R_75 @ $44465.59
+2026-01-03 12:24:04 | INFO     | trading_bot.alerts | Email alert sent: Trade Executed: BUY R_75
+2026-01-03 12:24:04 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '34.20%', 'xgboost': '73.14%'}
+2026-01-03 12:24:05 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '4.84%', 'xgboost': '6.86%'}
+2026-01-03 12:24:05 | INFO     | trading_bot | GO SHORT Signal for BOOM1000 at 17120.002
+2026-01-03 12:24:05 | INFO     | trading_bot.alerts | ALERT: Trade Executed: SELL BOOM1000 - Executed SELL order: 0.002920560406476588 BOOM1000 @ $17120.00
+2026-01-03 12:24:09 | INFO     | trading_bot.alerts | Email alert sent: Trade Executed: SELL BOOM1000
+2026-01-03 12:24:09 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:25:31 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-03 12:25:31 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-03 12:25:31 | INFO     | trading_bot | Loading models for R_75...
+2026-01-03 12:25:31 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-03 12:25:31 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-03 12:25:31 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-03 12:25:31 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-03 12:25:31 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-03 12:25:31 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-03 12:25:32 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-03 12:25:32 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-03 12:25:32 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-03 12:25:32 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-03 12:25:32 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-03 12:25:32 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:25:32
+2026-01-03 12:26:45 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-03 12:26:45 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-03 12:26:45 | INFO     | trading_bot | Loading models for R_75...
+2026-01-03 12:26:45 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-03 12:26:45 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-03 12:26:45 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-03 12:26:45 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-03 12:26:46 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-03 12:26:46 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-03 12:26:46 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-03 12:26:46 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-03 12:26:46 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-03 12:26:46 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-03 12:26:46 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-03 12:26:46 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:26:46
+2026-01-03 12:26:55 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '5.55%', 'xgboost': '55.37%'}
+2026-01-03 12:26:55 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '83.24%', 'xgboost': '60.44%'}
+2026-01-03 12:26:55 | INFO     | trading_bot | GO LONG Signal for CRASH500 at 3724.157
+2026-01-03 12:26:55 | INFO     | trading_bot.alerts | ALERT: Trade Executed: BUY CRASH500 - Executed BUY order: 0.013425857180564622 CRASH500 @ $3724.16
+2026-01-03 12:26:59 | INFO     | trading_bot.alerts | Email alert sent: Trade Executed: BUY CRASH500
+2026-01-03 12:26:59 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '3.23%', 'xgboost': '11.15%'}
+2026-01-03 12:26:59 | INFO     | trading_bot | GO SHORT Signal for BOOM1000 at 17117.002
+2026-01-03 12:26:59 | INFO     | trading_bot.alerts | ALERT: Trade Executed: SELL BOOM1000 - Executed SELL order: 0.00292107227655871 BOOM1000 @ $17117.00
+2026-01-03 12:27:03 | INFO     | trading_bot.alerts | Email alert sent: Trade Executed: SELL BOOM1000
+2026-01-03 12:27:03 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-03 12:28:03 | INFO     | trading_bot | Trading Cycle - 2026-01-03 12:28:03
+2026-01-03 12:28:12 | INFO     | trading_bot | Ensemble Predictions for R_75: {'lstm': '8.00%', 'xgboost': '58.73%'}
+2026-01-03 12:28:12 | INFO     | trading_bot | Ensemble Predictions for CRASH500: {'lstm': '79.72%', 'xgboost': '60.33%'}
+2026-01-03 12:28:13 | INFO     | trading_bot | Ensemble Predictions for BOOM1000: {'lstm': '3.31%', 'xgboost': '11.55%'}
+2026-01-03 12:28:13 | INFO     | trading_bot | Sleeping 60s until next cycle...
+2026-01-04 13:22:25 | INFO     | trading_bot | Bot monitoring system initialized
+2026-01-04 13:22:25 | INFO     | trading_bot | Initializing Trading Bot...
+2026-01-04 13:22:25 | INFO     | trading_bot | Loading models for R_75...
+2026-01-04 13:22:25 | INFO     | trading_bot | [R_75] LSTM Model loaded from models/R_75_lstm.pth
+2026-01-04 13:22:25 | INFO     | trading_bot | [R_75] XGBoost Model loaded from models/R_75_xgboost.json
+2026-01-04 13:22:25 | INFO     | trading_bot | Loading models for CRASH500...
+2026-01-04 13:22:25 | INFO     | trading_bot | [CRASH500] LSTM Model loaded from models/CRASH500_lstm.pth
+2026-01-04 13:22:26 | INFO     | trading_bot | [CRASH500] XGBoost Model loaded from models/CRASH500_xgboost.json
+2026-01-04 13:22:26 | INFO     | trading_bot | Loading models for BOOM1000...
+2026-01-04 13:22:26 | INFO     | trading_bot | [BOOM1000] LSTM Model loaded from models/BOOM1000_lstm.pth
+2026-01-04 13:22:26 | INFO     | trading_bot | [BOOM1000] XGBoost Model loaded from models/BOOM1000_xgboost.json
+2026-01-04 13:22:26 | INFO     | trading_bot | Using Ensemble Strategy
+2026-01-04 13:22:26 | INFO     | trading_bot | Bot initialized for ['R_75', 'CRASH500', 'BOOM1000'] (Paper trading)
+2026-01-04 13:22:26 | INFO     | trading_bot | Starting trading bot (interval: 60s)
+2026-01-04 13:22:26 | INFO     | trading_bot | Trading Cycle - 2026-01-04 13:22:26

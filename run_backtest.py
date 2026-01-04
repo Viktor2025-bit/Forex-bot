@@ -45,21 +45,32 @@ def run_full_pipeline(ticker="EURUSD=X",
     
     # ========== STEP 1: DATA ==========
     print("\n[STEP 1/5] Fetching historical data...")
-    df = fetch_historical_data(ticker, start_date, end_date)
+    
+    # Check if trading synthetics
+    import json
+    with open('config.json', 'r') as f:
+        config = json.load(f)
+    
+    market_type = config.get('bot', {}).get('market_type')
+    
+    if market_type == 'synthetics':
+        # Use Deriv API for synthetics
+        print("Fetching from Deriv API (synthetics)...")
+        from data_loader import fetch_historical_data as fetch_deriv
+        import asyncio
+        df = asyncio.run(fetch_deriv(ticker, time_interval="5m", max_candles=50000))
+    else:
+        # Use MT5 for forex/indices
+        from utils.data_loader import fetch_data_mt5
+        data_map = fetch_data_mt5(ticker, n_candles=50000)
+        if data_map and ticker in data_map:
+            df = data_map[ticker]
+        else:
+            df = None
+
     if df is None or df.empty:
-        # Fallback for testing if yfinance fails
-        print("WARNING: Could not fetch data (network/module error). Generating dummy data for testing.")
-        dates = pd.date_range(start=start_date, end=end_date, freq='h')
-        df = pd.DataFrame({
-            'Open': np.random.rand(len(dates)) * 10 + 100,
-            'High': np.random.rand(len(dates)) * 10 + 100,
-            'Low': np.random.rand(len(dates)) * 10 + 100,
-            'Close': np.random.rand(len(dates)) * 10 + 100,
-            'Volume': np.random.rand(len(dates)) * 1000
-        }, index=dates)
-        
-        # Add basic trend for better ML testing
-        df['Close'] = df['Close'].rolling(window=20).mean().bfill()
+        print("CRITICAL ERROR: Could not fetch data. Please check your connection.")
+        return
         
     print(f"Data rows: {len(df)}")
     
@@ -101,7 +112,7 @@ def run_full_pipeline(ticker="EURUSD=X",
         
         # 2. Train
         print("\n[STEP 3/5] Training XGBoost model...")
-        model = ForexModel() # Defaults to configs in __init__ or use kwargs
+        model = ForexModel(model_path=f'models/{ticker}_xgboost.json') # Save to ticker-specific file
         model.train(X_train, y_train)
         
         # 3. Predict
@@ -117,25 +128,32 @@ def run_full_pipeline(ticker="EURUSD=X",
         model.save_model()
 
     else:
-        # ========== LSTM Pipeline ==========
-        print("\n[STEP 2/5] Preprocessing (LSTM)...")
-        preprocessor = DataPreprocessor()
-        df_clean = preprocessor.clean_data(df)
-        df_indicators = preprocessor.add_technical_indicators(df_clean)
-        df_normalized = preprocessor.normalize_data(df_indicators)
+        # ========== LSTM Pipeline (Enhanced with FeatureEngine) ==========
+        print("\n[STEP 2/5] Feature Engineering (LSTM - Enhanced)...")
         
-        feature_columns = ['Open', 'High', 'Low', 'Close', 'Volume', 'SMA_14', 'RSI_14']
-        data = df_normalized[feature_columns].values
+        # Use the same FeatureEngine as XGBoost for consistency
+        fe = FeatureEngine()
+        df_features = fe.generate_features(df)
+        
+        # Normalize all numeric features for LSTM
+        from sklearn.preprocessing import StandardScaler
+        
+        # Exclude non-numeric columns
+        feature_columns = [col for col in df_features.columns if df_features[col].dtype in ['float64', 'int64', 'float32', 'int32']]
+        feature_columns = [col for col in feature_columns if col not in ['Date', 'Datetime']]
+        
+        scaler = StandardScaler()
+        data_scaled = scaler.fit_transform(df_features[feature_columns].values)
         
         # Store original close prices for backtesting
-        original_close = df_indicators['Close'].values
-        dates = df_indicators['Date'].values if 'Date' in df_indicators.columns else df_indicators.index
+        original_close = df_features['Close'].values
+        dates = df_features.index
         
-        print(f"Processed shape: {data.shape}")
+        print(f"Processed shape: {data_scaled.shape} ({len(feature_columns)} features)")
         
         # Create sequences
         print("\n[STEP 3/5] Creating sequences...")
-        X, y = create_sequences(data, seq_length=seq_length)
+        X, y = create_sequences(data_scaled, seq_length=seq_length)
         
         split_idx = int(len(X) * 0.8)
         X_train, X_test = X[:split_idx], X[split_idx:]
@@ -154,8 +172,8 @@ def run_full_pipeline(ticker="EURUSD=X",
         X_test_t = torch.FloatTensor(X_test)
         
         model = TradingLSTM(input_size=X_train.shape[2], hidden_size=64, num_layers=2)
-        criterion = torch.nn.BCELoss()
-        optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+        criterion = torch.nn.BCEWithLogitsLoss() # More stable than Sigmoid + BCELoss
+        optimizer = torch.optim.Adam(model.parameters(), lr=0.0001) # Lower LR for stability
         
         batch_size = 32
         for epoch in range(epochs):
@@ -177,9 +195,10 @@ def run_full_pipeline(ticker="EURUSD=X",
         # Predict
         model.eval()
         with torch.no_grad():
-            predictions = model(X_test_t).squeeze().numpy()
+            logits = model(X_test_t).squeeze()
+            predictions = torch.sigmoid(logits).numpy() # Apply sigmoid here since model returns logits
             
-        torch.save(model.state_dict(), 'models/trained_lstm.pth')
+        torch.save(model.state_dict(), f'models/{ticker}_lstm.pth')
 
     # ========== STEP 5: BACKTEST ==========
     print("\n[STEP 5/5] Running backtest...")
@@ -193,7 +212,7 @@ def run_full_pipeline(ticker="EURUSD=X",
     # prices[i+1] -> exit price (next day)
     
     use_preds = predictions[:min_len]
-    use_prices = test_prices[:min_len+1]
+    use_prices = test_prices[:min_len+1].squeeze()
     use_dates = test_dates[:min_len+1]
     
     print(f"Backtesting on {len(use_preds)} candles.")

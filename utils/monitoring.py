@@ -75,7 +75,7 @@ class TradeRecord:
     timestamp: str
     symbol: str
     side: str  # 'buy' or 'sell'
-    quantity: int
+    quantity: float
     price: float
     order_id: str
     pnl: Optional[float] = None

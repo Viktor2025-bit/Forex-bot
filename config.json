@@ -1,6 +1,6 @@
 {
     "bot": {
-        "market_type": "indices",
+        "market_type": "synthetics",
         "paper_trading": true,
         "initial_capital": 500,
         "trading_interval_seconds": 60,
@@ -22,11 +22,11 @@
                 "USDCHF=X"
             ]
         },
-        "indices": {
+        "synthetics": {
             "symbols": [
-                "US500",
-                "US30",
-                "NAS100"
+                "R_75",
+                "CRASH500",
+                "BOOM1000"
             ]
         }
     },
@@ -36,7 +36,7 @@
         "stop_loss_pct": 0.02,
         "take_profit_pct": 0.04,
         "max_open_positions": 3,
-        "min_confidence": 0.55,
+        "min_confidence": 0.51,
         "forex_risk": {
             "risk_per_trade_pct": 0.01,
             "stop_loss_pips": 20,
@@ -44,14 +44,15 @@
         }
     },
     "model": {
+        "strategy": "ensemble",
         "type": "xgboost",
-        "path": "models/xgboost_forex.json",
+        "path": "models/synthetics_lstm.pth",
         "lstm": {
             "hidden_size": 64,
             "num_layers": 2
         },
         "xgboost": {
-            "model_path": "models/xgboost_forex.json",
+            "model_path": "models/synthetics_xgboost.json",
             "max_depth": 5,
             "learning_rate": 0.05,
             "n_estimators": 300
@@ -79,10 +80,15 @@
             "practice": true
         },
         "mt5": {
-            "enabled": true,
+            "enabled": false,
             "login": "61450727",
             "password": "eb1jx!kilE",
             "server": "Pepperstone Demo"
+        },
+        "deriv": {
+            "enabled": true,
+            "server": "demo",
+            "api_token": "jGzI4hcJiaMpb3U"
         }
     }
 }

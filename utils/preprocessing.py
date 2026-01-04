@@ -1,6 +1,9 @@
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
+from ta.trend import SMAIndicator, ADXIndicator
+from ta.momentum import RSIIndicator
+from ta.volatility import AverageTrueRange
 
 class DataPreprocessor:
     def __init__(self):
@@ -18,18 +21,22 @@ class DataPreprocessor:
 
     def add_technical_indicators(self, df):
         """
-        Adds basic technical indicators: SMA, RSI.
+        Adds basic technical indicators: SMA, RSI, ADX, ATR.
         """
-        # Simple Moving Average (14 period)
-        df['SMA_14'] = df['Close'].rolling(window=14).mean()
+        # SMA
+        df['SMA_14'] = SMAIndicator(close=df['Close'].squeeze(), window=14).sma_indicator()
+        df['SMA_50'] = SMAIndicator(close=df['Close'].squeeze(), window=50).sma_indicator()
         
-        # RSI Calculation
-        delta = df['Close'].diff()
-        gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
-        loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
-        
-        rs = gain / loss
-        df['RSI_14'] = 100 - (100 / (1 + rs))
+        # RSI
+        df['RSI_14'] = RSIIndicator(close=df['Close'].squeeze(), window=14).rsi()
+
+        # ADX
+        adx_indicator = ADXIndicator(high=df['High'].squeeze(), low=df['Low'].squeeze(), close=df['Close'].squeeze(), window=14)
+        df['ADX'] = adx_indicator.adx()
+
+        # ATR
+        atr_indicator = AverageTrueRange(high=df['High'].squeeze(), low=df['Low'].squeeze(), close=df['Close'].squeeze(), window=14)
+        df['ATR'] = atr_indicator.average_true_range()
         
         # Drop NaN values created by indicators
         df = df.dropna()

@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
-from data_loader import download_data
 from feature_engine import FeatureEngine
 from ai_model import ForexModel
 import os
+import argparse
 
 def prepare_data(data, lookahead=1):
     """
@@ -29,43 +29,41 @@ def prepare_data(data, lookahead=1):
     
     return df
 
-def train_pipeline():
-    print("=== Starting AI Training Pipeline ===")
+def train_pipeline(symbol="R_75"):
+    print(f"=== Starting AI Training Pipeline for {symbol} ===")
     
-    # 1. Get Data (Enough for training)
-    # Using 2 years of data for better generalization
-    file_path = download_data(pair="EURUSD=X", period="2y", interval="1h")
-    
-    # Load CSV - FIX: Read the multi-level header properly
-    data = pd.read_csv(file_path, header=[0, 1], index_col=0, parse_dates=True)
+    # 1. Get Data from local storage
+    file_path = f"data/raw/{symbol}.csv"
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"❌ Data file not found: {file_path}. Run the bot to collect data first.")
+        
+    print(f"Loading data from {file_path}...")
+    data = pd.read_csv(file_path, index_col=0, parse_dates=True)
     
     # Debug: Print what we loaded
     print(f"Raw data shape: {data.shape}")
-    print(f"Raw columns: {data.columns.tolist()}")
-    
-    # Flatten multi-index columns - yfinance creates ('Close', 'EURUSD=X') format
-    data.columns = [col[0] for col in data.columns.values]
-    
-    # Verify we have the expected columns
-    print(f"Columns after flattening: {data.columns.tolist()}")
-    print(f"Data shape: {data.shape}")
     print(f"First few rows:\n{data.head()}")
     
     # Check for empty data
-    if len(data) == 0:
-        raise ValueError("❌ No data loaded! Check your CSV file structure.")
+    if len(data) < 100:
+        raise ValueError(f"❌ Not enough data! Only {len(data)} rows. need at least 100.")
     
     # 2. Prepare Data (Features + Targets)
-    df_processed = prepare_data(data)
+    try:
+        df_processed = prepare_data(data)
+    except Exception as e:
+        input_cols = data.columns.tolist()
+        raise ValueError(f"Feature engineering failed on columns {input_cols}. Error: {e}")
     
     # Check if we still have data after processing
     if len(df_processed) == 0:
         raise ValueError("❌ No data after feature engineering! Check your FeatureEngine and NaN handling.")
     
     # Define features to use for training (exclude non-feature columns)
-    feature_cols = [c for c in df_processed.columns if c not in ['Target', 'Future_Return', 'Open', 'High', 'Low', 'Close', 'Volume']]
+    ignore_cols = ['Target', 'Future_Return', 'Date', 'index', 'Open', 'High', 'Low', 'Close', 'Volume']
+    feature_cols = [c for c in df_processed.columns if c not in ignore_cols]
     
-    print(f"Using {len(feature_cols)} features: {feature_cols[:5]}...")  # Print first 5
+    print(f"Using {len(feature_cols)} features: {feature_cols[:5]}...")
     
     X = df_processed[feature_cols]
     y = df_processed['Target']
@@ -80,7 +78,8 @@ def train_pipeline():
     
     # 4. Train Model
     print("\nTraining XGBoost model...")
-    model = ForexModel()
+    model_path = f"models/{symbol}_xgboost.json"
+    model = ForexModel(model_path=model_path, n_estimators=500, max_depth=6) # Slightly boosted params
     model.train(X_train, y_train)
     
     # 5. Evaluate
@@ -91,23 +90,17 @@ def train_pipeline():
     accuracy = (preds_class == y_test).mean()
     print(f"Test Accuracy: {accuracy:.2%}")
     
-    # Feature Importance
-    try:
-        import matplotlib.pyplot as plt
-        from xgboost import plot_importance
-        
-        fig, ax = plt.subplots(figsize=(10, 8))
-        plot_importance(model.model, max_num_features=10, ax=ax)
-        plt.title("Top 10 Feature Importance")
-        plt.tight_layout()
-        plt.savefig("feature_importance.png")
-        print("Feature importance plot saved to feature_importance.png")
-    except Exception as e:
-        print(f"Could not create feature importance plot: {e}")
-
     # 6. Save Model
     model.save_model()
-    print("\n✅ Training Complete. Model ready for use.")
+    print(f"\n✅ Training Complete for {symbol}. Model saved to {model_path}.")
+    return accuracy
 
 if __name__ == "__main__":
-    train_pipeline()
+    parser = argparse.ArgumentParser(description="Train XGBoost Model for Synthetics")
+    parser.add_argument("--symbol", type=str, default="R_75", help="Symbol to train (e.g. R_75, CRASH500)")
+    args = parser.parse_args()
+    
+    try:
+        train_pipeline(args.symbol)
+    except Exception as e:
+        print(f"Training Failed: {e}")

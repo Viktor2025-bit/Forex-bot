@@ -1,0 +1,82 @@
+[
+  {
+    "timestamp": "2026-01-03T12:12:28.223852",
+    "symbol": "CRASH500",
+    "side": "SELL",
+    "quantity": 0.013403783620040265,
+    "price": 3730.29,
+    "order_id": "PAPER-1",
+    "pnl": null,
+    "notes": "AI_ENTRY"
+  },
+  {
+    "timestamp": "2026-01-03T12:15:27.557017",
+    "symbol": "BOOM1000",
+    "side": "SELL",
+    "quantity": 0.002919459660319441,
+    "price": 17128.887,
+    "order_id": "PAPER-2",
+    "pnl": null,
+    "notes": "AI_ENTRY"
+  },
+  {
+    "timestamp": "2026-01-03T12:20:47.610850",
+    "symbol": "CRASH500",
+    "side": "CLOSE",
+    "quantity": 0.013403783620040265,
+    "price": 3727.463,
+    "order_id": "PAPER-3",
+    "pnl": 0.037892496293850754,
+    "notes": "PnL: 0.04"
+  },
+  {
+    "timestamp": "2026-01-03T12:21:59.909605",
+    "symbol": "R_75",
+    "side": "BUY",
+    "quantity": 0.0011232705443011133,
+    "price": 44517.7131,
+    "order_id": "PAPER-4",
+    "pnl": null,
+    "notes": "AI_ENTRY"
+  },
+  {
+    "timestamp": "2026-01-03T12:24:00.597052",
+    "symbol": "R_75",
+    "side": "BUY",
+    "quantity": 0.0011244651037570265,
+    "price": 44465.5862,
+    "order_id": "PAPER-1",
+    "pnl": null,
+    "notes": "AI_ENTRY"
+  },
+  {
+    "timestamp": "2026-01-03T12:24:05.813872",
+    "symbol": "BOOM1000",
+    "side": "SELL",
+    "quantity": 0.002920560406476588,
+    "price": 17120.002,
+    "order_id": "PAPER-2",
+    "pnl": null,
+    "notes": "AI_ENTRY"
+  },
+  {
+    "timestamp": "2026-01-03T12:26:55.703173",
+    "symbol": "CRASH500",
+    "side": "BUY",
+    "quantity": 0.013425857180564622,
+    "price": 3724.157,
+    "order_id": "PAPER-1",
+    "pnl": null,
+    "notes": "AI_ENTRY"
+  },
+  {
+    "timestamp": "2026-01-03T12:26:59.532591",
+    "symbol": "BOOM1000",
+    "side": "SELL",
+    "quantity": 0.00292107227655871,
+    "price": 17117.002,
+    "order_id": "PAPER-2",
+    "pnl": null,
+    "notes": "AI_ENTRY"
+  }
+]

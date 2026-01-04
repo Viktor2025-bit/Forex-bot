@@ -1,0 +1,126 @@
+2025-12-30 16:03:22 | ERROR    | trading_bot | Failed to load LSTM model weights (likely due to new input size). Using untrained model. Error: Error(s) in loading state_dict for TradingLSTM:
+	size mismatch for lstm.weight_ih_l0: copying a param with shape torch.Size([256, 7]) from checkpoint, the shape in current model is torch.Size([256, 10]).
+2025-12-30 16:08:23 | ERROR    | trading_bot | Failed to load LSTM model weights (likely due to new input size). Using untrained model. Error: Error(s) in loading state_dict for TradingLSTM:
+	size mismatch for lstm.weight_ih_l0: copying a param with shape torch.Size([256, 7]) from checkpoint, the shape in current model is torch.Size([256, 10]).
+2025-12-31 13:02:59 | ERROR    | trading_bot | Failed to load LSTM model weights (likely due to new input size). Using untrained model. Error: Error(s) in loading state_dict for TradingLSTM:
+	size mismatch for lstm.weight_ih_l0: copying a param with shape torch.Size([256, 7]) from checkpoint, the shape in current model is torch.Size([256, 10]).
+2025-12-31 13:36:44 | ERROR    | trading_bot | Failed to load LSTM model weights (likely due to new input size). Using untrained model. Error: Error(s) in loading state_dict for TradingLSTM:
+	size mismatch for lstm.weight_ih_l0: copying a param with shape torch.Size([256, 7]) from checkpoint, the shape in current model is torch.Size([256, 57]).
+2025-12-31 13:36:47 | ERROR    | trading_bot | Error preparing features for lstm: Found array with 0 sample(s) (shape=(0, 57)) while a minimum of 1 is required by StandardScaler.
+2025-12-31 13:37:38 | ERROR    | trading_bot | Error preparing features for lstm: Found array with 0 sample(s) (shape=(0, 57)) while a minimum of 1 is required by StandardScaler.
+2026-01-03 11:39:47 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:39:47 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:39:49 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:39:49 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:40:58 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:40:58 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:40:59 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:40:59 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:43:19 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:43:19 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:43:21 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:43:21 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:44:30 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:44:30 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:46:15 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:46:15 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:46:16 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:46:16 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:48:06 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:48:06 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:48:13 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:48:13 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:49:59 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:49:59 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:50:00 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:50:00 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:50:03 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:50:03 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:51:13 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:51:13 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:51:16 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:51:16 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:51:17 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:51:17 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:52:28 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:52:28 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:52:30 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:52:30 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:52:32 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:52:32 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:52:53 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:52:53 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:52:54 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:52:55 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:52:56 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:52:56 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:53:47 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:53:47 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:53:51 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:53:51 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:53:56 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:53:56 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:54:15 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:54:16 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:54:17 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:54:17 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:54:19 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:54:19 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:55:07 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:55:07 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:55:09 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:55:09 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:55:11 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:55:11 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:55:31 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:55:31 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:55:33 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:55:33 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:55:35 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:55:35 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:56:44 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:56:44 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:56:44 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:56:44 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:56:45 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:56:45 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:56:55 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:56:55 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:56:56 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:56:56 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:56:58 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:56:58 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:58:29 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:58:29 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:58:30 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:58:30 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:58:30 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:58:30 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:58:43 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:58:43 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:58:43 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:58:43 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:58:43 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:58:43 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:59:39 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:59:39 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:59:40 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:59:40 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 11:59:40 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 11:59:40 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 12:01:04 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 12:01:04 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 12:01:04 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 12:01:04 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 12:01:05 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 12:01:05 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 12:02:13 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 12:02:13 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 12:02:14 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 12:02:14 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 12:02:14 | ERROR    | trading_bot | Error calculating size: RiskManager.calculate_position_size() takes 3 positional arguments but 4 were given
+2026-01-03 12:02:14 | ERROR    | trading_bot | Order Execution Failed: 'PaperTradingExecutor' object has no attribute 'place_order'
+2026-01-03 12:06:08 | ERROR    | trading_bot | Order Execution Failed: name 'OrderStatus' is not defined
+2026-01-03 12:06:09 | ERROR    | trading_bot | Order Execution Failed: name 'OrderStatus' is not defined
+2026-01-03 12:06:09 | ERROR    | trading_bot | Order Execution Failed: name 'OrderStatus' is not defined
+2026-01-03 12:08:00 | ERROR    | trading_bot | Order Execution Failed: BotMonitor.log_trade() takes 2 positional arguments but 6 were given

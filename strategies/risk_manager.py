@@ -68,11 +68,11 @@ class RiskManager:
             return False, f"Confidence too low ({prediction_confidence:.2%} < {self.params.min_confidence:.2%})"
         return True, "OK"
     
-    def calculate_position_size(self, portfolio_value: float, current_price: float) -> int:
-        """Calculate how many shares to buy (for stocks)."""
+    def calculate_position_size(self, portfolio_value: float, current_price: float) -> float:
+        """Calculate how many shares/units to buy (supports fractional)."""
         max_position_value = portfolio_value * self.params.max_position_size_pct
-        shares = int(max_position_value / current_price)
-        return max(shares, 0)
+        shares = max_position_value / current_price
+        return max(shares, 0.0)
         
     def calculate_forex_position_size(self, portfolio_value: float, symbol: str) -> int:
         """
@@ -187,6 +187,27 @@ class RiskManager:
         
         logger.info(f"Closed position: {symbol} @ ${exit_price:.4f}, P&L: ${pnl:.2f}")
         return pnl
+    
+    def check_daily_loss(self, current_daily_pnl, initial_capital=None):
+        """
+        Check if trading should continue based on daily loss limit.
+        
+        Args:
+            current_daily_pnl (float): Current day's PnL (negative = loss)
+            initial_capital (float): Optional initial capital override
+            
+        Returns:
+            bool: True if safe to trade, False if daily limit hit
+        """
+        # Use initial_portfolio_value if available, otherwise fall back to parameter
+        reference_capital = self.initial_portfolio_value if self.initial_portfolio_value > 0 else (initial_capital or 1000)
+        max_loss_amount = reference_capital * self.params.max_daily_loss_pct
+        
+        if current_daily_pnl < -max_loss_amount:
+            logger.warning(f"Daily loss limit hit: ${current_daily_pnl:.2f} exceeds -${max_loss_amount:.2f}")
+            return False
+            
+        return True
 
 
 if __name__ == "__main__":
