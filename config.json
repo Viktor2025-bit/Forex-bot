@@ -1,8 +1,8 @@
 {
     "bot": {
         "market_type": "synthetics",
-        "paper_trading": true,
-        "initial_capital": 500,
+        "paper_trading": false,
+        "initial_capital": 200,
         "trading_interval_seconds": 60,
         "seq_length": 30
     },
@@ -24,9 +24,9 @@
         },
         "synthetics": {
             "symbols": [
-                "R_75",
-                "CRASH500",
-                "BOOM1000"
+                "Volatility 75 Index",
+                "Crash 500 Index",
+                "Boom 1000 Index"
             ]
         }
     },
@@ -44,9 +44,13 @@
         }
     },
     "model": {
-        "strategy": "ensemble",
+        "strategy": "any_strong_signal",
         "type": "xgboost",
         "path": "models/synthetics_lstm.pth",
+        "any_strong_signal": {
+            "buy_threshold": 0.58,
+            "sell_threshold": 0.42
+        },
         "lstm": {
             "hidden_size": 64,
             "num_layers": 2
@@ -63,32 +67,43 @@
         "smtp_server": "smtp.gmail.com",
         "smtp_port": 587,
         "smtp_user": "kaluvictor130@gmail.com",
-        "smtp_password": "mfwt phwp qste ssig",
-        "alert_email": "kaluvictor130@gmail.com"
+        "smtp_password": "obec kruv ifsp jetu",
+        "alert_email": "tegamike27@gmail.com",
+        "telegram": {
+            "enabled": false,
+            "bot_token": "YOUR_BOT_TOKEN",
+            "chat_id": "YOUR_CHAT_ID"
+        }
+    },
+    "websocket": {
+        "enabled": true,
+        "provider": "deriv",
+        "reconnect_attempts": 10,
+        "reconnect_delay_seconds": 5
     },
     "brokers": {
         "alpaca": {
             "enabled": false,
-            "api_key": "",
-            "api_secret": "",
+            "api_key": "YOUR_ALPACA_API_KEY",
+            "api_secret": "YOUR_ALPACA_API_SECRET",
             "paper": true
         },
         "oanda": {
             "enabled": false,
-            "account_id": "",
-            "access_token": "",
+            "account_id": "YOUR_OANDA_ACCOUNT_ID",
+            "access_token": "YOUR_OANDA_ACCESS_TOKEN",
             "practice": true
         },
         "mt5": {
-            "enabled": false,
-            "login": "61450727",
-            "password": "eb1jx!kilE",
-            "server": "Pepperstone Demo"
+            "enabled": true,
+            "login": "5966845",
+            "password": "Krav20#pool",
+            "server": "Deriv-Demo"
         },
         "deriv": {
             "enabled": true,
             "server": "demo",
-            "api_token": "jGzI4hcJiaMpb3U"
+            "api_token": "c5PambAnbRrvn4J"
         }
     }
 }

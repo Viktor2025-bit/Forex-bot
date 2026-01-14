@@ -72,9 +72,13 @@ def save_data(data_dict, folder="data/raw"):
             filenames.append(filename)
     return filenames
 
-def fetch_data_mt5(tickers, n_candles=1000):
+def fetch_data_mt5(tickers, n_candles=1000, timeframe="M5"):
     """
     Fetches real-time candle data from MetaTrader 5.
+    Args:
+        tickers (str or list): Symbols to fetch.
+        n_candles (int): Number of candles.
+        timeframe (str): "M1", "M5", "H1", "D1".
     """
     try:
         import MetaTrader5 as mt5
@@ -85,6 +89,16 @@ def fetch_data_mt5(tickers, n_candles=1000):
     if not mt5.initialize():
         print(f"MT5 initialization failed: {mt5.last_error()}")
         return None
+
+    tf_map = {
+        "M1": mt5.TIMEFRAME_M1,
+        "M5": mt5.TIMEFRAME_M5,
+        "M15": mt5.TIMEFRAME_M15,
+        "H1": mt5.TIMEFRAME_H1,
+        "H4": mt5.TIMEFRAME_H4,
+        "D1": mt5.TIMEFRAME_D1
+    }
+    mt5_tf = tf_map.get(timeframe, mt5.TIMEFRAME_M5)
 
     data_dict = {}
     
@@ -100,7 +114,7 @@ def fetch_data_mt5(tickers, n_candles=1000):
              print(f"Failed to select {mt5_symbol} in MT5")
              continue
 
-        rates = mt5.copy_rates_from_pos(mt5_symbol, mt5.TIMEFRAME_M1, 0, n_candles)
+        rates = mt5.copy_rates_from_pos(mt5_symbol, mt5_tf, 0, n_candles)
         
         if rates is None or len(rates) == 0:
             print(f"No data for {mt5_symbol}")

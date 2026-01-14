@@ -1,7 +1,7 @@
 """
 Risk Management Module for the AI Trading Bot.
 
-Handles position sizing, stop-loss, take-profit, and overall risk controls.
+Hangles position sizing, stop-loss, take-profit, and overall risk controls.
 """
 
 from dataclasses import dataclass
@@ -16,18 +16,20 @@ logger = logging.getLogger(__name__)
 class ForexRiskParameters:
     """Configuration for forex-specific risk."""
     risk_per_trade_pct: float = 0.01   # Risk 1% of account per trade
-    stop_loss_pips: int = 20
+    stop_loss_atr_multiplier: float = 1.5  # Stop loss distance in multiples of ATR
     risk_reward_ratio: float = 2.0
 
 @dataclass
 class RiskParameters:
     """Configuration for risk management."""
-    max_position_size_pct: float = 0.1
+    risk_per_trade_pct: float = 0.01  # Risk 1% of account per trade (for non-forex)
     max_daily_loss_pct: float = 0.02
-    stop_loss_pct: float = 0.02
-    take_profit_pct: float = 0.04
+    stop_loss_pct: float = 0.02 # Used for calculating non-forex SL price
+    take_profit_pct: float = 0.04 # Used for calculating non-forex TP price
     max_open_positions: int = 3
     min_confidence: float = 0.6
+    trailing_stop_pct: float = 0.015  # Trailing stop distance (1.5%)
+    trailing_activation_pct: float = 0.01  # Activate trailing after 1% profit
     forex_risk: Optional[ForexRiskParameters] = None
 
 
@@ -44,6 +46,9 @@ class RiskManager:
         self.daily_pnl = 0.0
         self.open_positions = {}
         self.initial_portfolio_value = 0.0
+        
+        # Trailing Stop tracking: {symbol: {'best_price': float, 'trailing_stop': float}}
+        self.trailing_stops = {}
         
     def set_portfolio_value(self, value: float):
         """Set the initial portfolio value for daily tracking."""
@@ -68,106 +73,170 @@ class RiskManager:
             return False, f"Confidence too low ({prediction_confidence:.2%} < {self.params.min_confidence:.2%})"
         return True, "OK"
     
-    def calculate_position_size(self, portfolio_value: float, current_price: float) -> float:
-        """Calculate how many shares/units to buy (supports fractional)."""
-        max_position_value = portfolio_value * self.params.max_position_size_pct
-        shares = max_position_value / current_price
+    def calculate_position_size(self, portfolio_value: float, entry_price: float, stop_loss_price: float, position_type: str) -> float:
+        """
+        Calculate how many shares/units to buy based on fixed-risk.
+        """
+        risk_amount_per_trade = portfolio_value * self.params.risk_per_trade_pct
+        
+        if position_type == 'long':
+            per_share_risk = entry_price - stop_loss_price
+        else: # short
+            per_share_risk = stop_loss_price - entry_price
+
+        if per_share_risk <= 0:
+            logger.warning(f"Cannot calculate position size: per-share risk is zero or negative (Entry: {entry_price}, SL: {stop_loss_price})")
+            return 0.0
+
+        shares = risk_amount_per_trade / per_share_risk
+        logger.info(f"Stock Position Size: Risking ${risk_amount_per_trade:.2f}, SL: ${stop_loss_price:.2f}, Size: {shares:.2f} shares")
         return max(shares, 0.0)
         
-    def calculate_forex_position_size(self, portfolio_value: float, symbol: str) -> int:
+    def calculate_forex_position_size(self, portfolio_value: float, symbol: str, atr: float) -> int:
         """
-        Calculate position size in lots for Forex.
-        This assumes a standard pip value for simplicity. A more advanced version
-        would calculate the precise pip value based on the quote currency.
+        Calculate position size in lots for Forex based on ATR.
         """
-        # Simplified pip value assumption
-        # For a standard lot (100,000 units) of a XXX/USD pair, one pip is ~$10.
-        # We will trade in mini lots (10,000 units), so one pip is ~$1.
-        pip_value_per_mini_lot = 1.0 
+        pip_size = self._get_pip_size(symbol)
+        pip_value_per_mini_lot = 1.0  # Simplified assumption for mini lots (10k units)
 
         # 1. Amount to risk in account currency (e.g., USD)
         risk_amount = portfolio_value * self.params.forex_risk.risk_per_trade_pct
         
-        # 2. Value of stop loss in account currency
-        stop_loss_value = self.params.forex_risk.stop_loss_pips * pip_value_per_mini_lot
+        # 2. Stop loss distance in pips, based on ATR
+        stop_loss_pips = (atr / pip_size) * self.params.forex_risk.stop_loss_atr_multiplier
         
-        if stop_loss_value == 0:
+        # 3. Value of stop loss in account currency
+        stop_loss_value = stop_loss_pips * pip_value_per_mini_lot
+        
+        if stop_loss_value <= 0:
+            logger.warning(f"[{symbol}] Invalid stop loss value ({stop_loss_value}), cannot calculate position size.")
             return 0
             
-        # 3. Number of mini lots to trade
+        # 4. Number of mini lots to trade
         num_mini_lots = int(risk_amount / stop_loss_value)
         
         # OANDA and MT5 expect units, not lots. 1 mini lot = 10,000 units.
         units = num_mini_lots * 10000
         
-        logger.info(f"Forex Position Size: Risking ${risk_amount:.2f} to make {self.params.forex_risk.risk_reward_ratio * risk_amount:.2f}, SL: {self.params.forex_risk.stop_loss_pips} pips, Size: {units} units")
+        logger.info(f"Forex Position Size: Risking ${risk_amount:.2f}, SL: {stop_loss_pips:.1f} pips (ATR Multiplier: {self.params.forex_risk.stop_loss_atr_multiplier}), Size: {units} units")
         return max(units, 0)
     
     def _get_pip_size(self, symbol: str) -> float:
         """Returns the pip size for a given symbol. JPY pairs are different."""
         return 0.0001 if 'JPY' not in symbol.upper() else 0.01
 
-    def check_forex_stop_loss(self, entry_price: float, current_price: float, symbol: str, position_type: str) -> bool:
-        """Check stop-loss based on pips for Forex."""
-        pip_size = self._get_pip_size(symbol)
-        
-        if position_type == 'long':
-            pips_lost = round((entry_price - current_price) / pip_size, 1)
-        else: # short
-            pips_lost = round((current_price - entry_price) / pip_size, 1)
-            
-        if pips_lost >= self.params.forex_risk.stop_loss_pips:
-            logger.warning(f"FOREX STOP-LOSS triggered: {pips_lost:.1f} pips")
-            return True
-        return False
-        
-    def check_forex_take_profit(self, entry_price: float, current_price: float, symbol: str, position_type: str) -> bool:
-        """Check take-profit based on pips and risk/reward for Forex."""
-        pip_size = self._get_pip_size(symbol)
-        take_profit_pips = self.params.forex_risk.stop_loss_pips * self.params.forex_risk.risk_reward_ratio
+    def get_forex_exit_prices(self, entry_price: float, symbol: str, position_type: str, atr: float) -> dict:
+        """
+        Calculate stop-loss and take-profit prices based on ATR.
+        """
+        stop_distance = atr * self.params.forex_risk.stop_loss_atr_multiplier
+        take_profit_distance = stop_distance * self.params.forex_risk.risk_reward_ratio
 
         if position_type == 'long':
-            pips_gained = round((current_price - entry_price) / pip_size, 1)
+            stop_loss_price = entry_price - stop_distance
+            take_profit_price = entry_price + take_profit_distance
         else: # short
-            pips_gained = round((entry_price - current_price) / pip_size, 1)
+            stop_loss_price = entry_price + stop_distance
+            take_profit_price = entry_price - take_profit_distance
             
-        if pips_gained >= take_profit_pips:
-            logger.info(f"FOREX TAKE-PROFIT triggered: {pips_gained:.1f} pips")
-            return True
-        return False
+        return {'stop_loss': stop_loss_price, 'take_profit': take_profit_price}
 
-    def check_stop_loss(self, entry_price: float, current_price: float, position_type: str) -> bool:
-        """Check if stop-loss should be triggered (for stocks)."""
+    def get_stock_exit_prices(self, entry_price: float, position_type: str) -> dict:
+        """
+        Calculate stop-loss and take-profit prices for stocks based on percentages.
+        """
         if position_type == 'long':
-            loss_pct = (entry_price - current_price) / entry_price
-        else:
-            loss_pct = (current_price - entry_price) / entry_price
-            
-        if loss_pct >= self.params.stop_loss_pct:
-            logger.warning(f"STOP-LOSS triggered: {loss_pct:.2%} loss")
-            return True
-        return False
-    
-    def check_take_profit(self, entry_price: float, current_price: float, position_type: str) -> bool:
-        """Check if take-profit should be triggered (for stocks)."""
-        if position_type == 'long':
-            gain_pct = (current_price - entry_price) / entry_price
-        else:
-            gain_pct = (entry_price - current_price) / entry_price
-            
-        if gain_pct >= self.params.take_profit_pct:
-            logger.info(f"TAKE-PROFIT triggered: {gain_pct:.2%} gain")
-            return True
-        return False
-    
-    def register_position(self, symbol: str, entry_price: float, qty: int, position_type: str):
-        """Register a new open position."""
+            stop_loss_price = entry_price * (1 - self.params.stop_loss_pct)
+            take_profit_price = entry_price * (1 + self.params.take_profit_pct)
+        else: # short
+            stop_loss_price = entry_price * (1 + self.params.stop_loss_pct)
+            take_profit_price = entry_price * (1 - self.params.take_profit_pct)
+        
+        return {'stop_loss': stop_loss_price, 'take_profit': take_profit_price}
+
+    def register_position(self, symbol: str, entry_price: float, qty: int, position_type: str, stop_loss_price: float = None):
+        """
+        Register a new open position and initialize trailing stop.
+        The initial stop_level for the trailing stop is now the calculated SL price.
+        """
         self.open_positions[symbol] = {
             'entry_price': entry_price,
             'qty': qty,
-            'type': position_type
+            'type': position_type,
+            'stop_loss_price': stop_loss_price
         }
-        logger.info(f"Registered position: {symbol} {position_type} {qty} units/shares @ ${entry_price:.4f}")
+        
+        # Determine initial stop level for trailing stop
+        initial_stop = stop_loss_price
+        if initial_stop is None: # Fallback for non-forex trades (should be rare now)
+            initial_stop = entry_price * (1 - self.params.stop_loss_pct) if position_type == 'long' \
+                           else entry_price * (1 + self.params.stop_loss_pct)
+
+        self.trailing_stops[symbol] = {
+            'best_price': entry_price,
+            'trailing_active': False,
+            'stop_level': initial_stop
+        }
+        logger.info(f"Registered position: {symbol} {position_type} {qty} units @ ${entry_price:.4f} with initial SL @ ${initial_stop:.4f}")
+        
+    def update_trailing_stop(self, symbol: str, current_price: float) -> dict:
+        """
+        Update trailing stop based on current price movement.
+        Returns dict with 'triggered': bool and 'stop_level': float
+        """
+        if symbol not in self.open_positions or symbol not in self.trailing_stops:
+            return {'triggered': False, 'stop_level': 0}
+            
+        pos = self.open_positions[symbol]
+        ts = self.trailing_stops[symbol]
+        entry = pos['entry_price']
+        
+        if pos['type'] == 'long':
+            # For longs: track highest price, stop trails below
+            profit_pct = (current_price - entry) / entry
+            
+            # Check if trailing should activate
+            if profit_pct >= self.params.trailing_activation_pct:
+                ts['trailing_active'] = True
+                
+            # Update best price if we have a new high
+            if current_price > ts['best_price']:
+                ts['best_price'] = current_price
+                if ts['trailing_active']:
+                    # Move stop up (but never down)
+                    new_stop = current_price * (1 - self.params.trailing_stop_pct)
+                    ts['stop_level'] = max(ts['stop_level'], new_stop)
+                    logger.info(f"[{symbol}] Trailing Stop Updated: ${ts['stop_level']:.4f} (locked {((ts['stop_level']/entry)-1)*100:.2f}% profit)")
+            
+            # Check if stop is hit
+            if current_price <= ts['stop_level']:
+                logger.warning(f"[{symbol}] TRAILING STOP HIT @ ${current_price:.4f} (Stop: ${ts['stop_level']:.4f})")
+                return {'triggered': True, 'stop_level': ts['stop_level']}
+                
+        else:  # short
+            # For shorts: track lowest price, stop trails above
+            profit_pct = (entry - current_price) / entry
+            
+            if profit_pct >= self.params.trailing_activation_pct:
+                ts['trailing_active'] = True
+                
+            if current_price < ts['best_price']:
+                ts['best_price'] = current_price
+                if ts['trailing_active']:
+                    new_stop = current_price * (1 + self.params.trailing_stop_pct)
+                    ts['stop_level'] = min(ts['stop_level'], new_stop)
+                    logger.info(f"[{symbol}] Trailing Stop Updated: ${ts['stop_level']:.4f}")
+            
+            if current_price >= ts['stop_level']:
+                logger.warning(f"[{symbol}] TRAILING STOP HIT @ ${current_price:.4f}")
+                return {'triggered': True, 'stop_level': ts['stop_level']}
+        
+        return {'triggered': False, 'stop_level': ts['stop_level']}
+    
+    def check_trailing_stop(self, symbol: str, current_price: float) -> bool:
+        """Convenience method: returns True if trailing stop is triggered."""
+        result = self.update_trailing_stop(symbol, current_price)
+        return result['triggered']
         
     def close_position(self, symbol: str, exit_price: float) -> float:
         """Close a position and return the P&L."""
@@ -185,21 +254,17 @@ class RiskManager:
         self.daily_pnl += pnl
         del self.open_positions[symbol]
         
+        # Clean up trailing stop tracking
+        if symbol in self.trailing_stops:
+            del self.trailing_stops[symbol]
+        
         logger.info(f"Closed position: {symbol} @ ${exit_price:.4f}, P&L: ${pnl:.2f}")
         return pnl
     
     def check_daily_loss(self, current_daily_pnl, initial_capital=None):
         """
         Check if trading should continue based on daily loss limit.
-        
-        Args:
-            current_daily_pnl (float): Current day's PnL (negative = loss)
-            initial_capital (float): Optional initial capital override
-            
-        Returns:
-            bool: True if safe to trade, False if daily limit hit
         """
-        # Use initial_portfolio_value if available, otherwise fall back to parameter
         reference_capital = self.initial_portfolio_value if self.initial_portfolio_value > 0 else (initial_capital or 1000)
         max_loss_amount = reference_capital * self.params.max_daily_loss_pct
         
@@ -214,24 +279,36 @@ if __name__ == "__main__":
     # Test the risk manager
     print("Testing Risk Manager...")
     
-    # Stock risk
-    rm_stock = RiskManager(RiskParameters())
-    shares = rm_stock.calculate_position_size(10000, 150.0)
-    print(f"Stock Position Size: {shares} shares")
+    # Stock risk (new method)
+    stock_params = RiskParameters(risk_per_trade_pct=0.01, stop_loss_pct=0.05) # Risk 1%, 5% SL
+    rm_stock = RiskManager(stock_params)
+    portfolio_val = 50000
+    entry_price = 150.0
     
-    # Forex risk
-    forex_params = ForexRiskParameters(risk_per_trade_pct=0.01, stop_loss_pips=50)
+    stock_exits = rm_stock.get_stock_exit_prices(entry_price, 'long')
+    sl_price = stock_exits['stop_loss']
+    
+    shares = rm_stock.calculate_position_size(portfolio_val, entry_price, sl_price, 'long')
+    print(f"Stock Position Size: {shares:.2f} shares for a ${portfolio_val} portfolio")
+    print(f"Risking ${portfolio_val * 0.01:.2f} with SL at ${sl_price:.2f}")
+
+    # Forex risk with ATR
+    forex_params = ForexRiskParameters(risk_per_trade_pct=0.01, stop_loss_atr_multiplier=2.0)
     rm_forex = RiskManager(RiskParameters(forex_risk=forex_params))
     
-    units = rm_forex.calculate_forex_position_size(10000, "EUR/USD")
-    print(f"Forex Position Size: {units} units for a $10k portfolio with 50 pip SL")
+    # Example values
+    atr_val = 0.0050 
+    forex_entry = 1.1000
+    symbol = "EUR/USD"
+
+    units = rm_forex.calculate_forex_position_size(portfolio_val, symbol, atr=atr_val)
+    print(f"\nForex Position Size (ATR based): {units} units for a ${portfolio_val} portfolio")
     
-    # Test stop-loss
-    sl_triggered = rm_forex.check_forex_stop_loss(1.1000, 1.0950, "EUR/USD", 'long')
-    print(f"Forex SL at 50 pips: {sl_triggered}")
+    # Test exit price calculation
+    exit_prices = rm_forex.get_forex_exit_prices(forex_entry, symbol, 'long', atr=atr_val)
+    print(f"Forex Exit prices for LONG: SL={exit_prices['stop_loss']:.4f}, TP={exit_prices['take_profit']:.4f}")
     
-    # Test take-profit
-    tp_triggered = rm_forex.check_forex_take_profit(1.1000, 1.1100, "EUR/USD", 'long')
-    print(f"Forex TP at 100 pips (50 * 2.0 R:R): {tp_triggered}")
+    exit_prices_short = rm_forex.get_forex_exit_prices(forex_entry, symbol, 'short', atr=atr_val)
+    print(f"Forex Exit prices for SHORT: SL={exit_prices_short['stop_loss']:.4f}, TP={exit_prices_short['take_profit']:.4f}")
     
-    print("Risk Manager test complete!")
+    print("\nRisk Manager test complete!")

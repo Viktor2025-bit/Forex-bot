@@ -4,9 +4,10 @@ Data Loader for Deriv API
 This script fetches historical candle data for synthetic indices from Deriv's platform.
 """
 import asyncio
-import json
-import pandas as pd
 from deriv_api import DerivAPI
+import pandas as pd
+
+from utils.config_loader import load_config
 
 async def fetch_historical_data(symbol="R_75", time_interval="1h", max_candles=5000):
     """
@@ -24,15 +25,10 @@ async def fetch_historical_data(symbol="R_75", time_interval="1h", max_candles=5
     print(f"Fetching historical data for {symbol} ({time_interval})...")
 
     # Load API token from config
-    try:
-        with open('config.json', 'r') as f:
-            config = json.load(f)
-        api_token = config.get('brokers', {}).get('deriv', {}).get('api_token')
-        if not api_token:
-            print("Error: Deriv API token not found in config.json")
-            return None
-    except FileNotFoundError:
-        print("Error: config.json not found.")
+    config = load_config()
+    api_token = config.get('brokers', {}).get('deriv', {}).get('api_token')
+    if not api_token or api_token == 'YOUR_DERIV_API_TOKEN':
+        print("Error: Deriv API token not found or not set in environment variables.")
         return None
 
     # Map our interval to Deriv's granularity in seconds
@@ -109,10 +105,12 @@ async def fetch_historical_data(symbol="R_75", time_interval="1h", max_candles=5
             'close': 'Close'
         }, inplace=True)
         
-        # Synthetics don't have real volume, so we create a placeholder
-        # You can use tick_count or a constant value
-        if 'Volume' not in df.columns:
-            df['Volume'] = 1000  # Placeholder volume for synthetics
+        # Synthetics don't have real "exchange volume", but Deriv provides 'tick_count'
+        # unmapped in the initial dataframe. We should check for it.
+        if 'tick_count' in df.columns:
+             df.rename(columns={'tick_count': 'Volume'}, inplace=True)
+        elif 'Volume' not in df.columns:
+             df['Volume'] = 1  # Default to 1 to avoid division by zero errors, not 1000 which distorts scales
 
         # Ensure correct column order and drop 'epoch'
         df = df[['Open', 'High', 'Low', 'Close', 'Volume']]
@@ -129,29 +127,28 @@ async def fetch_historical_data(symbol="R_75", time_interval="1h", max_candles=5
         print("Disconnected from Deriv API.")
 
 
-async def main():
-    """Main function to test the data loader."""
-    # Example: Fetch data based on config
-    try:
-        with open('config.json', 'r') as f:
-            config = json.load(f)
-        
-        market_type = config.get('bot', {}).get('market_type')
-        if market_type == 'synthetics':
-            symbols = config.get('markets', {}).get('synthetics', {}).get('symbols', [])
-            if symbols:
-                await fetch_historical_data(symbol=symbols[0])
-            else:
-                print("No synthetic symbols found in config.")
+async def async_main():
+    """Asynchronous main function to test the data loader."""
+    config = load_config()
+    
+    market_type = config.get('bot', {}).get('market_type')
+    if market_type == 'synthetics':
+        symbols = config.get('markets', {}).get('synthetics', {}).get('symbols', [])
+        if symbols:
+            await fetch_historical_data(symbol=symbols[0])
         else:
-            print(f"Market type is set to '{market_type}', not 'synthetics'.")
+            print("No synthetic symbols found in config.")
+    else:
+        print(f"Market type is set to '{market_type}', not 'synthetics'.")
 
-    except FileNotFoundError:
-        print("Error: config.json not found.")
+
+def main():
+    """Main function to test the data loader."""
+    try:
+        asyncio.run(async_main())
     except Exception as e:
         print(f"An error occurred in main: {e}")
 
 
 if __name__ == "__main__":
-    # To run this script directly, we use asyncio.run()
-    asyncio.run(main())
+    main()

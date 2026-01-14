@@ -10,6 +10,7 @@ class RetrainingManager:
     """
     Manages the lifecycle of AI model retraining.
     Monitors performance and triggers retraining scripts when necessary.
+    Also tracks per-model accuracy for weighted ensemble voting.
     """
     
     def __init__(self, accuracy_threshold=0.55, min_trades=20):
@@ -20,7 +21,55 @@ class RetrainingManager:
         # Store rolling history of wins (1) and losses (0)
         self.trade_history = {} 
         self.is_training = {} # Lock to prevent multiple trainings for same symbol
+        self.reload_needed = set() # Flags for the bot to reload models
         
+        # Per-model prediction tracking for weighted ensemble
+        # Structure: {symbol: {model_name: deque of (prediction, was_correct)}}
+        self.model_predictions = {}
+
+    def record_prediction(self, symbol: str, model_name: str, prediction: float, actual_direction: int):
+        """
+        Record a model's prediction and whether it was correct.
+        actual_direction: 1 for UP, -1 for DOWN
+        """
+        if symbol not in self.model_predictions:
+            self.model_predictions[symbol] = {}
+        if model_name not in self.model_predictions[symbol]:
+            self.model_predictions[symbol][model_name] = deque(maxlen=30)  # Last 30 predictions
+            
+        # Was the prediction correct?
+        predicted_up = prediction > 0.5
+        actual_up = actual_direction > 0
+        was_correct = (predicted_up == actual_up)
+        
+        self.model_predictions[symbol][model_name].append(was_correct)
+        
+    def get_model_weights(self, symbol: str) -> dict:
+        """
+        Calculate accuracy-based weights for each model.
+        Returns normalized weights summing to 1.
+        """
+        if symbol not in self.model_predictions:
+            return {'xgboost': 0.5, 'lstm': 0.5}  # Default equal weights
+            
+        weights = {}
+        for model_name, history in self.model_predictions[symbol].items():
+            if len(history) >= 5:  # Need at least 5 predictions
+                accuracy = sum(history) / len(history)
+                # Weight is accuracy squared (rewards high accuracy more)
+                weights[model_name] = accuracy ** 2
+            else:
+                weights[model_name] = 0.5  # Default until enough data
+                
+        # Normalize
+        total = sum(weights.values())
+        if total > 0:
+            weights = {k: v/total for k, v in weights.items()}
+        else:
+            weights = {'xgboost': 0.5, 'lstm': 0.5}
+            
+        return weights
+
     def record_result(self, symbol: str, pnl: float):
         """Record the outcome of a trade (Win/Loss)."""
         if symbol not in self.trade_history:
@@ -84,6 +133,7 @@ class RetrainingManager:
 
             if xgb_success or lstm_success:
                 self.logger.info(f"[{symbol}] ✅ Retraining Cycle Complete.")
+                self.reload_needed.add(symbol) # Signal bot to reload
                 self.trade_history[symbol].clear()
                 self.logger.info(f"[{symbol}] Trade history reset. Monitoring new model performance.")
             else:

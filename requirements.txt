@@ -2,11 +2,13 @@ yfinance
 pandas
 numpy
 scikit-learn
-matplotlib
-streamlit
+joblib
+deriv-api
+websockets>=12.0
 plotly
 torch
 xgboost
 ta
 deriv_api
-websockets
+python-dotenv
+MetaTrader5

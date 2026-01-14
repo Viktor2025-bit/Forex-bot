@@ -1,142 +1,43 @@
 {
-  "timestamp": "2026-01-03T12:28:13.710408",
+  "timestamp": "2026-01-13T12:10:42.382499",
   "market_type": "synthetics",
   "symbols": [
-    "R_75",
-    "CRASH500",
-    "BOOM1000"
+    "Volatility 75 Index",
+    "Crash 500 Index",
+    "Boom 1000 Index"
   ],
   "account": {
-    "cash": 500.0,
-    "equity": 500.0097631925645,
-    "return_pct": 0,
-    "buying_power": 0,
+    "cash": 0.0,
+    "equity": 0.0,
+    "return_pct": 0.0,
+    "buying_power": 0.0,
     "daily_pnl": 0.0
   },
-  "positions": [
-    {
-      "symbol": "CRASH500",
-      "qty": 0.013425857180564622,
-      "side": "long",
-      "entry_price": 3724.157,
-      "unrealized_pl": -50.0
-    },
-    {
-      "symbol": "BOOM1000",
-      "qty": 0.00292107227655871,
-      "side": "short",
-      "entry_price": 17117.002,
-      "unrealized_pl": -50.0
-    }
-  ],
-  "trade_history": [
-    {
-      "timestamp": "2026-01-03T12:12:28.223852",
-      "symbol": "CRASH500",
-      "side": "SELL",
-      "quantity": 0.013403783620040265,
-      "price": 3730.29,
-      "order_id": "PAPER-1",
-      "pnl": null,
-      "notes": "AI_ENTRY"
-    },
-    {
-      "timestamp": "2026-01-03T12:15:27.557017",
-      "symbol": "BOOM1000",
-      "side": "SELL",
-      "quantity": 0.002919459660319441,
-      "price": 17128.887,
-      "order_id": "PAPER-2",
-      "pnl": null,
-      "notes": "AI_ENTRY"
-    },
-    {
-      "timestamp": "2026-01-03T12:20:47.610850",
-      "symbol": "CRASH500",
-      "side": "CLOSE",
-      "quantity": 0.013403783620040265,
-      "price": 3727.463,
-      "order_id": "PAPER-3",
-      "pnl": 0.037892496293850754,
-      "notes": "PnL: 0.04"
-    },
-    {
-      "timestamp": "2026-01-03T12:21:59.909605",
-      "symbol": "R_75",
-      "side": "BUY",
-      "quantity": 0.0011232705443011133,
-      "price": 44517.7131,
-      "order_id": "PAPER-4",
-      "pnl": null,
-      "notes": "AI_ENTRY"
-    },
-    {
-      "timestamp": "2026-01-03T12:24:00.597052",
-      "symbol": "R_75",
-      "side": "BUY",
-      "quantity": 0.0011244651037570265,
-      "price": 44465.5862,
-      "order_id": "PAPER-1",
-      "pnl": null,
-      "notes": "AI_ENTRY"
-    },
-    {
-      "timestamp": "2026-01-03T12:24:05.813872",
-      "symbol": "BOOM1000",
-      "side": "SELL",
-      "quantity": 0.002920560406476588,
-      "price": 17120.002,
-      "order_id": "PAPER-2",
-      "pnl": null,
-      "notes": "AI_ENTRY"
-    },
-    {
-      "timestamp": "2026-01-03T12:26:55.703173",
-      "symbol": "CRASH500",
-      "side": "BUY",
-      "quantity": 0.013425857180564622,
-      "price": 3724.157,
-      "order_id": "PAPER-1",
-      "pnl": null,
-      "notes": "AI_ENTRY"
-    },
-    {
-      "timestamp": "2026-01-03T12:26:59.532591",
-      "symbol": "BOOM1000",
-      "side": "SELL",
-      "quantity": 0.00292107227655871,
-      "price": 17117.002,
-      "order_id": "PAPER-2",
-      "pnl": null,
-      "notes": "AI_ENTRY"
-    }
-  ],
+  "positions": [],
+  "trade_history": [],
   "predictions": {
-    "R_75": {
-      "prob": 0.3336781933903694,
-      "signal": "DOWN",
-      "timestamp": "2026-01-03T12:28:12.399993",
-      "ensemble": {
-        "lstm": 0.08001215755939484,
-        "xgboost": 0.587344229221344
-      }
-    },
-    "CRASH500": {
-      "prob": 0.700257271528244,
+    "Volatility 75 Index": {
+      "prob": 0.9103438258171082,
       "signal": "UP",
-      "timestamp": "2026-01-03T12:28:12.866736",
+      "timestamp": "2026-01-13T12:10:41.634621",
       "ensemble": {
-        "lstm": 0.7971886396408081,
-        "xgboost": 0.6033259034156799
+        "xgboost": 0.9103438258171082
       }
     },
-    "BOOM1000": {
-      "prob": 0.07431340590119362,
-      "signal": "DOWN",
-      "timestamp": "2026-01-03T12:28:13.710408",
+    "Crash 500 Index": {
+      "prob": 0.7777764201164246,
+      "signal": "UP",
+      "timestamp": "2026-01-13T12:10:41.826306",
       "ensemble": {
-        "lstm": 0.03309280425310135,
-        "xgboost": 0.11553400754928589
+        "xgboost": 0.7777764201164246
+      }
+    },
+    "Boom 1000 Index": {
+      "prob": 0.1658981889486313,
+      "signal": "DOWN",
+      "timestamp": "2026-01-13T12:10:41.994868",
+      "ensemble": {
+        "xgboost": 0.1658981889486313
       }
     }
   },

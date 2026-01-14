@@ -1,8 +1,8 @@
 {
   "start_time": "2025-12-26T10:12:59.061243",
-  "total_cycles": 137,
+  "total_cycles": 138,
   "errors": 0,
-  "trades_executed": 8,
+  "trades_executed": 85,
   "daily_pnl": {},
   "equity_history": [
     {
@@ -552,6 +552,10 @@
     {
       "timestamp": "2025-12-29T02:01:36.215258",
       "equity": 500
+    },
+    {
+      "timestamp": "2026-01-08T09:57:38.382212",
+      "equity": 10000
     }
   ]
 }

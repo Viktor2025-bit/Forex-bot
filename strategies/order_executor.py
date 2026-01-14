@@ -71,6 +71,10 @@ class OrderExecutor(ABC):
     def get_account(self) -> dict:
         pass
 
+    @abstractmethod
+    def get_open_positions(self) -> list:
+        pass
+
 
 class PaperTradingExecutor(OrderExecutor):
     """
@@ -242,6 +246,19 @@ class PaperTradingExecutor(OrderExecutor):
             'total_return_pct': ((total_equity - self.initial_capital) / self.initial_capital) * 100
         }
 
+    def get_open_positions(self) -> list:
+        """Return a list of open positions."""
+        positions_list = []
+        for symbol, pos_data in self.positions.items():
+            if pos_data and pos_data.get('qty', 0) != 0:
+                positions_list.append({
+                    "symbol": symbol,
+                    "qty": abs(pos_data['qty']),
+                    "side": "long" if pos_data['qty'] > 0 else "short",
+                    "entry_price": pos_data.get('avg_price', 0)
+                })
+        return positions_list
+
 
 class AlpacaExecutor(OrderExecutor):
     """
@@ -364,6 +381,22 @@ class AlpacaExecutor(OrderExecutor):
         except Exception as e:
             logger.error(f"[ALPACA] Get account failed: {e}")
             return {}
+
+    def get_open_positions(self) -> list:
+        """Get all open positions from Alpaca."""
+        positions_list = []
+        try:
+            portfolio = self.api.list_positions()
+            for position in portfolio:
+                positions_list.append({
+                    "symbol": position.symbol,
+                    "qty": float(position.qty),
+                    "side": position.side,
+                    "entry_price": float(position.avg_entry_price)
+                })
+        except Exception as e:
+            logger.error(f"[ALPACA] Failed to get open positions: {e}")
+        return positions_list
 
 class OandaExecutor(OrderExecutor):
 
@@ -588,35 +621,187 @@ class OandaExecutor(OrderExecutor):
 
 
 
-    def get_account(self) -> dict:
+        def get_account(self) -> dict:
 
-        """Get account from OANDA."""
 
-        r = self.accounts_api.AccountSummary(self.account_id)
 
-        try:
+            """Get account from OANDA."""
 
-            self.api.request(r)
 
-            account = r.response.get('account', {})
 
-            return {
+            r = self.accounts_api.AccountSummary(self.account_id)
 
-                'cash': float(account.get('balance', 0)),
 
-                'position_value': float(account.get('positionValue', 0)),
 
-                'total_equity': float(account.get('NAV', 0)),
+            try:
 
-                'buying_power': float(account.get('marginAvailable', 0))
 
-            }
 
-        except Exception as e:
+                self.api.request(r)
 
-            logger.error(f"[OANDA] Get account failed: {e}")
 
-            return {}
+
+                account = r.response.get('account', {})
+
+
+
+                return {
+
+
+
+                    'cash': float(account.get('balance', 0)),
+
+
+
+                    'position_value': float(account.get('positionValue', 0)),
+
+
+
+                    'total_equity': float(account.get('NAV', 0)),
+
+
+
+                    'buying_power': float(account.get('marginAvailable', 0))
+
+
+
+                }
+
+
+
+            except Exception as e:
+
+
+
+                logger.error(f"[OANDA] Get account failed: {e}")
+
+
+
+                return {}
+
+
+
+    
+
+
+
+        def get_open_positions(self) -> list:
+
+
+
+            """Get all open positions from OANDA."""
+
+
+
+            positions_list = []
+
+
+
+            r = self.accounts_api.AccountDetails(self.account_id)
+
+
+
+            try:
+
+
+
+                self.api.request(r)
+
+
+
+                account_details = r.response
+
+
+
+                open_positions = account_details.get('account', {}).get('positions', [])
+
+
+
+                for position in open_positions:
+
+
+
+                    instrument = position['instrument']
+
+
+
+                    # OANDA provides separate 'long' and 'short' objects
+
+
+
+                    if 'long' in position and int(position['long']['units']) != 0:
+
+
+
+                        pos_data = position['long']
+
+
+
+                        positions_list.append({
+
+
+
+                            "symbol": instrument.replace("_", "/"),
+
+
+
+                            "qty": float(pos_data['units']),
+
+
+
+                            "side": "long",
+
+
+
+                            "entry_price": float(pos_data.get('averagePrice', 0))
+
+
+
+                        })
+
+
+
+                    if 'short' in position and int(position['short']['units']) != 0:
+
+
+
+                        pos_data = position['short']
+
+
+
+                        positions_list.append({
+
+
+
+                            "symbol": instrument.replace("_", "/"),
+
+
+
+                            "qty": abs(float(pos_data['units'])),
+
+
+
+                            "side": "short",
+
+
+
+                            "entry_price": float(pos_data.get('averagePrice', 0))
+
+
+
+                        })
+
+
+
+            except Exception as e:
+
+
+
+                logger.error(f"[OANDA] Failed to get open positions: {e}")
+
+
+
+            return positions_list
 
 
 
@@ -647,6 +832,7 @@ class MT5Executor(OrderExecutor):
         self.password = password
 
         self.server = server
+        self.paper_trading = "Demo" in server or "demo" in server
 
 
 
@@ -658,21 +844,61 @@ class MT5Executor(OrderExecutor):
 
         logger.info(f"Connected to MetaTrader 5 account {self.login} on server {self.server}")
 
+    def _map_symbol(self, symbol: str) -> str:
+        """Map common short codes to MT5 full names."""
+        mapping = {
+            "R_75": "Volatility 75 Index",
+            "R_100": "Volatility 100 Index",
+            "R_50": "Volatility 50 Index",
+            "R_25": "Volatility 25 Index",
+            "R_10": "Volatility 10 Index",
+            "CRASH500": "Crash 500 Index",
+            "CRASH1000": "Crash 1000 Index",
+            "BOOM500": "Boom 500 Index",
+            "BOOM1000": "Boom 1000 Index",
+            "BOOM300": "Boom 300 Index",
+            "CRASH300": "Crash 300 Index"
+        }
+        return mapping.get(symbol, symbol)
 
+
+
+    def _create_rejected_order(self, symbol, side, quantity, order_type):
+        return Order(
+            id="ERROR",
+            symbol=symbol,
+            side=side,
+            quantity=quantity,
+            order_type=order_type,
+            status=OrderStatus.REJECTED
+        )
 
     def submit_order(self, symbol: str, side: OrderSide, quantity: int,
                      order_type: str = "market", limit_price: Optional[float] = None,
                      stop_loss: Optional[float] = None, take_profit: Optional[float] = None) -> Order:
         import MetaTrader5 as mt5
         
+        # Map symbol name
+        symbol = self._map_symbol(symbol)
+        
+        # Prepare the request
+        if not mt5.symbol_select(symbol, True):
+            logger.error(f"[MT5] Failed to select symbol {symbol}")
+            return self._create_rejected_order(symbol, side, quantity, order_type)
+
+        tick = mt5.symbol_info_tick(symbol)
+        if tick is None:
+            logger.error(f"[MT5] Failed to get tick info for {symbol}")
+            return self._create_rejected_order(symbol, side, quantity, order_type)
+
         # Prepare the request
         request = {
             "action": mt5.TRADE_ACTION_DEAL,
             "symbol": symbol,
             "volume": float(quantity),
             "type": mt5.ORDER_TYPE_BUY if side == OrderSide.BUY else mt5.ORDER_TYPE_SELL,
-            "price": mt5.symbol_info_tick(symbol).ask if side == OrderSide.BUY else mt5.symbol_info_tick(symbol).bid,
-            "type_filling": mt5.ORDER_FILLING_FOC,
+            "price": tick.ask if side == OrderSide.BUY else tick.bid,
+            "type_filling": mt5.ORDER_FILLING_FOK,
             "deviation": 20,
             "comment": "python script order",
             "type_time": mt5.ORDER_TIME_GTC,
@@ -798,6 +1024,26 @@ class MT5Executor(OrderExecutor):
 
 
 
+    def get_position(self, symbol: str) -> dict:
+
+        import MetaTrader5 as mt5
+
+        positions = mt5.positions_get(symbol=symbol)
+
+        if positions is None or len(positions) == 0:
+
+            return {'qty': 0, 'avg_price': 0}
+
+        
+
+        # Assuming only one position per symbol for simplicity
+
+        pos = positions[0]
+
+        return {'qty': pos.volume_current if pos.type == mt5.POSITION_TYPE_BUY else -pos.volume_current, 'avg_price': pos.price_open}
+
+
+
     def get_account(self) -> dict:
 
         import MetaTrader5 as mt5
@@ -821,5 +1067,91 @@ class MT5Executor(OrderExecutor):
             'total_equity': account_info.equity,
 
             'buying_power': account_info.margin_free
+
+        }
+
+
+
+    def get_open_positions(self) -> list:
+
+        """Get all open positions from MetaTrader 5."""
+
+        import MetaTrader5 as mt5
+
+        positions_list = []
+
+        
+
+        # Invert the mapping from _map_symbol to find the short name if possible
+
+        reverse_mapping = {v: k for k, v in self._get_symbol_mapping().items()}
+
+
+
+        try:
+
+            positions = mt5.positions_get()
+
+            if positions is None:
+
+                return []
+
+
+
+            for pos in positions:
+
+                # Use the shorter, internal symbol name if available
+
+                symbol_name = reverse_mapping.get(pos.symbol, pos.symbol)
+
+                
+
+                positions_list.append({
+
+                    "symbol": symbol_name,
+
+                    "qty": float(pos.volume),
+
+                    "side": "long" if pos.type == mt5.POSITION_TYPE_BUY else "short",
+
+                    "entry_price": float(pos.price_open)
+
+                })
+
+        except Exception as e:
+
+            logger.error(f"[MT5] Failed to get open positions: {e}")
+
+        return positions_list
+
+
+
+    def _get_symbol_mapping(self) -> dict:
+
+        """Helper to centralize the symbol map."""
+
+        return {
+
+            "R_75": "Volatility 75 Index",
+
+            "R_100": "Volatility 100 Index",
+
+            "R_50": "Volatility 50 Index",
+
+            "R_25": "Volatility 25 Index",
+
+            "R_10": "Volatility 10 Index",
+
+            "CRASH500": "Crash 500 Index",
+
+            "CRASH1000": "Crash 1000 Index",
+
+            "BOOM500": "Boom 500 Index",
+
+            "BOOM1000": "Boom 1000 Index",
+
+            "BOOM300": "Boom 300 Index",
+
+            "CRASH300": "Crash 300 Index"
 
         }

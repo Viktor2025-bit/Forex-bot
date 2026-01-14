@@ -1,9 +1,8 @@
 """
-LSTM-based Trading Model for Price Direction Prediction.
+LSTM-based Trading Model for Price Prediction (Regression).
 
 This model takes a sequence of historical price data (with indicators) and
-predicts whether the next period's close price will be HIGHER (1) or LOWER (0)
-than the current close.
+predicts the value of a target feature for the next time step.
 """
 
 import torch
@@ -12,15 +11,16 @@ import numpy as np
 
 class TradingLSTM(nn.Module):
     """
-    An LSTM model for binary classification (price UP or DOWN).
+    An LSTM model for time-series regression.
     """
-    def __init__(self, input_size, hidden_size=64, num_layers=2, dropout=0.2):
+    def __init__(self, input_size, hidden_size=64, num_layers=2, dropout=0.2, output_size=1):
         """
         Args:
             input_size (int): Number of input features (e.g., OHLCV + indicators).
             hidden_size (int): Number of LSTM hidden units.
             num_layers (int): Number of stacked LSTM layers.
             dropout (float): Dropout rate for regularization.
+            output_size (int): The number of output values (usually 1 for regression).
         """
         super(TradingLSTM, self).__init__()
         self.hidden_size = hidden_size
@@ -36,9 +36,9 @@ class TradingLSTM(nn.Module):
         
         self.fc = nn.Sequential(
             nn.Linear(hidden_size, 32),
-            nn.LeakyReLU(0.01),          # LeakyReLU prevents dead neurons
+            nn.LeakyReLU(0.01),
             nn.Dropout(dropout),
-            nn.Linear(32, 1)             # No Sigmoid here; we'll use BCEWithLogitsLoss
+            nn.Linear(32, output_size)
         )
         
     def forward(self, x):
@@ -49,7 +49,7 @@ class TradingLSTM(nn.Module):
             x (torch.Tensor): Input tensor of shape (batch, seq_len, input_size).
             
         Returns:
-            torch.Tensor: Prediction probability of shape (batch, 1).
+            torch.Tensor: Prediction of shape (batch, output_size).
         """
         # LSTM output
         lstm_out, _ = self.lstm(x)
@@ -63,41 +63,37 @@ class TradingLSTM(nn.Module):
         return prediction
 
 
-def create_sequences(data, seq_length=30):
+def create_sequences(data, seq_length=30, target_col_index=3):
     """
-    Creates sequences for LSTM training.
+    Creates sequences for LSTM training (regression).
     
     Args:
         data (np.ndarray): Normalized feature array of shape (num_samples, num_features).
         seq_length (int): Number of past time steps to use for each prediction.
+        target_col_index (int): The index of the column we want to predict.
         
     Returns:
         X (np.ndarray): Input sequences of shape (num_sequences, seq_length, num_features).
-        y (np.ndarray): Labels (1 if next close > current close, else 0).
+        y (np.ndarray): Labels (the value of the target column at the next time step).
     """
     X, y = [], []
     
-    # Assuming 'Close' is at index 3 (after Open, High, Low)
-    close_idx = 3
-    
-    for i in range(len(data) - seq_length - 1):
+    for i in range(len(data) - seq_length):
         # Input sequence
         X.append(data[i:i + seq_length])
         
-        # Label: 1 if price goes up, 0 if down
-        current_close = data[i + seq_length - 1, close_idx]
-        next_close = data[i + seq_length, close_idx]
-        y.append(1 if next_close > current_close else 0)
+        # Label: The value of the target column at the next time step
+        y.append(data[i + seq_length, target_col_index])
         
     return np.array(X), np.array(y)
 
 
 if __name__ == "__main__":
     # Quick test of the model architecture
-    print("Testing TradingLSTM model...")
+    print("Testing TradingLSTM model for regression...")
     
     # Example: 7 features (OHLCV + SMA + RSI)
-    model = TradingLSTM(input_size=7, hidden_size=64, num_layers=2)
+    model = TradingLSTM(input_size=7, hidden_size=64, num_layers=2, output_size=1)
     
     # Dummy input: batch of 16, sequence of 30 days, 7 features
     dummy_input = torch.randn(16, 30, 7)

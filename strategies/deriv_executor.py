@@ -199,6 +199,8 @@ class DerivExecutorSync:
         self.loop.run_until_complete(self.executor.connect())
     
     def get_account(self):
+        # Refresh account info from Deriv before returning
+        self.loop.run_until_complete(self.executor.update_account_info())
         return self.executor.get_account()
     
     def execute_buy(self, symbol: str, qty: float, stop_loss: float = None, take_profit: float = None):
@@ -227,10 +229,9 @@ class DerivExecutorSync:
 
 if __name__ == "__main__":
     # Test the executor
-    import json
+    from utils.config_loader import load_config
     
-    with open('config.json', 'r') as f:
-        config = json.load(f)
+    config = load_config()
     
     api_token = config['brokers']['deriv']['api_token']
     server = config['brokers']['deriv']['server']

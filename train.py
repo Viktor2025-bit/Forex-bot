@@ -15,7 +15,7 @@ from sklearn.model_selection import train_test_split
 import argparse
 
 from models.lstm_model import TradingLSTM, create_sequences
-from utils.preprocessing import DataPreprocessor
+from feature_engine import FeatureEngine
 
 
 def train_model(ticker="R_75", seq_length=30, epochs=20, batch_size=32, learning_rate=0.001):
@@ -34,36 +34,47 @@ def train_model(ticker="R_75", seq_length=30, epochs=20, batch_size=32, learning
         return None
         
     df = pd.read_csv(file_path, index_col=0, parse_dates=True)
-    if len(df) < 100:
-        print("Not enough data to train.")
+    if len(df) < 250: # Increased requirement for feature generation
+        print("Not enough data to train (min 250 rows required).")
         return None
         
     print(f"Loaded {len(df)} rows.")
 
-    # Step 2: Preprocess
-    print("\n[2/5] Preprocessing data...")
+    # Step 2: Preprocess using FeatureEngine
+    print("\n[2/5] Preprocessing data with FeatureEngine...")
     try:
-        preprocessor = DataPreprocessor()
-        # For synthetics/stored CSVs, we might not need extensive cleaning depending on source
-        # But let's run standard pipeline
-        df_indicators = preprocessor.add_technical_indicators(df)
-        df_normalized = preprocessor.normalize_data(df_indicators)
+        feature_engine = FeatureEngine(ticker=ticker)
         
-        # Features match those in trading_bot.py prepare_features
-        # Ensure we use numeric columns
-        feature_columns = [col for col in df_normalized.columns if col not in ['Date', 'Datetime', 'Target', 'Future_Return', 'index']]
+        # Generate features
+        df_features = feature_engine.generate_features(df)
+        
+        # Check if we have enough data after feature generation (SMA(200) etc.)
+        if len(df_features) < seq_length * 2:
+            print(f"Not enough data remaining after feature generation ({len(df_features)} rows) to create sequences.")
+            return None
+
+        # Normalize the data and fit the scaler
+        df_normalized = feature_engine.normalize_data(df_features, fit_scaler=True)
+        
+        # Define feature columns - all numeric columns from the normalized df
+        feature_columns = [col for col in df_normalized.columns if df_normalized[col].dtype in [np.int64, np.float64]]
         data = df_normalized[feature_columns].values
         print(f"Processed data shape: {data.shape}")
         
     except Exception as e:
         print(f"Preprocessing error: {e}")
+        import traceback
+        traceback.print_exc()
         return None
 
     # Step 3: Create Sequences
     print("\n[3/5] Creating sequences...")
-    X, y = create_sequences(data, seq_length=seq_length)
+    # Target is the 'Close' price, which we want to predict
+    target_col_index = feature_columns.index('Close')
+    X, y = create_sequences(data, seq_length=seq_length, target_col_index=target_col_index)
+    
     if len(X) == 0:
-        print("No sequences created.")
+        print("No sequences created. Check data length and sequence length.")
         return None
         
     # Split
@@ -81,7 +92,7 @@ def train_model(ticker="R_75", seq_length=30, epochs=20, batch_size=32, learning
     # Step 4: Initialize or Load Model
     print("\n[4/5] Initializing model...")
     input_size = X_train.shape[2]
-    model = TradingLSTM(input_size=input_size, hidden_size=64, num_layers=2)
+    model = TradingLSTM(input_size=input_size, hidden_size=64, num_layers=2, output_size=1) # Output size is 1 (predicting 'Close')
     
     model_path = f"models/{ticker}_lstm.pth"
     if os.path.exists(model_path):
@@ -96,7 +107,7 @@ def train_model(ticker="R_75", seq_length=30, epochs=20, batch_size=32, learning
         except Exception as e:
             print(f"Error loading checkpoint: {e}. Starting fresh.")
     
-    criterion = nn.BCELoss()
+    criterion = nn.MSELoss() # Changed to MSELoss for regression
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
     # Training Loop
@@ -114,17 +125,18 @@ def train_model(ticker="R_75", seq_length=30, epochs=20, batch_size=32, learning
         
         if (epoch + 1) % 5 == 0:
             avg_loss = total_loss / len(train_loader)
-            print(f"Epoch {epoch+1}: Loss {avg_loss:.4f}")
+            print(f"Epoch {epoch+1}: Loss {avg_loss:.6f}") # Increased precision for MSE
 
     # Step 5: Evaluate
     print("\n[5/5] Evaluating...")
     model.eval()
     with torch.no_grad():
         test_predictions = model(X_test_t)
-        predicted_labels = (test_predictions > 0.5).float()
-        accuracy = (predicted_labels == y_test_t).float().mean()
+        # For regression, evaluation metric could be something like RMSE
+        mse = criterion(test_predictions, y_test_t)
+        rmse = torch.sqrt(mse)
         
-    print(f"Test Accuracy: {accuracy:.2%}")
+    print(f"Test RMSE: {rmse.item():.6f}")
 
     # Save
     torch.save({
@@ -132,11 +144,12 @@ def train_model(ticker="R_75", seq_length=30, epochs=20, batch_size=32, learning
         'input_size': input_size,
         'seq_length': seq_length,
         'ticker': ticker,
-        'accuracy': accuracy.item()
+        'rmse': rmse.item(),
+        'feature_columns': feature_columns # Save feature columns
     }, model_path)
     print(f"Model saved to {model_path}")
     
-    return accuracy.item()
+    return rmse.item()
 
 
 if __name__ == "__main__":

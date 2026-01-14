@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+import joblib
 from ta.trend import SMAIndicator, EMAIndicator, MACD, ADXIndicator, AroonIndicator
 from ta.momentum import RSIIndicator, StochasticOscillator, ROCIndicator, AwesomeOscillatorIndicator
 from ta.volatility import BollingerBands, AverageTrueRange
@@ -10,9 +12,37 @@ class FeatureEngine:
     Focuses on Forex-specific patterns: Sessions, Trend Efficiency, and Volatility.
     """
     
-    def __init__(self):
-        pass
+    def __init__(self, ticker=""):
+        self.scaler = MinMaxScaler(feature_range=(0, 1))
+        self.scaler_path = f"models/{ticker}_scaler.gz"
+        self.ticker = ticker
+
+    def normalize_data(self, df, fit_scaler=False):
+        """
+        Normalizes the feature columns using MinMaxScaler.
+        If fit_scaler is True, it fits the scaler to the data and saves it.
+        Otherwise, it loads and uses the existing scaler.
+        """
+        df_scaled = df.copy()
         
+        # Identify feature columns (all columns except non-numeric/identifiers)
+        feature_columns = [col for col in df.columns if df[col].dtype in [np.int64, np.float64]]
+
+        if fit_scaler:
+            print("Fitting scaler and transforming data...")
+            df_scaled[feature_columns] = self.scaler.fit_transform(df[feature_columns])
+            joblib.dump(self.scaler, self.scaler_path)
+            print(f"Scaler saved to {self.scaler_path}")
+        else:
+            print("Loading existing scaler and transforming data...")
+            try:
+                scaler = joblib.load(self.scaler_path)
+                df_scaled[feature_columns] = scaler.transform(df[feature_columns])
+            except FileNotFoundError:
+                raise FileNotFoundError(f"Scaler file not found at {self.scaler_path}. Please fit the scaler first.")
+
+        return df_scaled
+
     def generate_features(self, df):
         """
         Add technical indicators to the dataframe.
@@ -147,6 +177,13 @@ class FeatureEngine:
 
         # --- 6. Price Action ---
         data['Log_Return'] = np.log(data['Close'] / data['Close'].shift(1))
+        
+        
+        # --- 7. Time Features (NEW - Fix for Input Size 57) ---
+        # We need one more feature to reach 57 (currently 56)
+        # Adding normalized Day of Week (0-1)
+        # data['Day_of_Week'] = data.index.dayofweek / 6.0  # DISABLED - Not in training data
+
         
         # Lagged Returns
         for lag in [1, 2, 3, 5]:

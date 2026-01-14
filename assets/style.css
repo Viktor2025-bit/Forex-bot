@@ -1,0 +1,159 @@
+/* --- GOOGLE FONTS IMPORT --- */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+/* --- GLOBAL VARS --- */
+:root {
+    --primary-color: #7B61FF;
+    --primary-hover: #6248E5;
+    --secondary-color: #1A1A1A;
+    --accent-color: #FF9500;
+    --bg-dark: #0E1117;
+    --card-bg: rgba(26, 26, 26, 0.6);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --glass-blur: blur(12px);
+    --text-primary: #FFFFFF;
+    --text-secondary: #A1A1AA;
+}
+
+/* --- STREAMLIT OVERRIDES --- */
+.stApp {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+}
+
+section[data-testid="stSidebar"] {
+    background-color: #000000;
+    border-right: 1px solid var(--border-color);
+}
+
+/* --- GLASSMORPHISM CARD --- */
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.glass-card:hover {
+    border-color: rgba(123, 97, 255, 0.3);
+}
+
+/* --- TYPOGRAPHY --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 600;
+    color: white;
+}
+
+.metric-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+}
+
+.metric-delta {
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.delta-pos {
+    color: #10B981;
+}
+
+.delta-neg {
+    color: #EF4444;
+}
+
+/* --- BUTTONS --- */
+.stButton button {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #5E43F3 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.stButton button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -10px rgba(123, 97, 255, 0.5);
+}
+
+/* --- CUSTOM SCROLLBAR --- */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0E1117;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* --- DATAFRAME STYLING --- */
+[data-testid="stDataFrame"] {
+    background: transparent;
+    border: none;
+}
+
+/* --- UTILITIES --- */
+.text-gradient {
+    background: linear-gradient(to right, #FFFFFF, #999999);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-online {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10B981;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.status-offline {
+    background: rgba(239, 68, 68, 0.1);
+    color: #EF4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}

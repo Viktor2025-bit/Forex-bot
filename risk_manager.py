@@ -248,6 +248,39 @@ class RiskManager:
             
         return True
 
+    def check_equity_guard(self, current_equity):
+        """
+        Global Trailing Stop on Equity.
+        
+        Logic:
+        1. Track highest equity seen in this session.
+        2. If current equity drops X% below high, trigger STOP.
+        
+        Returns:
+            tuple: (triggered: bool, message: str)
+        """
+        if not hasattr(self, 'session_high_equity'):
+            self.session_high_equity = current_equity
+            
+        # Update High Water Mark
+        if current_equity > self.session_high_equity:
+            self.session_high_equity = current_equity
+            
+        # Calculate Drawdown from Peak
+        if self.session_high_equity > 0:
+            drawdown = (self.session_high_equity - current_equity) / self.session_high_equity
+            drawdown_pct = drawdown * 100
+        else:
+            drawdown_pct = 0
+            
+        # Hard Limit: 5% Trailing Stop on Account
+        LIMIT_PCT = 5.0 
+        
+        if drawdown_pct >= LIMIT_PCT:
+            return True, f"EQUITY GUARD TRIGGERED! Drawdown: {drawdown_pct:.2f}% (Limit: {LIMIT_PCT}%)"
+            
+        return False, f"Safe. Drawdown: {drawdown_pct:.2f}%"
+
 
 if __name__ == "__main__":
     # Test the Risk Manager with example scenarios

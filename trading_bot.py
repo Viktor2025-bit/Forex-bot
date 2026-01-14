@@ -15,16 +15,16 @@ except ImportError:
 # Corrected Imports
 # from config import Config  <-- REMOVED
 from strategies.risk_manager import RiskManager
-from strategies.order_executor import OrderExecutor, OrderSide, OrderStatus
+from strategies.order_executor import OrderExecutor, OrderSide, OrderStatus, PaperTradingExecutor
 from utils.retrainer import RetrainingManager
 
-# Suppress WarningsExecutor, OrderStatus
+# Suppress Warnings
 from strategy_engine import AIStrategy, EnsembleStrategy, TradeAction
 from utils.data_loader import fetch_historical_data, save_data, fetch_data_mt5
 from utils.monitoring import BotMonitor, TradeRecord
 from models.lstm_model import TradingLSTM
 from ai_model import ForexModel
-from utils.preprocessing import DataPreprocessor
+
 from feature_engine import FeatureEngine
 
 # Setup basic logging first (monitor will take over)
@@ -39,13 +39,8 @@ class TradingBot:
         alert_config = config.get('alerts', {})
         self.monitor = BotMonitor(
             log_dir="logs",
-            enable_email=alert_config.get('email_enabled', False)
+            alert_config=alert_config
         )
-        self.monitor.alerts.smtp_server = alert_config.get('smtp_server', "")
-        self.monitor.alerts.smtp_port = alert_config.get('smtp_port', 587)
-        self.monitor.alerts.smtp_user = alert_config.get('smtp_user', "")
-        self.monitor.alerts.smtp_password = alert_config.get('smtp_password', "")
-        self.monitor.alerts.alert_email = alert_config.get('alert_email', "")
         
         self.monitor.logger.info("Initializing Trading Bot...")
         
@@ -57,7 +52,6 @@ class TradingBot:
         from strategies.risk_manager import RiskParameters
         risk_config = config.get('risk', {})
         risk_params = RiskParameters(
-            max_position_size_pct=risk_config.get('max_position_size_pct', 0.1),
             max_daily_loss_pct=risk_config.get('max_daily_loss_pct', 0.02),
             stop_loss_pct=risk_config.get('stop_loss_pct', 0.02),
             take_profit_pct=risk_config.get('take_profit_pct', 0.04),
@@ -106,7 +100,11 @@ class TradingBot:
         strategy_name = config.get('model', {}).get('strategy', 'ai')
         if strategy_name == 'ensemble':
             self.strategy = EnsembleStrategy(config)
-            self.monitor.logger.info("Using Ensemble Strategy")
+            self.monitor.logger.info("Using Ensemble Strategy (weighted average)")
+        elif strategy_name == 'any_strong_signal':
+            from strategy_engine import AnyStrongSignalStrategy
+            self.strategy = AnyStrongSignalStrategy(config)
+            self.monitor.logger.info("Using Any Strong Signal Strategy (maximum flexibility)")
         else:
             self.strategy = AIStrategy(config)
             self.monitor.logger.info("Using AI Strategy")
@@ -123,9 +121,97 @@ class TradingBot:
         # Initialize Retrainer
         self.retrainer = RetrainingManager(accuracy_threshold=0.55, min_trades=20)
         
-        # Load Models
-        self.models = {}
+        # WebSocket Client for Real-Time Price Streaming
+        self.websocket_client = None
+        ws_config = config.get('websocket', {})
+        if ws_config.get('enabled', False):
+            from websocket_client import DerivWebSocketClient
+            deriv_api_token = config.get('brokers', {}).get('deriv', {}).get('api_token')
+            self.websocket_client = DerivWebSocketClient(self.symbols, api_token=deriv_api_token)
+            self.websocket_client.connect()
+            self.monitor.logger.info("✅ WebSocket price streaming enabled")
+        else:
+            self.monitor.logger.info("WebSocket disabled - using periodic HTTP polling only")
+        
         self.monitor.logger.info(f"Bot initialized for {self.symbols} ({'Paper' if self.executor.paper_trading else 'LIVE'} trading)")
+
+        # Load previous state
+        self.load_state()
+        # Reconcile with broker state
+        self.reconcile_state()
+
+    def load_state(self):
+        """Load bot state from a file to resume operations."""
+        state_file = 'state/bot_status.json'
+        if not os.path.exists(state_file):
+            self.monitor.logger.info("No previous state file found. Starting fresh.")
+            return
+
+        try:
+            with open(state_file, 'r') as f:
+                state = json.load(f)
+            
+            # Restore positions
+            if 'positions' in state and state['positions']:
+                self.monitor.logger.info("Restoring positions from state file...")
+                for pos in state['positions']:
+                    symbol = pos.get('symbol')
+                    if symbol in self.symbols:
+                        self.positions[symbol] = {
+                            'qty': pos.get('qty'),
+                            'side': pos.get('side')
+                        }
+                        self.entry_prices[symbol] = pos.get('entry_price')
+                        self.monitor.logger.info(f"  - Restored: {pos['side']} {pos['qty']} {symbol} @ {pos['entry_price']}")
+            
+            # Restore daily PnL if it's from the same day
+            if 'timestamp' in state and 'account' in state:
+                last_saved_time = datetime.fromisoformat(state['timestamp'])
+                if last_saved_time.date() == datetime.now().date():
+                    self.daily_pnl = state['account'].get('daily_pnl', 0.0)
+                    self.monitor.logger.info(f"Restored daily PnL of {self.daily_pnl:.2f} from today.")
+
+        except Exception as e:
+            self.monitor.logger.error(f"Error loading state: {e}")
+
+    def reconcile_state(self):
+        """Reconcile bot's state with the broker's actual positions."""
+        self.monitor.logger.info("Reconciling state with broker...")
+        try:
+            live_positions = self.executor.get_open_positions()
+            
+            if not live_positions:
+                self.monitor.logger.info("No open positions found at broker.")
+                # If local state has positions, they might be closed/stale. Clear them.
+                if any(self.positions.values()):
+                    self.monitor.logger.warning("Local state had positions not found at broker. Clearing local state.")
+                    self.positions = {symbol: None for symbol in self.symbols}
+                    self.entry_prices = {symbol: None for symbol in self.symbols}
+                return
+
+            # Create a set of symbols that have live positions
+            live_symbols = {pos['symbol'] for pos in live_positions}
+
+            # Sync live positions with bot's state
+            for pos in live_positions:
+                symbol = pos['symbol']
+                if symbol in self.symbols:
+                    self.positions[symbol] = {
+                        'qty': pos['qty'],
+                        'side': pos['side']
+                    }
+                    self.entry_prices[symbol] = pos['entry_price']
+                    self.monitor.logger.info(f"  - Synced from broker: {pos['side']} {pos['qty']} {symbol} @ {pos['entry_price']}")
+
+            # Clear any local positions that are no longer open on the broker
+            for symbol in self.symbols:
+                if symbol not in live_symbols and self.positions.get(symbol) is not None:
+                    self.monitor.logger.warning(f"  - Clearing stale local position for {symbol}.")
+                    self.positions[symbol] = None
+                    self.entry_prices[symbol] = None
+                    
+        except Exception as e:
+            self.monitor.logger.error(f"Failed to reconcile state with broker: {e}")
 
     def _load_model(self, model_type: str, symbol: str):
         model_config = self.config.get('model', {})
@@ -183,13 +269,24 @@ class TradingBot:
             elif model_type == 'lstm':
                 df_features = preprocessor.generate_features(df)
                 
-                # Normalize numeric columns (same as training)
-                from sklearn.preprocessing import StandardScaler
+                # Normalize numeric columns (MUST use same scaler as training!)
                 feature_columns = [col for col in df_features.columns if df_features[col].dtype in ['float64', 'int64', 'float32', 'int32']]
                 feature_columns = [col for col in feature_columns if col not in ['Date', 'Datetime']]
                 
-                scaler = StandardScaler()
-                data_scaled = scaler.fit_transform(df_features[feature_columns].values)
+                # Load the scaler saved during training
+                scaler_path = f"models/{self.symbols[0].replace(' ', '_')}_lstm_scaler.pkl"
+                
+                if os.path.exists(scaler_path):
+                    import joblib
+                    scaler = joblib.load(scaler_path)
+                    data_scaled = scaler.transform(df_features[feature_columns].values)
+                    self.monitor.logger.debug(f"LSTM: Using saved scaler from {scaler_path}")
+                else:
+                    # Fallback: Create new scaler (but log warning)
+                    self.monitor.logger.warning(f"LSTM Scaler not found at {scaler_path}. Using fit_transform (predictions may be unreliable!)")
+                    from sklearn.preprocessing import StandardScaler
+                    scaler = StandardScaler()
+                    data_scaled = scaler.fit_transform(df_features[feature_columns].values)
                 
                 return data_scaled
 
@@ -199,10 +296,12 @@ class TradingBot:
 
     def make_prediction(self, features, model, model_type: str) -> float:
         if features is None or len(features) == 0:
-            return 0.5
+            self.monitor.logger.warning(f"{model_type}: No features provided")
+            return None
 
         if not model:
-            return 0.5
+            self.monitor.logger.warning(f"{model_type}: Model not loaded")
+            return None
             
         try:
             if model_type == 'xgboost':
@@ -212,7 +311,10 @@ class TradingBot:
             
             elif model_type == 'lstm':
                 import torch
-                if len(features) < self.seq_length: return 0.5
+                if len(features) < self.seq_length:
+                    self.monitor.logger.warning(f"LSTM: Insufficient data ({len(features)} < {self.seq_length} required)")
+                    return None
+                    
                 sequence = features[-self.seq_length:]
                 X_tensor = torch.FloatTensor(sequence).unsqueeze(0)
                 with torch.no_grad():
@@ -221,10 +323,12 @@ class TradingBot:
                 return prediction
 
         except Exception as e:
-            self.monitor.logger.error(f"Prediction error for {model_type}: {e}")
-            return 0.5
+            self.monitor.logger.critical(f"🔴 MODEL FAILURE ({model_type}): {e}")
+            import traceback
+            self.monitor.logger.error(traceback.format_exc())
+            return None
         
-        return 0.5
+        return None
 
     def save_market_data(self, symbol, new_df):
         """Append new data to local CSV storage for retraining."""
@@ -263,24 +367,57 @@ class TradingBot:
             self.last_trade_day = current_day
             self.trading_halted = False
 
+        # Hot Reload Models if Retraining occurred
+        if hasattr(self, 'retrainer'):
+            symbols_to_reload = list(self.retrainer.reload_needed)
+            for symbol in symbols_to_reload:
+                try:
+                    self.monitor.logger.info(f"[{symbol}] Reloading models following retraining...")
+                    if symbol not in self.models:
+                        self.models[symbol] = {}
+                    
+                    # Reload XGBoost
+                    self.models[symbol]['xgboost'] = self._load_model('xgboost', symbol)
+                    
+                    # Reload LSTM
+                    self.models[symbol]['lstm'] = self._load_model('lstm', symbol)
+                    
+                    self.retrainer.reload_needed.remove(symbol)
+                    self.monitor.logger.info(f"[{symbol}] Models reloaded successfully. Using updated AI.")
+                except Exception as e:
+                    self.monitor.logger.error(f"[{symbol}] Failed to reload models: {e}")
+
         # 1. Fetch Data
         mt5_enabled = self.config.get('brokers', {}).get('mt5', {}).get('enabled', False)
         deriv_enabled = self.config.get('brokers', {}).get('deriv', {}).get('enabled', False)
         
-        if deriv_enabled or self.market_type == 'synthetics':
-            # Use Deriv for synthetics
+        
+        h1_data_map = {}
+        if mt5_enabled:
+            # Use MT5 for fast data fetching (works for Synthetics too)
+            # Need to map long names back to short names if existing code expects short names?
+            # Actually fetch_data_mt5 takes list of symbols. 
+            # Current symbols are ["Volatility 75 Index", ...].
+            data_map = fetch_data_mt5(self.symbols, n_candles=500, timeframe="M5")
+            
+            # Phase 2: Fetch 1H Data for Trend Filter
+            try:
+                h1_data_map = fetch_data_mt5(self.symbols, n_candles=50, timeframe="H1")
+                if h1_data_map:
+                    self.monitor.logger.info(f"Fetched 1H Trend Data for {len(h1_data_map)} symbols.")
+            except Exception as e:
+                self.monitor.logger.error(f"Failed to fetch H1 data: {e}")
+                
+        elif deriv_enabled or self.market_type == 'synthetics':
+            # Fallback to Deriv API
             from data_loader import fetch_historical_data as fetch_deriv
             import asyncio
             data_map = {}
             for symbol in self.symbols:
-                # Fetch more candles (500) to account for indicator warmup (200+ for SMA_200)
                 df = asyncio.run(fetch_deriv(symbol, time_interval="5m", max_candles=500))
                 if df is not None:
-                    # Save for retraining
                     self.save_market_data(symbol, df)
                     data_map[symbol] = df
-        elif mt5_enabled:
-            data_map = fetch_data_mt5(self.symbols, n_candles=100)
         else:
             end_date = datetime.now()
             start_date = end_date - pd.Timedelta(days=60) 
@@ -307,17 +444,41 @@ class TradingBot:
             prediction_input = None
             if strategy_name == 'ensemble':
                 predictions = {}
-                # Fetch models for this specific symbol
+                
+                # Ensure models are loaded for this symbol
+                if symbol not in self.models or not self.models[symbol]:
+                    self.models[symbol] = {
+                        'xgboost': self._load_model('xgboost', symbol),
+                        'lstm': self._load_model('lstm', symbol)
+                    }
+                
                 symbol_models = self.models.get(symbol, {})
                 
                 for model_type, model in symbol_models.items():
+                    if model is None:
+                        continue
                     features = self.prepare_features(df.copy(), model_type)
                     # Pass model instance explicitly
-                    predictions[model_type] = self.make_prediction(features, model, model_type)
+                    pred_result = self.make_prediction(features, model, model_type)
+                    
+                    # Only add valid predictions (skip None)
+                    if pred_result is not None:
+                        predictions[model_type] = pred_result
+                
+                # Update ensemble weights based on recent model accuracy
+                model_weights = self.retrainer.get_model_weights(symbol)
+                self.strategy.set_weights(model_weights)
                 
                 log_preds = {k: f"{v:.2%}" for k,v in predictions.items()}
-                self.monitor.logger.info(f"Ensemble Predictions for {symbol}: {log_preds}")
-                prediction_input = predictions
+                log_weights = {k: f"{v:.1%}" for k,v in model_weights.items()}
+                self.monitor.logger.info(f"Ensemble Predictions for {symbol}: {log_preds} (Weights: {log_weights})")
+                
+                # Guard against empty predictions
+                if predictions and len(predictions) > 0:
+                    prediction_input = predictions
+                else:
+                    self.monitor.logger.warning(f"[{symbol}] No valid model predictions available, skipping.")
+                    continue
             
             else: # single 'ai' strategy
                 model_type = self.config.get('model', {}).get('type', 'xgboost')
@@ -328,7 +489,9 @@ class TradingBot:
                 prediction = self.make_prediction(features, model, model_type)
                 
                 self.monitor.logger.info(f"Model Prediction for {symbol}: {prediction:.2%} ({'UP' if prediction > 0.5 else 'DOWN'})")
-                prediction_input = prediction
+                
+                # Wrap single prediction in dict for strategy compatibility (especially AnyStrongSignalStrategy)
+                prediction_input = {model_type: prediction}
 
             if prediction_input is not None:
                 # For ensemble, calculate average probability for dashboard display
@@ -348,7 +511,21 @@ class TradingBot:
                         "signal": signal,
                         "timestamp": datetime.now().isoformat()
                     }
-                self.execute_strategy(symbol, prediction_input, current_price)
+                if self.market_type == 'synthetics' or mt5_enabled:
+                    # Calculate 1H Trend Context
+                    trend_context = None
+                    if symbol in h1_data_map:
+                        h1_df = h1_data_map[symbol]
+                        if not h1_df.empty and len(h1_df) > 49:
+                             # Simple Trend: Price > SMA 50 ?
+                             sma_50 = h1_df['Close'].rolling(window=50).mean().iloc[-1]
+                             h1_price = h1_df['Close'].iloc[-1]
+                             trend_context = 'UP' if h1_price > sma_50 else 'DOWN'
+                             # self.monitor.logger.info(f"[{symbol}] H1 Trend: {trend_context}")
+
+                    self.execute_strategy(symbol, prediction_input, current_price, trend_context=trend_context, df=df)
+                else:
+                    self.execute_strategy(symbol, prediction_input, current_price, df=df)
 
 
         # 5. Save state for dashboard
@@ -357,9 +534,45 @@ class TradingBot:
         # 6. Log Cycle Performance
         # ... (logging logic remains the same)
 
-    def execute_strategy(self, symbol, prediction_input, current_price):
+    def execute_strategy(self, symbol, prediction_input, current_price, trend_context=None, df=None):
         position_info = self.positions.get(symbol)
-        action = self.strategy.get_decision(prediction_input, position_info)
+        action = None # Initialize action
+
+        # ========== CHECK EXITS FIRST (SL, TP, TRAILING) ==========
+        if position_info:
+            # 1. Check HARD Stop-Loss and Take-Profit
+            sl_price = position_info.get('sl_price')
+            tp_price = position_info.get('tp_price')
+
+            if position_info['side'] == 'long':
+                if sl_price and current_price <= sl_price:
+                    self.monitor.logger.warning(f"[{symbol}] STOP-LOSS HIT @ {current_price:.4f} (SL: {sl_price:.4f})")
+                    action = TradeAction.CLOSE_POSITION
+                elif tp_price and current_price >= tp_price:
+                    self.monitor.logger.info(f"[{symbol}] TAKE-PROFIT HIT @ {current_price:.4f} (TP: {tp_price:.4f})")
+                    action = TradeAction.CLOSE_POSITION
+            elif position_info['side'] == 'short':
+                if sl_price and current_price >= sl_price:
+                    self.monitor.logger.warning(f"[{symbol}] STOP-LOSS HIT @ {current_price:.4f} (SL: {sl_price:.4f})")
+                    action = TradeAction.CLOSE_POSITION
+                elif tp_price and current_price <= tp_price:
+                    self.monitor.logger.info(f"[{symbol}] TAKE-PROFIT HIT @ {current_price:.4f} (TP: {tp_price:.4f})")
+                    action = TradeAction.CLOSE_POSITION
+            
+            # 2. Check TRAILING STOP (only if no hard SL/TP was hit)
+            if action is None:
+                trailing_result = self.risk_manager.update_trailing_stop(symbol, current_price)
+                if trailing_result['triggered']:
+                    self.monitor.logger.warning(f"[{symbol}] TRAILING STOP TRIGGERED - Forcing position close")
+                    action = TradeAction.CLOSE_POSITION
+        
+        # ========== GET AI-DRIVEN ACTION (if no exit was triggered) ==========
+        if action is None:
+            # Pass trend_context to strategy
+            if hasattr(self.strategy, 'get_decision') and 'trend_context' in self.strategy.get_decision.__code__.co_varnames:
+                 action = self.strategy.get_decision(prediction_input, position_info, symbol=symbol, trend_context=trend_context)
+            else:
+                 action = self.strategy.get_decision(prediction_input, position_info, symbol=symbol)
 
         # Prevent new trades if daily loss limit is hit
         if action in [TradeAction.GO_LONG, TradeAction.GO_SHORT]:
@@ -372,20 +585,45 @@ class TradingBot:
             if action == TradeAction.GO_LONG:
                 self.monitor.logger.info(f"GO LONG Signal for {symbol} at {current_price}")
                 
-                # Calculate size
+                # Calculate size and exits
                 account = self.executor.get_account()
                 equity = account.get('total_equity', self.config['bot']['initial_capital'])
+                qty = 0
+                sl_price, tp_price = None, None # Init
+
                 try:
-                    qty = self.risk_manager.calculate_position_size(equity, current_price)
+                    # Use Forex specific ATR calculation
+                    if self.market_type in ['forex', 'synthetics'] and hasattr(self.risk_manager, 'calculate_forex_position_size') and df is not None:
+                        atr = df['ATR'].iloc[-1]
+                        qty = self.risk_manager.calculate_forex_position_size(equity, symbol, atr=atr)
+                        exit_prices = self.risk_manager.get_forex_exit_prices(current_price, symbol, 'long', atr=atr)
+                        sl_price = exit_prices['stop_loss']
+                        tp_price = exit_prices['take_profit']
+                    else: # Non-Forex: Stocks, Crypto, etc.
+                        # Calculate exit prices first
+                        exit_prices = self.risk_manager.get_stock_exit_prices(current_price, 'long')
+                        sl_price = exit_prices['stop_loss']
+                        tp_price = exit_prices['take_profit']
+                        # Calculate position size based on risk and stop loss
+                        qty = self.risk_manager.calculate_position_size(equity, current_price, sl_price, 'long')
+
                 except Exception as e:
-                     self.monitor.logger.error(f"Error calculating size: {e}")
-                     qty = 0.01
+                     self.monitor.logger.error(f"Error calculating size/exits: {e}")
+                     qty = 0 # Safety check
 
                 if qty > 0:
                     order = self.executor.submit_order(symbol, OrderSide.BUY, qty, order_type="market")
                     if order and order.status == OrderStatus.FILLED:
-                        self.positions[symbol] = {'qty': qty, 'side': 'long'}
+                        # Update position state with exit prices
+                        self.positions[symbol] = {
+                            'qty': qty, 
+                            'side': 'long',
+                            'sl_price': sl_price,
+                            'tp_price': tp_price
+                        }
                         self.entry_prices[symbol] = current_price
+                        # Register with risk manager for trailing stop
+                        self.risk_manager.register_position(symbol, current_price, qty, 'long', stop_loss_price=sl_price)
                         
                         trade_record = TradeRecord(
                             timestamp=datetime.now().isoformat(),
@@ -394,27 +632,50 @@ class TradingBot:
                             quantity=qty,
                             price=current_price,
                             order_id=order.id,
-                            notes="AI_ENTRY"
+                            notes=f"AI_ENTRY | SL: {sl_price:.4f}, TP: {tp_price:.4f}" if sl_price else "AI_ENTRY"
                         )
                         self.monitor.log_trade(trade_record)
 
             elif action == TradeAction.GO_SHORT:
                 self.monitor.logger.info(f"GO SHORT Signal for {symbol} at {current_price}")
                 
-                # Calculate size
+                # Calculate size and exits
                 account = self.executor.get_account()
                 equity = account.get('total_equity', self.config['bot']['initial_capital'])
+                qty = 0
+                sl_price, tp_price = None, None # Init
+
                 try:
-                    qty = self.risk_manager.calculate_position_size(equity, current_price)
+                     # Use Forex specific ATR calculation
+                    if self.market_type in ['forex', 'synthetics'] and hasattr(self.risk_manager, 'calculate_forex_position_size') and df is not None:
+                        atr = df['ATR'].iloc[-1]
+                        qty = self.risk_manager.calculate_forex_position_size(equity, symbol, atr=atr)
+                        exit_prices = self.risk_manager.get_forex_exit_prices(current_price, symbol, 'short', atr=atr)
+                        sl_price = exit_prices['stop_loss']
+                        tp_price = exit_prices['take_profit']
+                    else: # Non-Forex: Stocks, Crypto, etc.
+                        # Calculate exit prices first
+                        exit_prices = self.risk_manager.get_stock_exit_prices(current_price, 'short')
+                        sl_price = exit_prices['stop_loss']
+                        tp_price = exit_prices['take_profit']
+                        # Calculate position size based on risk and stop loss
+                        qty = self.risk_manager.calculate_position_size(equity, current_price, sl_price, 'short')
+
                 except Exception as e:
-                     self.monitor.logger.error(f"Error calculating size: {e}")
-                     qty = 0.01
+                     self.monitor.logger.error(f"Error calculating size/exits: {e}")
+                     qty = 0
 
                 if qty > 0:
                     order = self.executor.submit_order(symbol, OrderSide.SELL, qty, order_type="market")
                     if order and order.status == OrderStatus.FILLED:
-                        self.positions[symbol] = {'qty': qty, 'side': 'short'}
+                        self.positions[symbol] = {
+                            'qty': qty, 
+                            'side': 'short',
+                            'sl_price': sl_price,
+                            'tp_price': tp_price
+                        }
                         self.entry_prices[symbol] = current_price
+                        self.risk_manager.register_position(symbol, current_price, qty, 'short', stop_loss_price=sl_price)
                         
                         trade_record = TradeRecord(
                             timestamp=datetime.now().isoformat(),
@@ -423,7 +684,7 @@ class TradingBot:
                             quantity=qty,
                             price=current_price,
                             order_id=order.id,
-                            notes="AI_ENTRY"
+                            notes=f"AI_ENTRY | SL: {sl_price:.4f}, TP: {tp_price:.4f}" if sl_price else "AI_ENTRY"
                         )
                         self.monitor.log_trade(trade_record)
 
@@ -499,7 +760,7 @@ class TradingBot:
                     "daily_pnl": self.daily_pnl
                 },
                 "positions": pos_list,
-                "trade_history": self.monitor.journal.trades[-50:], 
+                "trade_history": self.monitor.get_recent_trades(50), 
                 "predictions": self.last_prediction,
                 "latest_logs": [] 
             }
@@ -509,25 +770,212 @@ class TradingBot:
         except Exception as e:
             self.monitor.logger.error(f"Error saving state: {e}")
 
-    def start(self):
-        self.monitor.logger.info(f"Starting trading bot (interval: {self.trading_interval}s)")
+
+    def check_exits(self):
+        """
+        Lightweight check running every second.
+        Safely monitors Stop-Loss and Take-Profit using real-time WebSocket prices.
+        And GLOBAL DRAWDOWN (Equity Guard).
+        """
         try:
-            while True:
-                self.run_trading_cycle()
-                self.monitor.logger.info(f"Sleeping {self.trading_interval}s until next cycle...")
-                time.sleep(self.trading_interval)
-        except KeyboardInterrupt:
-            self.monitor.logger.info("Bot stopped by user")
-            # Final Report
-            print(self.monitor.get_status())
+            # Only check if we have active positions
+            active_symbols = [s for s, pos in self.positions.items() if pos is not None]
+            if not active_symbols:
+                return
+
+            # Use WebSocket for real-time prices if available, else skip (will be checked in main cycle)
+            if not self.websocket_client or not self.websocket_client.is_connected():
+                return
+            
+            for symbol in active_symbols:
+                try:
+                    position_info = self.positions[symbol]
+                    
+                    # Get real-time price from WebSocket
+                    current_price = self.websocket_client.get_latest_price(symbol)
+                    if current_price is None:
+                        continue  # No price data yet
+                    
+                    # Check SL/TP thresholds
+                    sl_price = position_info.get('sl_price')
+                    tp_price = position_info.get('tp_price')
+                    position_side = position_info['side']
+                    
+                    should_close = False
+                    exit_reason = ""
+                    
+                    if position_side == 'long':
+                        if sl_price and current_price <= sl_price:
+                            should_close = True
+                            exit_reason = f"STOP-LOSS HIT @ {current_price:.4f} (SL: {sl_price:.4f})"
+                        elif tp_price and current_price >= tp_price:
+                            should_close = True
+                            exit_reason = f"TAKE-PROFIT HIT @ {current_price:.4f} (TP: {tp_price:.4f})"
+                    else:  # short
+                        if sl_price and current_price >= sl_price:
+                            should_close = True
+                            exit_reason = f"STOP-LOSS HIT @ {current_price:.4f} (SL: {sl_price:.4f})"
+                        elif tp_price and current_price <= tp_price:
+                            should_close = True
+                            exit_reason = f"TAKE-PROFIT HIT @ {current_price:.4f} (TP: {tp_price:.4f})"
+                    
+                    # Also check trailing stop
+                    if not should_close:
+                        trailing_result = self.risk_manager.update_trailing_stop(symbol, current_price)
+                        if trailing_result['triggered']:
+                            should_close = True
+                            exit_reason = f"TRAILING STOP HIT @ {current_price:.4f} (Stop: {trailing_result['stop_level']:.4f})"
+                    
+                    # Execute close if triggered
+                    if should_close:
+                        self.monitor.logger.warning(f"[{symbol}] {exit_reason}")
+                        
+                        qty = position_info['qty']
+                        close_side = OrderSide.SELL if position_side == 'long' else OrderSide.BUY
+                        
+                        try:
+                            order = self.executor.submit_order(symbol, close_side, qty, order_type="market")
+                            
+                            if order and order.status == OrderStatus.FILLED:
+                                # Calculate PnL
+                                entry = self.entry_prices.get(symbol, current_price)
+                                if position_side == 'long':
+                                    pnl = (current_price - entry) * qty
+                                else:
+                                    pnl = (entry - current_price) * qty
+                                
+                                self.daily_pnl += pnl
+                                
+                                trade_record = TradeRecord(
+                                    timestamp=datetime.now().isoformat(),
+                                    symbol=symbol,
+                                    side='CLOSE',
+                                    quantity=qty,
+                                    price=current_price,
+                                    order_id=order.id,
+                                    pnl=pnl,
+                                    notes=f"WebSocket Exit: {exit_reason}"
+                                )
+                                self.monitor.log_trade(trade_record)
+                                
+                                # Record result for retraining
+                                self.retrainer.record_result(symbol, pnl)
+                                
+                                # Clear position
+                                self.positions[symbol] = None
+                                self.entry_prices[symbol] = 0
+                                self.risk_manager.close_position(symbol, current_price)
+                                
+                        except Exception as e:
+                            self.monitor.logger.error(f"Failed to close position for {symbol}: {e}")
+                
+                except Exception as e:
+                    self.monitor.logger.error(f"Error checking exit for {symbol}: {e}")
+                    continue
+
+        except Exception as e:
+            # Prevent one error from crashing the heartbeat
+            if isinstance(e, SystemExit):
+                raise e
+            self.monitor.logger.error(f"Error in check_exits: {e}") 
+
+    def start(self):
+        """
+        Main execution loop (Smart Loop).
+        - Tick interval: 1 second
+        - Analysis interval: 5 minutes (approx)
+        """
+        self.monitor.logger.info("Bot started in Smart Loop Mode. Ticking every 1s...")
+        print(f"Bot started. Press Ctrl+C to stop.")
+        
+        last_analysis_time = 0
+        
+        while True:
+            try:
+                # 1. Check for manual commands
+                # Inline command processing logic directly here to ensure it works
+                if os.path.exists('command.json'):
+                    try:
+                        with open('command.json', 'r') as f:
+                            cmd_data = json.load(f)
+                        
+                        cmd = cmd_data.get('command', 'RUN')
+                        
+                        if cmd == 'STOP':
+                            # self.monitor.logger.info("PAUSED by user command. Waiting...")
+                            time.sleep(2)
+                            continue
+                            
+                        elif cmd == 'MANUAL_TRADE':
+                            # Execute manual trade if parameters provided
+                            params = cmd_data.get('params', {})
+                            self.monitor.logger.info(f"Executing Manual Trade: {params}")
+                            # Reset command to prevent double execution
+                            with open('command.json', 'w') as f:
+                                json.dump({"command": "RUN", "timestamp": datetime.now().isoformat()}, f)
+                            
+                            # Execute
+                            try:
+                                # Quick implementation of manual trade
+                                symbol = params.get('symbol')
+                                side = params.get('side') # BUY/SELL
+                                qty = float(params.get('qty', 0.01))
+                                
+                                if symbol and side:
+                                    order_side = OrderSide.BUY if side.upper() == 'BUY' else OrderSide.SELL
+                                    self.executor.submit_order(symbol, order_side, qty, order_type="market")
+                                    self.monitor.logger.info(f"Manual {side} order for {symbol} submitted.")
+                            except Exception as e:
+                                self.monitor.logger.error(f"Manual trade failed: {e}")
+                                
+                    except Exception as e:
+                        pass # self.monitor.logger.error(f"Command error: {e}")
+
+                # 2. Safety / Exit Checks (Every tick)
+                self.check_exits()
+                
+                # 3. Main Analysis (Every 5 minutes or on startup)
+                # We use OS time to align with candles (minute 0, 5, 10...)
+                now = datetime.now()
+                is_candle_close = (now.minute % 5 == 0 and now.second < 5)
+                # Startup condition: last_analysis_time == 0
+                is_startup = (last_analysis_time == 0)
+                is_stale = (time.time() - last_analysis_time > 300)
+                
+                if is_candle_close or is_startup or is_stale:
+                    # Debounce: Ensure we don't run multiple times in the same minute-window
+                    # Exception: Startup runs immediately
+                    if is_startup or (time.time() - last_analysis_time > 60): 
+                        self.monitor.logger.info(f"Triggering Analysis Cycle at {now.strftime('%H:%M:%S')}")
+                        self.run_trading_cycle()
+                        last_analysis_time = time.time()
+                
+                # 4. Sleep
+                time.sleep(1)
+                
+            except KeyboardInterrupt:
+                self.monitor.logger.info("Bot stopped by user")
+                
+                # Disconnect WebSocket
+                if self.websocket_client:
+                    self.websocket_client.disconnect()
+                
+                # Final Report
+                print(self.monitor.get_status())
+                break
+            except Exception as e:
+                self.monitor.logger.error(f"Critical Loop Error: {e}")
+                time.sleep(5)
+
+
+from utils.config_loader import load_config
 
 if __name__ == "__main__":
     if not os.path.exists('config.json'):
         print("Config file not found.")
         sys.exit(1)
         
-    with open('config.json', 'r') as f:
-        config = json.load(f)
+    config = load_config()
         
     bot = TradingBot(config)
     bot.start()

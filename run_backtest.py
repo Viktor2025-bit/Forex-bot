@@ -47,9 +47,8 @@ def run_full_pipeline(ticker="EURUSD=X",
     print("\n[STEP 1/5] Fetching historical data...")
     
     # Check if trading synthetics
-    import json
-    with open('config.json', 'r') as f:
-        config = json.load(f)
+    from utils.config_loader import load_config
+    config = load_config()
     
     market_type = config.get('bot', {}).get('market_type')
     

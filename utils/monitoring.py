@@ -134,35 +134,35 @@ class TradeJournal:
 class AlertManager:
     """
     Sends alerts for important trading events.
-    Supports email and can be extended for Telegram/Discord.
+    Supports email and Telegram.
     """
     
-    def __init__(self, 
-                 email_enabled: bool = False,
-                 smtp_server: str = "",
-                 smtp_port: int = 587,
-                 smtp_user: str = "",
-                 smtp_password: str = "",
-                 alert_email: str = ""):
-        
-        self.email_enabled = email_enabled
-        self.smtp_server = smtp_server
-        self.smtp_port = smtp_port
-        self.smtp_user = smtp_user
-        self.smtp_password = smtp_password
-        self.alert_email = alert_email
+    def __init__(self, config: dict):
+        self.config = config
+        self.email_enabled = config.get('email_enabled', False)
+        self.smtp_server = config.get('smtp_server', "")
+        self.smtp_port = config.get('smtp_port', 587)
+        self.smtp_user = config.get('smtp_user', "")
+        self.smtp_password = config.get('smtp_password', "")
+        self.alert_email = config.get('alert_email', "")
         
         self.logger = logging.getLogger("trading_bot.alerts")
         
-    def send_alert(self, subject: str, message: str, level: str = "INFO"):
-        """
-        Send an alert through configured channels.
+        # Telegram Setup
+        tg_config = config.get('telegram', {})
+        self.tg_enabled = tg_config.get('enabled', False)
+        if self.tg_enabled:
+            from utils.telegram_service import TelegramService
+            self.telegram = TelegramService(
+                bot_token=tg_config.get('bot_token', ""),
+                chat_id=tg_config.get('chat_id', ""),
+                enabled=True
+            )
+        else:
+            self.telegram = None
         
-        Args:
-            subject: Alert subject/title
-            message: Alert body
-            level: Alert level (INFO, WARNING, ERROR, CRITICAL)
-        """
+    def send_alert(self, subject: str, message: str, level: str = "INFO"):
+        """Send an alert through configured channels."""
         # Always log the alert
         log_method = getattr(self.logger, level.lower(), self.logger.info)
         log_method(f"ALERT: {subject} - {message}")
@@ -170,6 +170,16 @@ class AlertManager:
         # Send email if enabled
         if self.email_enabled:
             self._send_email(subject, message)
+            
+        # Send Telegram if enabled
+        if self.telegram:
+            icon = "ℹ️"
+            if level == "WARNING": icon = "⚠️"
+            elif level == "ERROR": icon = "❌"
+            elif level == "CRITICAL": icon = "🚨"
+            
+            tg_msg = f"{icon} *{subject}*\n{message}"
+            self.telegram.send_message(tg_msg)
             
     def _send_email(self, subject: str, message: str):
         """Send email alert."""
@@ -196,6 +206,9 @@ class AlertManager:
             message=f"Executed {side} order: {quantity} {symbol} @ ${price:.2f}",
             level="INFO"
         )
+        # Using dedicated trade alert format for Telegram if available
+        if self.telegram:
+            self.telegram.send_trade_alert(symbol, side, price, quantity)
         
     def alert_stop_loss(self, symbol: str, loss_pct: float):
         """Alert when stop-loss is triggered."""
@@ -301,24 +314,35 @@ class BotMonitor:
     Central monitoring class that combines all monitoring features.
     """
     
-    def __init__(self, log_dir: str = "logs", enable_email: bool = False):
+    def __init__(self, log_dir: str = "logs", alert_config: dict = None):
         # Setup logging
         self.logger = setup_logging(log_dir)
         
         # Initialize components
-        self.journal = TradeJournal(f"{log_dir}/trade_journal.json")
-        self.alerts = AlertManager(email_enabled=enable_email)
+        # self.journal = TradeJournal(f"{log_dir}/trade_journal.json") # Deprecated replaced by DB
+        from database import Database
+        self.db = Database()
+        
+        # Legacy support
+        if alert_config is None: alert_config = {}
+        
+        self.alerts = AlertManager(alert_config)
         self.performance = PerformanceMonitor(f"{log_dir}/metrics.json")
         
-        self.logger.info("Bot monitoring system initialized")
+        self.logger.info("Bot monitoring system initialized (SQLite Enabled)")
         
     def log_trade(self, trade: TradeRecord):
         """Log a trade execution."""
-        self.journal.record_trade(trade)
+        # self.journal.record_trade(trade)
+        self.db.log_trade(asdict(trade))
+        
         self.performance.record_trade()
         self.alerts.alert_trade_executed(
             trade.symbol, trade.side, trade.quantity, trade.price
         )
+        
+    def get_recent_trades(self, limit=50):
+        return self.db.get_trades(limit)
         
     def log_cycle(self, equity: float):
         """Log a trading cycle."""
@@ -332,14 +356,14 @@ class BotMonitor:
         
     def get_status(self) -> str:
         """Get current bot status."""
-        journal_summary = self.journal.get_summary()
+        stats = self.db.get_stats()
         report = self.performance.get_report()
         
         return report + f"""
 Trade Summary:
-  Total Trades: {journal_summary.get('total_trades', 0)}
-  Win Rate: {journal_summary.get('win_rate', 0):.1%}
-  Total P&L: ${journal_summary.get('total_pnl', 0):.2f}
+  Total Trades: {stats.get('total_trades', 0)}
+  Win Rate: {stats.get('win_rate', 0):.1%}
+  Total P&L: ${stats.get('total_pnl', 0):.2f}
 """
 
 

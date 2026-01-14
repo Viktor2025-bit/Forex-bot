@@ -1,4 +1,4 @@
-import json
+from utils.config_loader import load_config
 import MetaTrader5 as mt5
 import os
 
@@ -7,9 +7,8 @@ def check_mt5_connection():
     
     # Load config
     try:
-        with open('config.json', 'r') as f:
-            config = json.load(f)
-            mt5_config = config['brokers']['mt5']
+        config = load_config()
+        mt5_config = config['brokers']['mt5']
     except Exception as e:
         print(f"Error loading config: {e}")
         return
